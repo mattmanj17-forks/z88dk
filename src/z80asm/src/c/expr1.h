@@ -2,7 +2,7 @@
 Z88DK Z80 Macro Assembler
 
 Copyright (C) Gunther Strube, InterLogic 1993-99
-Copyright (C) Paulo Custodio, 2011-2023
+Copyright (C) Paulo Custodio, 2011-2024
 License: The Artistic License 2.0, http://www.perlfoundation.org/artistic_license_2_0
 Repository: https://github.com/z88dk/z88dk
 
@@ -15,9 +15,9 @@ see http://www.engr.mun.ca/~theo/Misc/exp_parsing.htm
 #include "array.h"
 #include "class.h"
 #include "classlist.h"
-#include "objfile.h"
 #include "scan1.h"
 #include "sym.h"
+#include "z80asm_defs.h"
 #include "utarray.h"
 
 struct Module1;
@@ -33,7 +33,7 @@ extern UT_icd ut_exprs_icd;
 *----------------------------------------------------------------------------*/
 typedef enum
 {
-	ASMPC_OP, NUMBER_OP, SYMBOL_OP,
+	ASMPC_OP, NUMBER_OP, SYMBOL_OP, 
 	UNARY_OP, BINARY_OP, TERNARY_OP,
 } op_type_t;
 
@@ -73,7 +73,7 @@ typedef struct ExprOp				/* hold one operation or operand */
 		long	value;				/* operand value */
 
 		/* SYMBOL_OP */
-		Symbol1* symbol;				/* symbol in symbol table */
+		Symbol1* symbol;			/* symbol in symbol table */
 
 		/* UNARY_OP, BINARY_OP, TERNARY_OP */
 		Operator* op;				/* static struct, retrieved by Operator_get() */
@@ -81,9 +81,6 @@ typedef struct ExprOp				/* hold one operation or operand */
 } ExprOp;
 
 ARRAY(ExprOp);					/* hold list of Expr1 operations/operands */
-
-/* return size in bytes of value of given range */
-extern int range_size(range_t range);
 
 /*-----------------------------------------------------------------------------
 *	Expression
@@ -98,6 +95,7 @@ struct {
 	bool undefined_symbol : 1;	/* true if expression contains one undefined symbol */
 	bool extern_symbol : 1;		/* true if expression contains one EXTERN symbol */
 	bool cross_section_addr : 1;/* true if expression referred to symbol on another section */
+    bool has_local_symbol : 1;  /* true if expression refers to local labels */
 } result;
 
 range_t		 range;				/* range of expression result */
