@@ -26,7 +26,7 @@
     EXTERN  nmi_vectors
     EXTERN  asm_interrupt_handler
 
-    PUBLIC  cleanup         ;jp'd to by exit()
+    PUBLIC  __Exit         ;jp'd to by exit()
     PUBLIC  l_dcal          ;jp(hl)
 
     ; 2 columns on left and 2 column on right are lost
@@ -66,20 +66,20 @@ endif
 
     jp      program
 
-    INCLUDE "crt/classic/crt_z80_rsts.asm"
+    INCLUDE "crt/classic/crt_z80_rsts.inc"
 
 program:
-    INCLUDE "crt/classic/crt_init_sp.asm"
-    INCLUDE "crt/classic/crt_init_atexit.asm"
-    call    crt0_init_bss
-    ld      (exitsp),sp
+    INCLUDE "crt/classic/crt_init_sp.inc"
+    call    crt0_init
+    INCLUDE "crt/classic/crt_init_atexit.inc"
     im      1
-    INCLUDE "crt/classic/crt_start_eidi.inc"
+    INCLUDE "crt/classic/crt_init_heap.inc"
+    INCLUDE "crt/classic/crt_init_eidi.inc"
 
-    INCLUDE "crt/classic/crt_init_amalloc.asm"
     call    _main
-cleanup:
+__Exit:
     call    crt0_exit
+    INCLUDE "crt/classic/crt_exit_eidi.inc"
     INCLUDE "crt/classic/crt_terminate.inc"
 
 
@@ -105,7 +105,7 @@ ENDIF
 
 
 
-    INCLUDE "crt/classic/crt_runtime_selection.asm" 
+    INCLUDE "crt/classic/crt_runtime_selection.inc" 
 
     defc	__crt_org_bss = CRT_ORG_BSS
 IF DEFINED_CRT_MODEL
@@ -113,4 +113,4 @@ IF DEFINED_CRT_MODEL
 ELSE
     defc __crt_model = 1
 ENDIF
-    INCLUDE	"crt/classic/crt_section.asm"
+    INCLUDE	"crt/classic/crt_section.inc"

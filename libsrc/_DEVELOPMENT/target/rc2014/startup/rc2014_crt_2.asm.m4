@@ -128,7 +128,6 @@ include(`crt_memory_map.inc')
 SECTION CODE
 
 PUBLIC __Start, __Exit
-PUBLIC  cleanup                 ; jumped to by exit()
 
 EXTERN _main
 
@@ -259,20 +258,7 @@ ENDIF
 
     include "../crt_set_interrupt_mode.inc"
 
-IF DEFINED_USING_amalloc
-    
-; Optional definition for auto MALLOC init
-; it assumes we have free space between the end of
-; the compiled program and the stack pointer
-
-    EXTERN  __BSS_END_tail
-
-    ld hl,__BSS_END_tail
-    ld (_heap),hl
-
-    include "../../../../lib/crt/classic/crt_init_amalloc.asm"
-
-ENDIF
+    include "../../../../lib/crt/classic/crt_init_heap.inc"
 
     ; initialise the ACIA
 
@@ -338,7 +324,6 @@ IF __clib_exit_stack_size > 0
 
 ENDIF
 
-.cleanup
 .__Exit
 
 IF !((__crt_on_exit & 0x10000) && (__crt_on_exit & 0x8))
@@ -371,7 +356,7 @@ SECTION code_crt_return
 
     SECTION data_crt
 
-include "../../../../lib/crt/classic/crt_runtime_selection.asm" 
+include "../../../../lib/crt/classic/crt_runtime_selection.inc" 
 
 PUBLIC _8085_int65
 EXTERN  acia_interrupt
@@ -382,30 +367,39 @@ include "../crt_jump_vectors_8085.inc"
 
     SECTION bss_crt
 
-IF CRT_ENABLE_STDIO = 1
+PUBLIC  saved_hl                ;Temporary store used by compiler for 8085
+saved_hl:
+    defw    0                   ;for hl
 
+IF CRT_ENABLE_STDIO = 1 && CLIB_FOPEN_MAX > 0
     PUBLIC  __sgoioblk
     PUBLIC  __sgoioblk_end
-.__sgoioblk
-    defs    CLIB_FOPEN_MAX * 10 ; stdio control block
-.__sgoioblk_end                 ; end of stdio control block
-
+__sgoioblk:                     ;stdio control block
+    defs    CLIB_FOPEN_MAX * 10
+__sgoioblk_end:                 ;end of stdio control block
 ENDIF
 
-    PUBLIC  exitsp
-    PUBLIC  exitcount
-.exitsp     defw    0           ; atexit() stack
-.exitcount  defb    0           ; number of atexit() routines
+IF !DEFINED_basegraphics
+    PUBLIC  base_graphics
+base_graphics:
+    defw    0                   ;address of graphics map
+ENDIF
 
-IF DEFINED_USING_amalloc
-
-    PUBLIC _heap
+IF __clib_malloc_heap_size > 0
+    PUBLIC  _heap
     ; The heap pointer will be wiped at bss initialisation.
     ; Its value (based on __tail) will be set later if set
     ; by sbrk() during AMALLOC initialisation.
-._heap
-    defw 0                      ; initialised by code_crt_init - location of the last program byte
-    defw 0
+_heap:
+    defw    0,0                 ;populated by crt_heap_init.inc
+__autoheap:
+    defs    __clib_malloc_heap_size
+
+ELIF DEFINED_CRT_HEAP_AMALLOC ||  __crt_stack_size > 0
+    PUBLIC  _heap
+_heap:
+    defw    0                   ;populated by crt_heap_init.inc
+    defw    0
 
 ENDIF
 
@@ -413,13 +407,13 @@ IF CLIB_BALLOC_TABLE_SIZE > 0
 
     ; create balloc table
     SECTION data_alloc_balloc
-    PUBLIC __balloc_array
-.__balloc_array
+    PUBLIC  __balloc_array
+__balloc_array:
     defw __balloc_table
 
     SECTION bss_alloc_balloc
-    PUBLIC __balloc_table
-.__balloc_table
+    PUBLIC  __balloc_table
+__balloc_table:
     defs CLIB_BALLOC_TABLE_SIZE * 2
 
 ENDIF
