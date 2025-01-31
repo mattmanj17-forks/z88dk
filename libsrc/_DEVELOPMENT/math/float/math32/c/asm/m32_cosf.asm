@@ -1,6 +1,6 @@
 ;--------------------------------------------------------
-; File Created by SDCC : free open source ANSI-C Compiler
-; Version 4.2.0 #13131 (Linux)
+; File Created by SDCC : free open source ISO C Compiler
+; Version 4.5.0 #15248 (Linux)
 ;--------------------------------------------------------
 ; Processed by Z88DK
 ;--------------------------------------------------------
@@ -343,14 +343,14 @@
 	GLOBAL _log10
 	GLOBAL _log_fastcall
 	GLOBAL _log
+	GLOBAL _ilogb_fastcall
+	GLOBAL _ilogb
 	GLOBAL _scalbln_callee
 	GLOBAL _scalbln
 	GLOBAL _scalbn_callee
 	GLOBAL _scalbn
 	GLOBAL _ldexp_callee
 	GLOBAL _ldexp
-	GLOBAL _ilogb_fastcall
-	GLOBAL _ilogb
 	GLOBAL _frexp_callee
 	GLOBAL _frexp
 	GLOBAL _expm1_fastcall
@@ -416,7 +416,7 @@ ENDIF
 ;--------------------------------------------------------
 ; Home
 ;--------------------------------------------------------
-	SECTION IGNORE
+	SECTION code_home
 ;--------------------------------------------------------
 ; code
 ;--------------------------------------------------------
@@ -503,8 +503,6 @@ l_m32_cosf_00104:
 	ld	h,0x00
 	ld	a,0x03
 	cp	a, l
-	ld	a,0x00
-	sbc	a, h
 	jr	NC,l_m32_cosf_00106
 	ld	(ix-1),0xff
 	ld	a, l
@@ -516,8 +514,6 @@ l_m32_cosf_00104:
 l_m32_cosf_00106:
 	ld	a,0x01
 	cp	a, l
-	ld	a,0x00
-	sbc	a, h
 	jr	NC,l_m32_cosf_00108
 	xor	a, a
 	sub	a,(ix-1)
@@ -540,15 +536,11 @@ l_m32_cosf_00108:
 	ld	d,(ix-4)
 	push	de
 	call	___fssub_callee
-	ld	c, l
-	ld	b, h
-	pop	hl
-	inc	sp
-	inc	sp
-	push	bc
+	ld	(ix-5),l
+	ld	(ix-4),h
 	ld	(ix-3),e
 	ld	(ix-2),d
-	ex	de,hl
+	pop	de
 	pop	hl
 	push	hl
 	push	de

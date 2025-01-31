@@ -35,7 +35,7 @@ endif
 
 Z88DK_PATH	= $(shell pwd)
 SDCC_PATH	= $(Z88DK_PATH)/src/sdcc-build
-SDCC_VERSION	= 14210
+SDCC_VERSION	= 15248
 
 ifdef BUILD_SDCC
 ifdef BUILD_SDCC_HTTP
@@ -107,7 +107,7 @@ ifdef BUILD_SDCC
 		--disable-pdk13-port --disable-pdk14-port \
 		--disable-pdk15-port --disable-pdk16-port \
 		--disable-mos6502-port --disable-mos65c02-port \
-		--disable-r2k-port \
+		--disable-r2k-port --disable-f8-port \
 		--disable-non-free --disable-device-lib \
 		--disable-ucsim --disable-packihx \
 		--disable-sdcpp --disable-sdcdb --disable-sdbinutil
@@ -270,3 +270,16 @@ examples-clean:
 	$(MAKE) -C examples clean
 
 .PHONY: test testsuite
+
+
+.PHONY: snap
+
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Darwin)
+	SNAP_OPTS=
+else 
+	SNAP_OPTS= --use-lxd
+endif
+
+snap: snap/snapcraft.yaml
+	snapcraft $(SNAP_OPTS)
