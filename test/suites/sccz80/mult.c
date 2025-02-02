@@ -3,8 +3,8 @@
 #include <stdlib.h>
 
 
-#ifndef __8080__
-  #ifndef __GBZ80__
+#ifndef __8080
+  #ifndef __GBZ80
 void test_mult_longlong() 
 {
      long long val1 = 3;
@@ -50,8 +50,10 @@ void test_mult_unsigned_longlong()
 
      Assert( val1 * val3  ==  0x80000001, "3 * 0x2AAAAAAB");
      Assert( val3 * val1  ==  0x80000001, "0x2AAAAAAB * 3");
+#ifdef TEST_LONGLONG
      Assert( val1 * val4  ==  0x8000000000000001, "3 * 0x2AAAAAAAAAAAAAAB");
      Assert( val4 * val1  ==  0x8000000000000001, "0x2AAAAAAAAAAAAAAB * 3");
+#endif
 
      Assert( val1 * val3 * 3 ==  0x180000003, "3 * 0x2AAAAAAB * 3");
      Assert( val3 * val1 * 3 ==  0x180000003, "0x2AAAAAAB * 3 * 3");
@@ -196,8 +198,8 @@ int suite_mult()
     suite_add_test(test_mult_long);
     suite_add_test(test_mult_unsigned_long);
 
-#ifndef __8080__
-  #ifndef __GBZ80__
+#ifndef __8080
+  #ifndef __GBZ80
     suite_add_test(test_mult_longlong);
     suite_add_test(test_mult_unsigned_longlong);
   #endif

@@ -220,7 +220,11 @@ void plnge2a(int (*heir)(LVALUE* lval), LVALUE* lval, LVALUE* lval2, void (*oper
             } else if ( lval2->val_type == KIND_LONG ) {
                 vlongconst_tostack(lval->const_val); 
                 lval->val_type = KIND_LONG;  
-                lval->ltype = lval->ltype->isunsigned ? type_ulong : type_long;        
+                lval->ltype = lval->ltype->isunsigned ? type_ulong : type_long;
+            } else if ( lval2->val_type == KIND_CPTR ) {
+                vlongconst_tostack(lval->const_val); 
+                lval->val_type = KIND_LONG;  
+                lval->ltype = lval->ltype->isunsigned ? type_ulong : type_long;  
             } else {
                 const2(lval->const_val);
             }
@@ -289,7 +293,11 @@ void plnge2a(int (*heir)(LVALUE* lval), LVALUE* lval, LVALUE* lval2, void (*oper
                 // Even if LHS is int, we promote to long. 
                 lval2->val_type = KIND_LONG;
                 lval2->ltype = lval2->ltype->isunsigned ? type_ulong : type_long;    
-                load_constant(lval2);   
+                load_constant(lval2);
+            } else if (lval->val_type == KIND_CPTR  || lval2->val_type == KIND_CPTR ) {
+                lval2->val_type = KIND_LONG;
+                lval2->ltype = lval2->ltype->isunsigned ? type_ulong : type_long;    
+                load_constant(lval2); 
             } else if ( kind_is_fixed(lval->val_type)) {
                 lval2->val_type = lval->val_type;
                 lval2->ltype = lval->ltype;
@@ -372,6 +380,9 @@ void plnge2a(int (*heir)(LVALUE* lval), LVALUE* lval, LVALUE* lval2, void (*oper
         if ( !operator_is_comparison(oper)) {
             errorfmt("Invalid pointer arithmetic",1);
         } else {
+            if ( (!lval->ptr_type && !lval1_wasconst) || (!lval2->ptr_type && !lval2->is_const) ) {
+                warningfmt("incompatible-pointer-types", "Comparison of pointer with non-pointer value");
+            }
             lval->binop = oper;
             (*oper)(lval);
         }
@@ -386,8 +397,7 @@ void plnge2a(int (*heir)(LVALUE* lval), LVALUE* lval, LVALUE* lval2, void (*oper
     
 
     /* Special case handling for operation by constant */
-    if ( constoper != NULL && 
-        ( oper == mult || oper == zor || oper == zand || oper == zxor || lval2->is_const) ) {
+    if ( constoper != NULL && (operator_is_commutative(oper) || lval2->is_const )) {
         int doconstoper = 0;
         int64_t const_val;
 
@@ -535,8 +545,10 @@ void plnge2b(int (*heir)(LVALUE* lval), LVALUE* lval, LVALUE* lval2, void (*oper
         } else if (lval->val_type == KIND_LONG) {
             // LongConstant +/- lvalue
             widenintegers(lval, lval2);
-            lval2->val_type = KIND_LONG;
-            lval2->ltype = lval2->ltype->isunsigned ? type_ulong : type_long; 
+            if (!ispointer(lval2->ltype)) {
+                lval2->val_type = KIND_LONG;
+                lval2->ltype = lval2->ltype->isunsigned ? type_ulong : type_long; 
+            }
             if ( doconst_oper == 0 ) {
                 vlongconst_tostack(lval->const_val); 
             }
@@ -546,16 +558,22 @@ void plnge2b(int (*heir)(LVALUE* lval), LVALUE* lval, LVALUE* lval2, void (*oper
                 if ( doconst_oper == 0 ) {
                     vllongconst_tostack(lval->const_val);
                 }
-                lval->val_type = KIND_LONGLONG;
-                lval->ltype = lval->ltype->isunsigned ? type_ulong : type_long;
+                if (!ispointer(lval->ltype)) {
+                    lval->val_type = KIND_LONGLONG;
+                    lval->ltype = lval->ltype->isunsigned ? type_ulonglong : type_longlong;
+                }
             } else if ( lval2->val_type == KIND_LONG ) {
                 if ( doconst_oper == 0 ) {
                     vlongconst_tostack(lval->const_val); 
                 }
-                lval->val_type = KIND_LONG;
-                lval->ltype = lval->ltype->isunsigned ? type_ulong : type_long;
+                if (!ispointer(lval->ltype)) {
+                    lval->val_type = KIND_LONG;
+                    lval->ltype = lval->ltype->isunsigned ? type_ulong : type_long;
+                }
             } else {
-                lval->ltype = lval2->ltype->isunsigned ? type_uint : type_int;  
+                if (!ispointer(lval->ltype)) {
+                    lval->ltype = lval2->ltype->isunsigned ? type_uint : type_int;  
+                }
                 if ( doconst_oper == 0 ) {              
                     const2(lval->const_val);
                 }
@@ -563,13 +581,14 @@ void plnge2b(int (*heir)(LVALUE* lval), LVALUE* lval, LVALUE* lval2, void (*oper
         }
         if ( doconst_oper ) {
             lval->is_const = 0;
-            zadd_const(lval, lval->const_val);
+            zadd_const(lval2, lval->const_val);
             result(lval, lval2);
             return;
         }
     } else {
         /* non-constant on left - it's already loaded */
         int savesp1 = Zsp;
+
 
         setstage(&before1, &start1);
         // Get LHS onto the stack

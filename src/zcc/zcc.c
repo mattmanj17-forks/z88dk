@@ -282,6 +282,7 @@ static char           *m4arg = NULL;
 static char           *coptarg = NULL;
 static char           *pragincname = NULL;  /* File containing pragmas to append to zcc_opt.def */
 static char           *zccopt = NULL;       /* Text to append to zcc_opt.def */
+static char           *c_target = NULL;     // Placeholder, unused
 static char           *c_subtype = NULL;
 static char           *c_clib = NULL;
 static int             c_startup = -2;
@@ -382,6 +383,7 @@ static char  *c_altmathflags = NULL;        /* "-math-z88 -D__NATIVE_MATH__"; */
 static char  *c_startuplib = "z80_crt0";
 static char  *c_genmathlib = "genmath@{ZCC_LIBCPU}";
 static int    c_stylecpp = outspecified;
+static char  *c_swallow_mf = NULL;
 
 static char  *c_extension = NULL;
 static char  *c_assembler = NULL;
@@ -482,11 +484,12 @@ static option options[] = {
     { 0, "mkc160", OPT_ASSIGN|OPT_INT, "Generate output for the KC160 (z80 mode)", &c_cpu, NULL, CPU_TYPE_KC160 },
 
     { 0, "", OPT_HEADER, "Target options:", NULL, NULL, 0 },
+    { 0, "target", OPT_STRING, "Set the target (alternative to + syntax)", &c_target, NULL, 0 },
     { 0, "subtype", OPT_STRING,  "Set the target subtype" , &c_subtype, NULL, 0},
     { 0, "clib", OPT_STRING,  "Set the target clib type" , &c_clib, NULL, 0},
     { 0, "crt0", OPT_STRING,  "Override the crt0 assembler file to use" , &c_crt0, NULL, 0},
     { 0, "startuplib", OPT_STRING,  "Override STARTUPLIB - compiler base support routines" , &c_startuplib, NULL, 0},
-    { 0, "no-crt", OPT_BOOL|OPT_DOUBLE_DASH,  "Link without crt0 file" , &c_nocrt, NULL, 0},
+    { 0, "no-crt", OPT_BOOL|OPT_DOUBLE_DASH,  "Link without crt0 file (if possible, may not be successful)" , &c_nocrt, NULL, 0},
     { 0, "startupoffset", OPT_INT|OPT_PRIVATE,  "Startup offset value (internal)" , &c_startupoffset, NULL, 0},
     { 0, "startup", OPT_INT,  "Set the startup type" , &c_startup, NULL, 0},
     { 0, "zorg", OPT_INT,  "Set the origin (only certain targets)" , &c_zorg, NULL, 0},
@@ -568,6 +571,9 @@ static option options[] = {
     { 0, "lstcwd", OPT_BOOL|OPT_DOUBLE_DASH,  "Paths in .lst files are relative to the current working dir" , &lstcwd, NULL, 0},
     { 0, "custom-copt-rules", OPT_STRING,  "Custom user copt rules" , &c_coptrules_user, NULL, 0},
     { 'M', NULL, OPT_BOOL|OPT_PRIVATE,  "Swallow -M option in configs" , &swallow_M, NULL, 0},
+    { 0, "MD", OPT_BOOL|OPT_PRIVATE,  "Ignore -MD" , &swallow_M, NULL, 0},
+    { 0, "MT", OPT_BOOL|OPT_PRIVATE,  "Ignore -MT" , &c_swallow_mf, NULL, 0},
+    { 0, "MF", OPT_STRING|OPT_PRIVATE,  "Ignore -MF" , &c_swallow_mf, NULL, 0},
     { 0, "vn", OPT_BOOL_FALSE|OPT_PRIVATE,  "Turn off command tracing" , &verbose, NULL, 0},
     { 0, "no-cleanup", OPT_BOOL_FALSE, "Don't cleanup temporary files", &cleanup, NULL, 0 },
     { 0, "", 0, NULL },
@@ -668,8 +674,8 @@ static int hassuffix(char *name, char *suffix)
         }
     }
 
-    nlen = strlen(name);
-    slen = strlen(suffix);
+    nlen = (int)strlen(name);
+    slen = (int)strlen(suffix);
 
     if (slen > nlen)
         return (0);
@@ -743,7 +749,7 @@ int process(char *suffix, char *nextsuffix, char *processor, char *extraargs, en
     switch (ios) {
     case outimplied:
         /* Dropping the suffix for Z80..cheating! */
-        tstore = strlen(filelist[number]) - strlen(suffix);
+        tstore = (int)strlen(filelist[number]) - (int)strlen(suffix);
         if (!needsuffix)
             filelist[number][tstore] = 0;
         snprintf(buffer, sizeof(buffer), "%s%s %s \"%s\"", bin_dir, processor, extraargs, filelist[number]);
@@ -768,8 +774,8 @@ int process(char *suffix, char *nextsuffix, char *processor, char *extraargs, en
     }
 
     if (verbose) {
-        printf("%s\n", buffer);
-        fflush(stdout);
+        fprintf(stderr, "%s\n", buffer);
+        fflush(stderr);
     }
 
     status = system(buffer);
@@ -861,7 +867,7 @@ int linkthem(char *linker)
 
         fclose(out);
 
-        len += strlen(tname) + 5;
+        len += (int)strlen(tname) + 5;
         cmdline = calloc(len, sizeof(char));
 
         snprintf(cmdline, len, "%s \"@%s\"", temp, tname);
@@ -873,7 +879,7 @@ int linkthem(char *linker)
         /* place source files on the command line */
 
         for (i = 0; i < nfiles; i++)
-            len += strlen(filelist[i]) + 7;
+            len += (int)strlen(filelist[i]) + 7;
         len++;
 
         /* So the total length we need is now in len, let's malloc and do it */
@@ -975,6 +981,10 @@ int main(int argc, char **argv)
         if (aa[0] == '+') {
             strcpy(configuration, aa);
             break;
+        } else if ( strncmp(aa, "-target=", 8) == 0 ) {
+            strcpy(configuration, "+");
+            strcat(configuration, aa + 8);
+            break;
         } else if (aa[0] == '@') {
             struct tokens_list_s* tokens = gather_from_list_file(aa + 1);
 
@@ -990,7 +1000,7 @@ int main(int argc, char **argv)
     }
 
     if (strlen(configuration) == 0) {
-        fprintf(stderr, "A config file must be specified with +file\n\n");
+        fprintf(stderr, "A config file must be specified with +file or with -target=[target]\n\n");
         print_help_text(argv[0]);
         exit(1);
     }
@@ -1409,9 +1419,10 @@ int main(int argc, char **argv)
                 } else {
                     compiler_arg = strdup(comparg);
                 }
-            
-                if (process(".i", ".opt", c_compiler, compiler_arg, compiler_style, i, YES, NO))
+
+                if (process(".i", ".opt", c_compiler, compiler_arg, compiler_style, i, YES, NO)) {
                     exit(1);
+                }
                 free(compiler_arg);
             }
         case OPTFILE:
@@ -1564,7 +1575,7 @@ int main(int argc, char **argv)
                         *tmp = '\0';
 #endif
                     if (p) {
-                        len = strlen(tmp);
+                        len = (int)strlen(tmp);
                         snprintf(tmp + len, sizeof(tmp) - len - 1, "/%.*s", (int)(p - filelist[i]), filelist[i]);
                     }
 
@@ -1640,11 +1651,16 @@ int main(int argc, char **argv)
         case OBJFILE:
             break;
         default:
-            if (strcmp(filelist[i], original_filenames[i]) == 0)
-                fprintf(stderr, "Filetype of %s unrecognized\n", filelist[i]);
-            else
-                fprintf(stderr, "Filetype of %s (%s) unrecognized\n", filelist[i], original_filenames[i]);
-            exit(1);
+            {
+                struct stat sb;
+                if (stat(original_filenames[i], &sb) != 0) 
+                    fprintf(stderr, "File %s not found\n", filelist[i]);
+                else if (strcmp(filelist[i], original_filenames[i]) == 0)
+                    fprintf(stderr, "Filetype of %s unrecognized\n", filelist[i]);
+                 else
+                    fprintf(stderr, "Filetype of %s (%s) unrecognized\n", filelist[i], original_filenames[i]);
+                exit(1);
+            }
         }
     }
 
@@ -1747,12 +1763,15 @@ int main(int argc, char **argv)
         }
 
 		// z80asm now generates def file with same basename as output binary, i.e. a.def
-		/*
+
+        /*
 		if (globaldefon && copy_defc_file(c_crt0, ".def", filenamebuf, ".def")) {
+        */
+        if (globaldefon && copy_defc_file(filenamebuf, ".def", filenamebuf, ".dfc")) {
             fprintf(stderr, "Cannot create global defc file\n");
             status = 1;
         }
-		*/
+		
 
         if (lston && copy_file(c_crt0, ".lis", filenamebuf, ".lis")) {
             fprintf(stderr, "Cannot copy crt0 list file\n");
@@ -2273,15 +2292,14 @@ void SetStringConfig(arg_t *argument, char *arg)
 
 void SetNumber(arg_t *argument, char *arg)
 {
-    char *ptr = arg + 1;
+    char *ptr = arg;
     char *end;
     int   val;
-
     if (strncmp(ptr, argument->name, strlen(argument->name)) == 0) {
         ptr += strlen(argument->name);
     }
-
     while (ispunct(*ptr)) ++ptr;
+
     val = (int)strtol(ptr, &end, 0);
 
     if (end != ptr) {
@@ -3163,7 +3181,7 @@ void copy_output_files_to_destdir(char *suffix, int die_on_fail)
                     if (f) {
                         static char buf[1024];
                         unsigned long nread;
-                        while ((nread = fread(buf, 1, sizeof(buf), f)) > 0)
+                        while ((nread = (unsigned long)fread(buf, 1, sizeof(buf), f)) > 0)
                             fwrite(buf, 1, nread, stdout);
                         fclose(f);
                     }
@@ -3299,9 +3317,35 @@ void find_zcc_config_fileFile(const char *program, char *arg, char *buf, size_t 
         if (c_zcc_cfg != NULL) {
             /* Config file in config directory */
             snprintf(buf, buflen, "%s/%s.cfg", c_zcc_cfg, arg + 1);
+            if ( (fp = fopen(buf, "r") ) != NULL ) {
+                fclose(fp);
+                return;
+            }
+            // We can't find the file here, check for ti8x
+            if ( strcmp(arg+1,"ti8x") == 0 ) {
+                fprintf(stderr, "Target ti8x has been requested, the target is now named ti83p\n");
+                snprintf(buf, buflen, "%s/ti83p.cfg", c_zcc_cfg);
+            } else {
+                fprintf(stderr, "Can't find configuration file for target %s in %s\n", arg+1, c_zcc_cfg);
+                exit(1);
+            }
+
             return;
         } else {
             snprintf(buf, buflen, "%s/lib/config/%s.cfg", c_install_dir, arg + 1);
+
+            if ( (fp = fopen(buf, "r") ) != NULL ) {
+                fclose(fp);
+                return;
+            }
+            // We can't find the file here, check for ti8x
+            if ( strcmp(arg+1,"ti8x") == 0 ) {
+                fprintf(stderr, "Target ti8x has been requested, the target is now named ti83p\n");
+                snprintf(buf, buflen, "%s/lib/config/ti83p.cfg", c_install_dir);
+            } else {
+                fprintf(stderr, "Can't find configuration file for target %s in %s/lib/config\n", arg+1, c_install_dir);
+                exit(1);
+            }
         }
         /*
          * User supplied invalid config file, let it fall over back
@@ -3310,7 +3354,7 @@ void find_zcc_config_fileFile(const char *program, char *arg, char *buf, size_t 
         return;
     }
     /* Without a config file, we should just print usage and then exit */
-    fprintf(stderr, "A config file must be specified with +file\n\n");
+    fprintf(stderr, "A config file must be specified with +file or with -target=[target]\n\n");
     print_help_text(program);
     exit(1);
 }
@@ -3570,7 +3614,7 @@ static int zcc_vasprintf(char **s, const char *fmt, va_list ap)
         *s = NULL;
         req = -1;
     }
-    return req;
+    return (int)req;
 }
 
 

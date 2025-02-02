@@ -1,6 +1,6 @@
 /*
- * FreeRTOS Kernel V10.5.1+
- * Copyright (C) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
+ * FreeRTOS Kernel V11.1.0
+ * Copyright (C) 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * SPDX-License-Identifier: MIT
  *
@@ -58,23 +58,23 @@
 #endif
 
 #if portBYTE_ALIGNMENT == 32
-    #define portBYTE_ALIGNMENT_MASK     ( 0x001f )
+    #define portBYTE_ALIGNMENT_MASK    ( 0x001f )
 #elif portBYTE_ALIGNMENT == 16
-    #define portBYTE_ALIGNMENT_MASK     ( 0x000f )
+    #define portBYTE_ALIGNMENT_MASK    ( 0x000f )
 #elif portBYTE_ALIGNMENT == 8
-    #define portBYTE_ALIGNMENT_MASK     ( 0x0007 )
+    #define portBYTE_ALIGNMENT_MASK    ( 0x0007 )
 #elif portBYTE_ALIGNMENT == 4
-    #define portBYTE_ALIGNMENT_MASK     ( 0x0003 )
+    #define portBYTE_ALIGNMENT_MASK    ( 0x0003 )
 #elif portBYTE_ALIGNMENT == 2
-    #define portBYTE_ALIGNMENT_MASK     ( 0x0001 )
+    #define portBYTE_ALIGNMENT_MASK    ( 0x0001 )
 #elif portBYTE_ALIGNMENT == 1
-    #define portBYTE_ALIGNMENT_MASK     ( 0x0000 )
+    #define portBYTE_ALIGNMENT_MASK    ( 0x0000 )
 #else /* if portBYTE_ALIGNMENT == 32 */
     #error "Invalid portBYTE_ALIGNMENT definition"
 #endif /* if portBYTE_ALIGNMENT == 32 */
 
 #ifndef portUSING_MPU_WRAPPERS
-    #define portUSING_MPU_WRAPPERS      0
+    #define portUSING_MPU_WRAPPERS    0
 #endif
 
 #ifndef portNUM_CONFIGURABLE_REGIONS
@@ -86,7 +86,11 @@
 #endif
 
 #ifndef portARCH_NAME
-    #define portARCH_NAME               NULL
+    #define portARCH_NAME    NULL
+#endif
+
+#ifndef configSTACK_DEPTH_TYPE
+    #define configSTACK_DEPTH_TYPE    StackType_t
 #endif
 
 #ifndef configSTACK_ALLOCATION_FROM_SEPARATE_HEAP
@@ -196,7 +200,7 @@ extern void __LIB__ vPortGetHeapStats(HeapStats_t * pxHeapStats) __smallc;
  * Map to the memory management routines required for the port.
  */
 /*
-void * pvPortMalloc( size_t xSize ) PRIVILEGED_FUNCTION;
+void * pvPortMalloc( size_t xWantedSize ) PRIVILEGED_FUNCTION;
 void * pvPortCalloc( size_t xNum,
                      size_t xSize ) PRIVILEGED_FUNCTION;
 void vPortFree( void * pv ) PRIVILEGED_FUNCTION;
@@ -204,7 +208,7 @@ void vPortInitialiseBlocks( void ) PRIVILEGED_FUNCTION;
 size_t xPortGetFreeHeapSize( void ) PRIVILEGED_FUNCTION;
 size_t xPortGetMinimumEverFreeHeapSize( void ) PRIVILEGED_FUNCTION;
  */
-extern void __LIB__ *pvPortMalloc(size_t xSize) __smallc;
+extern void __LIB__ *pvPortMalloc(size_t xWantedSize) __smallc;
 
 
 extern void __LIB__ *pvPortCalloc(size_t xNum,size_t xSize) __smallc;
@@ -239,6 +243,17 @@ extern size_t __LIB__ xPortGetMinimumEverFreeHeapSize(void) __smallc;
     #define vPortFreeStack       vPortFree
 #endif
 
+/*
+ * This function resets the internal state of the heap module. It must be called
+ * by the application before restarting the scheduler.
+ */
+/*
+void vPortHeapResetState( void ) PRIVILEGED_FUNCTION;
+ */
+extern void __LIB__ vPortHeapResetState(void) __smallc;
+
+
+
 #if ( configUSE_MALLOC_FAILED_HOOK == 1 )
 
 /**
@@ -250,7 +265,7 @@ extern size_t __LIB__ xPortGetMinimumEverFreeHeapSize(void) __smallc;
  * This hook function is called when allocation failed.
  */
 /*
-    void vApplicationMallocFailedHook( void ); /*lint !e526 Symbol not defined as it is an application callback. */
+    void vApplicationMallocFailedHook( void );
  */
     extern void __LIB__ vApplicationMallocFailedHook(void) __smallc;
 

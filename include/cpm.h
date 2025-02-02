@@ -19,7 +19,7 @@
  */
 #ifndef CLIB_OPEN_MAX
 extern void *_CLIB_OPEN_MAX;
-#define CLIB_OPEN_MAX &_CLIB_OPEN_MAX
+#define CLIB_OPEN_MAX (int)&_CLIB_OPEN_MAX
 #endif
 
 

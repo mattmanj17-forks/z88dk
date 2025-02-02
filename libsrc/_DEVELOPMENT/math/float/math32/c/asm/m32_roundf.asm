@@ -1,6 +1,6 @@
 ;--------------------------------------------------------
-; File Created by SDCC : free open source ANSI-C Compiler
-; Version 4.2.0 #13131 (Linux)
+; File Created by SDCC : free open source ISO C Compiler
+; Version 4.5.0 #15248 (Linux)
 ;--------------------------------------------------------
 ; Processed by Z88DK
 ;--------------------------------------------------------
@@ -343,14 +343,14 @@
 	GLOBAL _log10
 	GLOBAL _log_fastcall
 	GLOBAL _log
+	GLOBAL _ilogb_fastcall
+	GLOBAL _ilogb
 	GLOBAL _scalbln_callee
 	GLOBAL _scalbln
 	GLOBAL _scalbn_callee
 	GLOBAL _scalbn
 	GLOBAL _ldexp_callee
 	GLOBAL _ldexp
-	GLOBAL _ilogb_fastcall
-	GLOBAL _ilogb
 	GLOBAL _frexp_callee
 	GLOBAL _frexp
 	GLOBAL _expm1_fastcall
@@ -414,7 +414,7 @@ ENDIF
 ;--------------------------------------------------------
 ; Home
 ;--------------------------------------------------------
-	SECTION IGNORE
+	SECTION code_home
 ;--------------------------------------------------------
 ; code
 ;--------------------------------------------------------
@@ -461,15 +461,15 @@ _m32_roundf:
 	and	a,0x7f
 	ld	(ix-1),a
 	ld	a,0x17
-l_m32_roundf_00141:
+l_m32_roundf_00151:
 	srl	(ix-1)
 	rr	(ix-2)
 	rr	(ix-3)
 	rr	(ix-4)
 	dec	a
-	jr	NZ, l_m32_roundf_00141
-	ld	l,(ix-3)
+	jr	NZ, l_m32_roundf_00151
 	ld	a,(ix-4)
+	ld	l,0x00
 	add	a,0x81
 	ld	(ix-10),a
 	ld	a, l
@@ -494,6 +494,7 @@ l_m32_roundf_00141:
 	and	a,(ix-9)
 	inc	a
 	jp	NZ,l_m32_roundf_00113
+	ld	bc,0x0000
 	set	7, e
 	ld	a, d
 	or	a,0x3f
@@ -506,15 +507,15 @@ l_m32_roundf_00106:
 	xor	a, a
 	ld	(ix-1),a
 	inc	a
-	jr	l_m32_roundf_00146
-l_m32_roundf_00145:
+	jr	l_m32_roundf_00156
+l_m32_roundf_00155:
 	sra	(ix-1)
 	rr	(ix-2)
 	rr	(ix-3)
 	rr	(ix-4)
-l_m32_roundf_00146:
+l_m32_roundf_00156:
 	dec	a
-	jr	NZ, l_m32_roundf_00145
+	jr	NZ, l_m32_roundf_00155
 	ld	l,(ix-4)
 	ld	h,(ix-3)
 	ld	(ix-8),l
@@ -528,19 +529,16 @@ l_m32_roundf_00146:
 	ld	a,(ix-13)
 	and	a,(ix-7)
 	ld	(ix-3),a
-	ld	a,(ix-12)
-	and	a,(ix-6)
+	xor	a, a
 	ld	(ix-2),a
-	ld	a,(ix-11)
-	and	a,(ix-5)
 	ld	(ix-1),a
-	or	a,(ix-2)
+	or	a,a
 	or	a,(ix-3)
 	or	a,(ix-4)
 	jr	NZ,l_m32_roundf_00104
 	ld	l, c
 	ld	h, b
-	jp	l_m32_roundf_00114
+	jr	l_m32_roundf_00114
 l_m32_roundf_00104:
 	ld	a,(ix-10)
 	push	af
@@ -548,49 +546,40 @@ l_m32_roundf_00104:
 	ld	de,0x0040
 	pop	af
 	inc	a
-	jr	l_m32_roundf_00148
-l_m32_roundf_00147:
+	jr	l_m32_roundf_00158
+l_m32_roundf_00157:
 	sra	d
 	rr	e
 	rr	b
 	rr	c
-l_m32_roundf_00148:
+l_m32_roundf_00158:
 	dec	a
-	jr	NZ, l_m32_roundf_00147
+	jr	NZ, l_m32_roundf_00157
 	ld	a, c
 	add	a,(ix-14)
-	ld	c, a
+	ld	(ix-4),a
 	ld	a, b
 	adc	a,(ix-13)
-	ld	b, a
+	ld	(ix-3),a
 	ld	a, e
 	adc	a,(ix-12)
-	ld	e, a
+	ld	(ix-2),a
 	ld	a, d
 	adc	a,(ix-11)
-	ld	d, a
+	ld	(ix-1),a
 	ld	a, l
 	cpl
-	ld	l, a
+	ld	c, a
 	ld	a, h
 	cpl
-	ld	(ix-4),l
-	ld	(ix-3),a
-	xor	a, a
-	ld	(ix-2),a
-	ld	(ix-1),a
+	ld	b, a
 	ld	a, c
 	and	a,(ix-4)
 	ld	c, a
 	ld	a, b
 	and	a,(ix-3)
 	ld	b, a
-	ld	a, e
-	and	a,(ix-2)
-	ld	e, a
-	ld	a, d
-	and	a,(ix-1)
-	ld	d, a
+	ld	de,0x0000
 	jr	l_m32_roundf_00113
 l_m32_roundf_00112:
 	ld	a,(ix-10)

@@ -811,6 +811,7 @@ int in(int port){
   if ( (val = hook_console_in(port)) != -1 ) return val;
   if ( (val = apu_in(port)) != -1 ) return val;
   if ( (val = acia_in(port)) != -1 ) return val;
+  if ( (val = memory_in(port)) != -1 ) return val;
 
   return port&1 ? 255 : ear;
 }
@@ -929,7 +930,7 @@ int main (int argc, char **argv){
     printf("  -d             Enable debugger\n"),
     printf("  -v             Verbose logging\n"),
     printf("  -l X           Load file to address\n"),
-    printf("  -b <model>     Memory model (zxn/zx/z180)\n"),
+    printf("  -b <model>     Memory model (zxn/zx/z180/msx)\n"),
     printf("  -m8080         Emulate an 8080\n"),
     printf("  -m8085         Emulate an 8085 (mostly)\n"),
     printf("  -mgbz80        Emulate a gbz80 (mostly)\n"),
@@ -1151,6 +1152,19 @@ int main (int argc, char **argv){
         *get_memory_addr(5, MEM_TYPE_INST) = 0xED;
         *get_memory_addr(6, MEM_TYPE_INST) = 0xFE;
         *get_memory_addr(7, MEM_TYPE_INST) = 0xC9;
+        // Trap BIOS entry as well + 3 + 5
+        *get_memory_addr(0, MEM_TYPE_INST) = 0xED;
+        *get_memory_addr(1, MEM_TYPE_INST) = 0x05;
+        *get_memory_addr(2, MEM_TYPE_INST) = 0x00;
+
+        *get_memory_addr(8, MEM_TYPE_INST) = 0xED;
+        *get_memory_addr(9, MEM_TYPE_INST) = 0xFE;
+        *get_memory_addr(10, MEM_TYPE_INST) = 0xC9;
+
+        *get_memory_addr(11, MEM_TYPE_INST) = 0xED;
+        *get_memory_addr(12, MEM_TYPE_INST) = 0xFE;
+        *get_memory_addr(13, MEM_TYPE_INST) = 0xC9;
+
         pc = 256;
         // CP/M emulator
         if (1 != fread(get_memory_addr(256, MEM_TYPE_INST), size, 1, fh)) { fclose(fh); exit_log(1, "Could not read required data from <%s>\n", argv[1]); }

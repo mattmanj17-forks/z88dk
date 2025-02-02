@@ -300,7 +300,7 @@ extern const unsigned char *joystick_type[];
 
 #ifdef __AQUARIUS__
 #ifdef DEFINE_JOYSTICK_TYPE
-	const unsigned char *joystick_type[] = {"QAOP-MN", "8246-05", "hjkl-sd", "Cursor"};
+	const unsigned char *joystick_type[] = {"Joystick 1", "Joystick 2", "QAOP-MN", "8246-05", "hjkl-sd", "Cursor"};
 #endif
 	#define GAME_DEVICES 4
 #endif
@@ -447,6 +447,13 @@ extern const unsigned char *joystick_type[];
 	const unsigned char *joystick_type[] = {"Joystick 1", "Joystick 2","AQOP-MN", "8246-05", "hjkl-sd", "Cursor"};
 #endif
 	#define GAME_DEVICES 6
+#endif
+
+#ifdef __HECTOR
+#ifdef DEFINE_JOYSTICK_TYPE
+	const unsigned char *joystick_type[] = {"Joystick 1", "Joystick 2","AQOP-BN", "8246-05", "hjkl-sd"};
+#endif
+	#define GAME_DEVICES 5
 #endif
 
 

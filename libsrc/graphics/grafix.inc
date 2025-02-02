@@ -175,10 +175,22 @@ IF FORzx81hr64
     defc maxy    = 64
 ENDIF
 
+IF FORzx81hr128
+    DEFINE gotgfx
+    defc maxx    = 256
+    defc maxy    = 128
+ENDIF
+
 IF FORzx81hr192
     DEFINE gotgfx
     defc maxx    = 256
     defc maxy    = 192
+ENDIF
+
+IF FORzx81hr384
+    DEFINE gotgfx
+    defc maxx    = 256
+    defc maxy    = 384
 ENDIF
 
 IF FORzx81mt64
@@ -849,6 +861,28 @@ IF FORtim011
    DEFINE gotgfx
    defc maxx = 512
    defc maxy = 256
+   defc    WANT_swapgfxbk = 0
+ENDIF
+
+IF FORinteract
+   DEFINE gotgfx
+   defc maxx = 112
+   defc maxy = 77
+   defc    WANT_swapgfxbk = 0
+ENDIF
+
+IF FORhector1
+   DEFINE gotgfx
+   DEFINE GFX_noclip
+   defc maxx = 112
+   defc maxy = 77
+   defc    WANT_swapgfxbk = 0
+ENDIF
+
+IF FORhectorhr
+   DEFINE gotgfx
+   defc maxx = 240
+   defc maxy = 226
    defc    WANT_swapgfxbk = 0
 ENDIF
 

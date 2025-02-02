@@ -4,7 +4,7 @@
 # Build and test z88dk-z80asm-*.lib
 #
 # Copyright (C) Gunther Strube, InterLogic 1993-99
-# Copyright (C) Paulo Custodio, 2011-2023
+# Copyright (C) Paulo Custodio, 2011-2024
 # License: http://www.perlfoundation.org/artistic_license_2_0
 #------------------------------------------------------------------------------
 PROJ		:= z88dk-z80asm
@@ -12,6 +12,8 @@ PROJ		:= z88dk-z80asm
 INSTALL 	?= install
 Z80ASM_EXE	?= ../../$(PROJ)
 SRC			:= $(wildcard *.asm)
+
+TASKS ?= 9
 
 all:		$(PROJ).lib
 
@@ -29,4 +31,4 @@ install::
 
 test: all
 	cp $(Z80ASM_EXE) $(PROJ)
-	perl -S prove --state=slow,save -j9 t/*.t
+	perl -S prove --state=slow,save -j$(TASKS) t/*.t
