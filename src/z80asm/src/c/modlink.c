@@ -382,7 +382,7 @@ static void read_cur_module_exprs(Expr1List* exprs, obj_file_t* obj) {
         // patch location
         const char* section_name = parse_st_str(obj);
         int asmpc = parse_obj_file_int(obj);
-        int code_pos = parse_obj_file_int(obj);
+        int patch_ptr = parse_obj_file_int(obj);
         int opcode_size = parse_obj_file_int(obj);
 
         const char* target_name = parse_st_str(obj);
@@ -402,7 +402,7 @@ static void read_cur_module_exprs(Expr1List* exprs, obj_file_t* obj) {
             expr->module = CURRENTMODULE;
             expr->section = CURRENTSECTION;
             expr->asmpc = asmpc;
-            expr->code_pos = code_pos;
+            expr->patch_ptr = patch_ptr;
             expr->opcode_size = opcode_size;
             expr->filename = spool_add(source_filename);
             expr->line_num = line_num;
@@ -564,7 +564,7 @@ static void patch_exprs(Expr1List* exprs) {
                     warning_hex2(ErrIntRange, value);
                 }
 
-                patch_byte(expr->code_pos, (byte_t)value);
+                patch_byte(expr->patch_ptr, (byte_t)value);
                 break;
 
             case RANGE_BYTE_SIGNED:
@@ -572,7 +572,7 @@ static void patch_exprs(Expr1List* exprs) {
                     warning_hex2(ErrIntRange, value);
                 }
 
-                patch_byte(expr->code_pos, (byte_t)value);
+                patch_byte(expr->patch_ptr, (byte_t)value);
                 break;
 
             case RANGE_HIGH_OFFSET:
@@ -582,7 +582,7 @@ static void patch_exprs(Expr1List* exprs) {
                     }
                 }
 
-                patch_byte(expr->code_pos, (byte_t)(value & 0xff));
+                patch_byte(expr->patch_ptr, (byte_t)(value & 0xff));
                 break;
 
             case RANGE_BYTE_TO_WORD_UNSIGNED:
@@ -590,8 +590,8 @@ static void patch_exprs(Expr1List* exprs) {
                     warning_hex2(ErrIntRange, value);
                 }
 
-                patch_byte(expr->code_pos, (byte_t)value);
-                patch_byte(expr->code_pos + 1, 0);
+                patch_byte(expr->patch_ptr, (byte_t)value);
+                patch_byte(expr->patch_ptr + 1, 0);
                 break;
 
             case RANGE_BYTE_TO_WORD_SIGNED:
@@ -599,8 +599,8 @@ static void patch_exprs(Expr1List* exprs) {
                     warning_hex2(ErrIntRange, value);
                 }
 
-                patch_byte(expr->code_pos, (byte_t)value);
-                patch_byte(expr->code_pos + 1, value < 0 || value > 127 ? 0xff : 0);
+                patch_byte(expr->patch_ptr, (byte_t)value);
+                patch_byte(expr->patch_ptr + 1, value < 0 || value > 127 ? 0xff : 0);
                 break;
 
             case RANGE_BYTE_TO_PTR_UNSIGNED:
@@ -608,9 +608,9 @@ static void patch_exprs(Expr1List* exprs) {
                     warning_hex2(ErrIntRange, value);
                 }
 
-                patch_byte(expr->code_pos, (byte_t)value);
-                patch_byte(expr->code_pos + 1, 0);
-                patch_byte(expr->code_pos + 2, 0);
+                patch_byte(expr->patch_ptr, (byte_t)value);
+                patch_byte(expr->patch_ptr + 1, 0);
+                patch_byte(expr->patch_ptr + 2, 0);
                 break;
 
             case RANGE_BYTE_TO_PTR_SIGNED:
@@ -618,31 +618,31 @@ static void patch_exprs(Expr1List* exprs) {
                     warning_hex2(ErrIntRange, value);
                 }
 
-                patch_byte(expr->code_pos, (byte_t)value);
-                patch_byte(expr->code_pos + 1, value < 0 || value > 127 ? 0xff : 0);
-                patch_byte(expr->code_pos + 2, value < 0 || value > 127 ? 0xff : 0);
+                patch_byte(expr->patch_ptr, (byte_t)value);
+                patch_byte(expr->patch_ptr + 1, value < 0 || value > 127 ? 0xff : 0);
+                patch_byte(expr->patch_ptr + 2, value < 0 || value > 127 ? 0xff : 0);
                 break;
 
             case RANGE_PTR24:
-                patch_byte(expr->code_pos + 0, (byte_t)((value >> 0) & 0xff));
-                patch_byte(expr->code_pos + 1, (byte_t)((value >> 8) & 0xff));
-                patch_byte(expr->code_pos + 2, (byte_t)((value >> 16) & 0xff));
+                patch_byte(expr->patch_ptr + 0, (byte_t)((value >> 0) & 0xff));
+                patch_byte(expr->patch_ptr + 1, (byte_t)((value >> 8) & 0xff));
+                patch_byte(expr->patch_ptr + 2, (byte_t)((value >> 16) & 0xff));
                 break;
 
             case RANGE_WORD:
-                patch_word(expr->code_pos, value);
+                patch_word(expr->patch_ptr, value);
 
                 /* Expression contains relocatable address */
                 if (expr->type == TYPE_ADDRESS) {
 
                     /* save section reloc data */
-                    *(intArray_push(expr->section->reloc)) = expr->code_pos +
+                    *(intArray_push(expr->section->reloc)) = expr->patch_ptr +
                             get_cur_module_start();
 
                     /* relocate code */
                     if (option_relocatable()) {
                         int offset = get_cur_module_start() + expr->section->addr;
-                        int distance = expr->code_pos + offset - curroffset;
+                        int distance = expr->patch_ptr + offset - curroffset;
 
                         if (distance > 0 && distance < 256) {	// Bugfix: when zero, need to use 3 bytes
                             *relocptr++ = (byte_t)distance;
@@ -656,17 +656,17 @@ static void patch_exprs(Expr1List* exprs) {
                         }
 
                         totaladdr++;
-                        curroffset = expr->code_pos + offset;
+                        curroffset = expr->patch_ptr + offset;
                     }
                 }
                 break;
 
             case RANGE_WORD_BE:
-                patch_word_be(expr->code_pos, value);
+                patch_word_be(expr->patch_ptr, value);
                 break;
 
             case RANGE_DWORD:
-                patch_long(expr->code_pos, value);
+                patch_long(expr->patch_ptr, value);
                 break;
 
             case RANGE_JR_OFFSET:
@@ -677,7 +677,7 @@ static void patch_exprs(Expr1List* exprs) {
                     error_hex2(ErrIntRange, value);
                 }
                 else {
-                    patch_byte(expr->code_pos, (byte_t)value);
+                    patch_byte(expr->patch_ptr, (byte_t)value);
                 }
                 break;
 
@@ -689,7 +689,7 @@ static void patch_exprs(Expr1List* exprs) {
                     error_hex4(ErrIntRange, value);
                 }
                 else {
-                    patch_word(expr->code_pos, value);
+                    patch_word(expr->patch_ptr, value);
                 }
                 break;
 
@@ -1379,7 +1379,7 @@ static void merge_local_symbols(StrHash* extern_syms) {
                 set_cur_section(expr->section);
                 start = get_cur_module_start();
                 expr->asmpc += start;
-                expr->code_pos += start;
+                expr->patch_ptr += start;
 
                 set_cur_module(first_module);
             }
