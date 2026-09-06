@@ -23,9 +23,15 @@ namespace fs = std::filesystem;
 namespace fs = boost::filesystem;
 #endif
 
-inline bool is_eol(char c) { return c == '\r' || c == '\n'; }
-inline bool is_ident_start(char c) { return c == '_' || c == '@' || isalpha(c); }
-inline bool is_ident(char c) { return c == '_' || c == '@' || isalnum(c); }
+inline bool is_eol(char c) {
+    return c == '\r' || c == '\n';
+}
+inline bool is_ident_start(char c) {
+    return c == '_' || c == '@' || isalpha(c);
+}
+inline bool is_ident(char c) {
+    return c == '_' || c == '@' || isalnum(c);
+}
 
 bool is_ident(const string& ident);
 int char_digit(char c);
@@ -36,7 +42,8 @@ string str_toupper(string str);
 string str_strip(const string& str);				// remove start and end blanks
 string str_chomp(const string& str);				// remove end blanks
 string str_remove_all_blanks(const string& str);	// remove all blanks
-string str_remove_extra_blanks(const string& str);	// replace sequences of blanks with one space
+string str_remove_extra_blanks(const string&
+                               str);	// replace sequences of blanks with one space
 string str_replace_all(string text, const string& find, const string& replace);
 
 // globs a pattern including *, ? and ** and returns all matching files and directories
@@ -50,14 +57,15 @@ string int_to_hex(T i, int width) {
     std::ostringstream ss;
     if (i <= -10)
         ss << "-$"
-        << std::setfill('0') << std::setw(width)
-        << std::hex << -i << std::dec;
-    else if (i < 10)
+           << std::setfill('0') << std::setw(width)
+           << std::hex << -i << std::dec;
+    else if (i < 10) {
         ss << i;
+    }
     else
         ss << "$"
-        << std::setfill('0') << std::setw(width)
-        << std::hex << i << std::dec;
+           << std::setfill('0') << std::setw(width)
+           << std::hex << i << std::dec;
     return ss.str();
 }
 

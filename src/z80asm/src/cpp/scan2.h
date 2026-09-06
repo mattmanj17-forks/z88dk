@@ -46,25 +46,44 @@ public:
     Token(TType type, bool blank_before, double fvalue);
     Token(TType type, bool blank_before, const string& svalue);
 
-    TType type() const { return m_type; }
-    bool blank_before() const { return m_blank_before; }
-    int ivalue() const { return m_ivalue; }
-    double fvalue() const { return m_fvalue; }
-    const string& svalue() const { return m_svalue; }
-    Keyword keyword() const { return m_keyword; }
+    TType type() const {
+        return m_type;
+    }
+    bool blank_before() const {
+        return m_blank_before;
+    }
+    int ivalue() const {
+        return m_ivalue;
+    }
+    double fvalue() const {
+        return m_fvalue;
+    }
+    const string& svalue() const {
+        return m_svalue;
+    }
+    Keyword keyword() const {
+        return m_keyword;
+    }
 
     string to_string() const;
 
-    bool is(TType type) { return this->m_type == type; }
-    bool is(Keyword keyword) { return this->m_keyword == keyword; }
+    bool is(TType type) {
+        return this->m_type == type;
+    }
+    bool is(Keyword keyword) {
+        return this->m_keyword == keyword;
+    }
     template <typename T, typename... Types>
     bool is(T var1, Types... var2) {
-        if (is(var1))
+        if (is(var1)) {
             return true;
-        else if (is(var2...))
+        }
+        else if (is(var2...)) {
             return true;
-        else
+        }
+        else {
             return false;
+        }
     }
 
     static string to_string(const vector<Token>& tokens);
@@ -89,19 +108,39 @@ public:
     void append(const vector<Token>& tokens);
     void clear();
 
-    const string& text() const { return m_text; }
-    void set_text(const string& text) { m_text = text; }
+    const string& text() const {
+        return m_text;
+    }
+    void set_text(const string& text) {
+        m_text = text;
+    }
 
-    vector<Token>& tokens() { return m_tokens; }
-    const vector<Token>& tokens() const { return m_tokens; }
+    vector<Token>& tokens() {
+        return m_tokens;
+    }
+    const vector<Token>& tokens() const {
+        return m_tokens;
+    }
 
-    bool empty() const { return m_text.empty() && m_tokens.empty(); }
-    string to_string() const { return Token::to_string(m_tokens); }
+    bool empty() const {
+        return m_text.empty() && m_tokens.empty();
+    }
+    string to_string() const {
+        return Token::to_string(m_tokens);
+    }
 
-    void rewind() { m_pos = 0; }
-    bool at_end() const { return m_pos >= m_tokens.size(); }
-    unsigned pos() const { return m_pos; }
-    void set_pos(unsigned pos) { m_pos = pos; }
+    void rewind() {
+        m_pos = 0;
+    }
+    bool at_end() const {
+        return m_pos >= m_tokens.size();
+    }
+    unsigned pos() const {
+        return m_pos;
+    }
+    void set_pos(unsigned pos) {
+        m_pos = pos;
+    }
 
     Token& peek(int offset = 0);			// 0: current; 1: next; -1: previous
     void next(int n = 1);
@@ -122,10 +161,17 @@ public:
     bool open(const string& filename);
     void scan_text(Location location, const string& text);
     bool get_text_line(ScannedLine& line);  // read line, do not split into tokens
-    bool get_token_line(ScannedLine& line); // read statemement from line, split into tokens
-    Location& location() { return m_location; }
-    const string& filename() const { return m_filename; }
-    const Location& location() const { return m_location; }
+    bool get_token_line(ScannedLine&
+                        line); // read statemement from line, split into tokens
+    Location& location() {
+        return m_location;
+    }
+    const string& filename() const {
+        return m_filename;
+    }
+    const Location& location() const {
+        return m_location;
+    }
 
 private:
     string m_filename;                      // original file name, not changed by LINE
@@ -143,11 +189,14 @@ private:
     bool m_blank_before{ false };           // blank before current token while scanning
     bool m_got_eof{ false };                // true after end of file reached
 
-    bool peek_text_line(ScannedLine& line); // read line, setup line number for errors
+    bool peek_text_line(ScannedLine&
+                        line); // read line, setup line number for errors
 
     void scan_error(ErrCode code, const string& arg = "");
 
     bool fill();                            // fill buffer from file
-    int yyfill() { return fill() ? 0 : 1; } // interface to re2c
+    int yyfill() {
+        return fill() ? 0 : 1;    // interface to re2c
+    }
     void notify_new_line(const string& text);
 };

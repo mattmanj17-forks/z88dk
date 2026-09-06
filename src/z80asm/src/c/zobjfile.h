@@ -42,10 +42,10 @@ extern bool check_object_file_no_errors(const char* obj_filename);
 extern bool check_obj_lib_file(
     bool is_lib,
     const char* filename,
-	const char* signature,
+    const char* signature,
     void(*do_error_file_not_found)(const char*),
     void(*do_error_file_open)(const char*),
-	void(*do_error_file_type)(const char*),
-	void(*do_error_version)(const char*, int, int),
+    void(*do_error_file_type)(const char*),
+    void(*do_error_version)(const char*, int, int),
     void(*do_error_cpu_incompatible)(const char*, cpu_t),
     void(*do_error_ixiy_incompatible)(const char*, bool));

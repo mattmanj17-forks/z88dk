@@ -67,6 +67,9 @@ endif
 endif
 
 STYLE_WIDTH = 80
+ASTYLE	= astyle --style=attach --pad-oper --align-pointer=type \
+		  --break-closing-braces --add-braces --attach-return-type \
+		  --max-code-length=$(STYLE_WIDTH) --lineend=linux --formatted 
 PERLTIDY = perltidy --indent-columns=4 --continuation-indentation=4 \
 		  --maximum-line-length=$(STYLE_WIDTH) -b
 TIDY_STAMP = .tidy-stamp
@@ -275,10 +278,14 @@ clean::
 #------------------------------------------------------------------------------
 tidy:
 	@[ -f $(TIDY_STAMP) ] || touch -t 197001010000 $(TIDY_STAMP)
+	find . \( -name '*.c' -o -name '*.cpp' -o -name '*.h' -o -name '*.re' \) \
+		-newer $(TIDY_STAMP) -exec $(ASTYLE) {} +
 	find . \( -name '*.pl' -o -name '*.pm' -o -name '*.t' \) \
 		   -newer $(TIDY_STAMP) -exec $(PERLTIDY) {} +
 	touch $(TIDY_STAMP)
 
+clean::
+	$(RM) $(TIDY_STAMP)
 
 #------------------------------------------------------------------------------
 # Dependencies

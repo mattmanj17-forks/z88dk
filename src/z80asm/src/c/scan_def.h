@@ -124,679 +124,1409 @@ TOKEN(TK_BIN_NOT, "~", )
 *----------------------------------------------------------------------------*/
 
 /* flags */
-TOKEN_OPCODE_RE(TK_CALL_NZ,  "CALL NZ",  "CALL"i hspace1 "NZ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_Z,   "CALL Z",   "CALL"i hspace1 "Z"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_NC,  "CALL NC",  "CALL"i hspace1 "NC"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_C,   "CALL C",   "CALL"i hspace1 "C"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_PO,  "CALL PO",  "CALL"i hspace1 "PO"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_PE,  "CALL PE",  "CALL"i hspace1 "PE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_P,   "CALL P",   "CALL"i hspace1 "P"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_M,   "CALL M",   "CALL"i hspace1 "M"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LZ,  "CALL LZ",  "CALL"i hspace1 "LZ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LO,  "CALL LO",  "CALL"i hspace1 "LO"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_NV,  "CALL NV",  "CALL"i hspace1 "NV"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_V,   "CALL V",   "CALL"i hspace1 "V"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_X5,  "CALL X5",  "CALL"i hspace1 "X5"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_NX5, "CALL NX5", "CALL"i hspace1 "NX5"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_K,   "CALL K",   "CALL"i hspace1 "K"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_NK,  "CALL NK",  "CALL"i hspace1 "NK"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_NE,  "CALL NE",  "CALL"i hspace1 "NE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_EQ,  "CALL EQ",  "CALL"i hspace1 "EQ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LTU, "CALL LTU", "CALL"i hspace1 "LTU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LEU, "CALL LEU", "CALL"i hspace1 "LEU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_GTU, "CALL GTU", "CALL"i hspace1 "GTU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_GEU, "CALL GEU", "CALL"i hspace1 "GEU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LT,  "CALL LT",  "CALL"i hspace1 "LT"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LE,  "CALL LE",  "CALL"i hspace1 "LE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_GT,  "CALL GT",  "CALL"i hspace1 "GT"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_GE,  "CALL GE",  "CALL"i hspace1 "GE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_OF,  "CALL OF",  "CALL"i hspace1 "OF"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_NZ,  "CALL NZ",  "CALL"i hspace1 "NZ"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_Z,   "CALL Z",   "CALL"i hspace1 "Z"i    hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_NC,  "CALL NC",  "CALL"i hspace1 "NC"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_C,   "CALL C",   "CALL"i hspace1 "C"i    hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_PO,  "CALL PO",  "CALL"i hspace1 "PO"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_PE,  "CALL PE",  "CALL"i hspace1 "PE"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_P,   "CALL P",   "CALL"i hspace1 "P"i    hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_M,   "CALL M",   "CALL"i hspace1 "M"i    hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LZ,  "CALL LZ",  "CALL"i hspace1 "LZ"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LO,  "CALL LO",  "CALL"i hspace1 "LO"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_NV,  "CALL NV",  "CALL"i hspace1 "NV"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_V,   "CALL V",   "CALL"i hspace1 "V"i    hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_X5,  "CALL X5",  "CALL"i hspace1 "X5"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_NX5, "CALL NX5", "CALL"i hspace1 "NX5"i  hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_K,   "CALL K",   "CALL"i hspace1 "K"i    hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_NK,  "CALL NK",  "CALL"i hspace1 "NK"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_NE,  "CALL NE",  "CALL"i hspace1 "NE"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_EQ,  "CALL EQ",  "CALL"i hspace1 "EQ"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LTU, "CALL LTU", "CALL"i hspace1 "LTU"i  hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LEU, "CALL LEU", "CALL"i hspace1 "LEU"i  hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_GTU, "CALL GTU", "CALL"i hspace1 "GTU"i  hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_GEU, "CALL GEU", "CALL"i hspace1 "GEU"i  hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LT,  "CALL LT",  "CALL"i hspace1 "LT"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LE,  "CALL LE",  "CALL"i hspace1 "LE"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_GT,  "CALL GT",  "CALL"i hspace1 "GT"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_GE,  "CALL GE",  "CALL"i hspace1 "GE"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_OF,  "CALL OF",  "CALL"i hspace1 "OF"i   hspace0 ",",
+                p--; te--; )
 
-TOKEN_OPCODE_RE(TK_CALL3_NZ,  "CALL3 NZ",  "CALL3"i hspace1 "NZ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL3_Z,   "CALL3 Z",   "CALL3"i hspace1 "Z"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL3_NC,  "CALL3 NC",  "CALL3"i hspace1 "NC"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL3_C,   "CALL3 C",   "CALL3"i hspace1 "C"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL3_PO,  "CALL3 PO",  "CALL3"i hspace1 "PO"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL3_PE,  "CALL3 PE",  "CALL3"i hspace1 "PE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL3_P,   "CALL3 P",   "CALL3"i hspace1 "P"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL3_M,   "CALL3 M",   "CALL3"i hspace1 "M"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL3_LZ,  "CALL3 LZ",  "CALL3"i hspace1 "LZ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL3_LO,  "CALL3 LO",  "CALL3"i hspace1 "LO"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL3_NV,  "CALL3 NV",  "CALL3"i hspace1 "NV"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL3_V,   "CALL3 V",   "CALL3"i hspace1 "V"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL3_X5,  "CALL3 X5",  "CALL3"i hspace1 "X5"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL3_NX5, "CALL3 NX5", "CALL3"i hspace1 "NX5"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL3_K,   "CALL3 K",   "CALL3"i hspace1 "K"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL3_NK,  "CALL3 NK",  "CALL3"i hspace1 "NK"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL3_NE,  "CALL3 NE",  "CALL3"i hspace1 "NE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL3_EQ,  "CALL3 EQ",  "CALL3"i hspace1 "EQ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL3_LTU, "CALL3 LTU", "CALL3"i hspace1 "LTU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL3_LEU, "CALL3 LEU", "CALL3"i hspace1 "LEU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL3_GTU, "CALL3 GTU", "CALL3"i hspace1 "GTU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL3_GEU, "CALL3 GEU", "CALL3"i hspace1 "GEU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL3_LT,  "CALL3 LT",  "CALL3"i hspace1 "LT"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL3_LE,  "CALL3 LE",  "CALL3"i hspace1 "LE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL3_GT,  "CALL3 GT",  "CALL3"i hspace1 "GT"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL3_GE,  "CALL3 GE",  "CALL3"i hspace1 "GE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL3_OF,  "CALL3 OF",  "CALL3"i hspace1 "OF"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL3_NZ,  "CALL3 NZ",  "CALL3"i hspace1 "NZ"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL3_Z,   "CALL3 Z",   "CALL3"i hspace1 "Z"i    hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL3_NC,  "CALL3 NC",  "CALL3"i hspace1 "NC"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL3_C,   "CALL3 C",   "CALL3"i hspace1 "C"i    hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL3_PO,  "CALL3 PO",  "CALL3"i hspace1 "PO"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL3_PE,  "CALL3 PE",  "CALL3"i hspace1 "PE"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL3_P,   "CALL3 P",   "CALL3"i hspace1 "P"i    hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL3_M,   "CALL3 M",   "CALL3"i hspace1 "M"i    hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL3_LZ,  "CALL3 LZ",  "CALL3"i hspace1 "LZ"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL3_LO,  "CALL3 LO",  "CALL3"i hspace1 "LO"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL3_NV,  "CALL3 NV",  "CALL3"i hspace1 "NV"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL3_V,   "CALL3 V",   "CALL3"i hspace1 "V"i    hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL3_X5,  "CALL3 X5",  "CALL3"i hspace1 "X5"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL3_NX5, "CALL3 NX5", "CALL3"i hspace1 "NX5"i  hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL3_K,   "CALL3 K",   "CALL3"i hspace1 "K"i    hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL3_NK,  "CALL3 NK",  "CALL3"i hspace1 "NK"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL3_NE,  "CALL3 NE",  "CALL3"i hspace1 "NE"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL3_EQ,  "CALL3 EQ",  "CALL3"i hspace1 "EQ"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL3_LTU, "CALL3 LTU", "CALL3"i hspace1 "LTU"i  hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL3_LEU, "CALL3 LEU", "CALL3"i hspace1 "LEU"i  hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL3_GTU, "CALL3 GTU", "CALL3"i hspace1 "GTU"i  hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL3_GEU, "CALL3 GEU", "CALL3"i hspace1 "GEU"i  hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL3_LT,  "CALL3 LT",  "CALL3"i hspace1 "LT"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL3_LE,  "CALL3 LE",  "CALL3"i hspace1 "LE"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL3_GT,  "CALL3 GT",  "CALL3"i hspace1 "GT"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL3_GE,  "CALL3 GE",  "CALL3"i hspace1 "GE"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL3_OF,  "CALL3 OF",  "CALL3"i hspace1 "OF"i   hspace0 ",",
+                p--; te--; )
 
-TOKEN_OPCODE_RE(TK_CALL_SIS_NZ,  "CALL.SIS NZ",  "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "NZ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIS_Z,   "CALL.SIS Z",   "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "Z"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIS_NC,  "CALL.SIS NC",  "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "NC"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIS_C,   "CALL.SIS C",   "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "C"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIS_PO,  "CALL.SIS PO",  "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "PO"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIS_PE,  "CALL.SIS PE",  "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "PE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIS_P,   "CALL.SIS P",   "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "P"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIS_M,   "CALL.SIS M",   "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "M"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIS_LZ,  "CALL.SIS LZ",  "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "LZ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIS_LO,  "CALL.SIS LO",  "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "LO"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIS_NV,  "CALL.SIS NV",  "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "NV"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIS_V,   "CALL.SIS V",   "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "V"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIS_X5,  "CALL.SIS X5",  "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "X5"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIS_NX5, "CALL.SIS NX5", "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "NX5"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIS_K,   "CALL.SIS K",   "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "K"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIS_NK,  "CALL.SIS NK",  "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "NK"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIS_NE,  "CALL.SIS NE",  "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "NE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIS_EQ,  "CALL.SIS EQ",  "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "EQ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIS_LTU, "CALL.SIS LTU", "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "LTU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIS_LEU, "CALL.SIS LEU", "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "LEU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIS_GTU, "CALL.SIS GTU", "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "GTU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIS_GEU, "CALL.SIS GEU", "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "GEU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIS_LT,  "CALL.SIS LT",  "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "LT"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIS_LE,  "CALL.SIS LE",  "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "LE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIS_GT,  "CALL.SIS GT",  "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "GT"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIS_GE,  "CALL.SIS GE",  "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "GE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIS_OF,  "CALL.SIS OF",  "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "OF"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIS_NZ,  "CALL.SIS NZ",
+                "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "NZ"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIS_Z,   "CALL.SIS Z",
+                "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "Z"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIS_NC,  "CALL.SIS NC",
+                "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "NC"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIS_C,   "CALL.SIS C",
+                "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "C"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIS_PO,  "CALL.SIS PO",
+                "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "PO"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIS_PE,  "CALL.SIS PE",
+                "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "PE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIS_P,   "CALL.SIS P",
+                "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "P"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIS_M,   "CALL.SIS M",
+                "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "M"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIS_LZ,  "CALL.SIS LZ",
+                "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "LZ"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIS_LO,  "CALL.SIS LO",
+                "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "LO"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIS_NV,  "CALL.SIS NV",
+                "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "NV"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIS_V,   "CALL.SIS V",
+                "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "V"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIS_X5,  "CALL.SIS X5",
+                "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "X5"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIS_NX5, "CALL.SIS NX5",
+                "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "NX5"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIS_K,   "CALL.SIS K",
+                "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "K"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIS_NK,  "CALL.SIS NK",
+                "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "NK"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIS_NE,  "CALL.SIS NE",
+                "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "NE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIS_EQ,  "CALL.SIS EQ",
+                "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "EQ"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIS_LTU, "CALL.SIS LTU",
+                "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "LTU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIS_LEU, "CALL.SIS LEU",
+                "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "LEU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIS_GTU, "CALL.SIS GTU",
+                "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "GTU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIS_GEU, "CALL.SIS GEU",
+                "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "GEU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIS_LT,  "CALL.SIS LT",
+                "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "LT"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIS_LE,  "CALL.SIS LE",
+                "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "LE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIS_GT,  "CALL.SIS GT",
+                "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "GT"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIS_GE,  "CALL.SIS GE",
+                "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "GE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIS_OF,  "CALL.SIS OF",
+                "CALL"i hspace0 "." hspace0 "SIS"i hspace1 "OF"i   hspace0 ",", p--; te--; )
 
-TOKEN_OPCODE_RE(TK_CALL_SIL_NZ,  "CALL.SIL NZ",  "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "NZ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIL_Z,   "CALL.SIL Z",   "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "Z"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIL_NC,  "CALL.SIL NC",  "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "NC"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIL_C,   "CALL.SIL C",   "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "C"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIL_PO,  "CALL.SIL PO",  "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "PO"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIL_PE,  "CALL.SIL PE",  "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "PE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIL_P,   "CALL.SIL P",   "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "P"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIL_M,   "CALL.SIL M",   "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "M"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIL_LZ,  "CALL.SIL LZ",  "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "LZ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIL_LO,  "CALL.SIL LO",  "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "LO"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIL_NV,  "CALL.SIL NV",  "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "NV"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIL_V,   "CALL.SIL V",   "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "V"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIL_X5,  "CALL.SIL X5",  "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "X5"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIL_NX5, "CALL.SIL NX5", "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "NX5"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIL_K,   "CALL.SIL K",   "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "K"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIL_NK,  "CALL.SIL NK",  "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "NK"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIL_NE,  "CALL.SIL NE",  "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "NE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIL_EQ,  "CALL.SIL EQ",  "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "EQ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIL_LTU, "CALL.SIL LTU", "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "LTU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIL_LEU, "CALL.SIL LEU", "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "LEU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIL_GTU, "CALL.SIL GTU", "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "GTU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIL_GEU, "CALL.SIL GEU", "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "GEU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIL_LT,  "CALL.SIL LT",  "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "LT"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIL_LE,  "CALL.SIL LE",  "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "LE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIL_GT,  "CALL.SIL GT",  "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "GT"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIL_GE,  "CALL.SIL GE",  "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "GE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_SIL_OF,  "CALL.SIL OF",  "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "OF"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIL_NZ,  "CALL.SIL NZ",
+                "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "NZ"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIL_Z,   "CALL.SIL Z",
+                "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "Z"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIL_NC,  "CALL.SIL NC",
+                "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "NC"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIL_C,   "CALL.SIL C",
+                "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "C"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIL_PO,  "CALL.SIL PO",
+                "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "PO"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIL_PE,  "CALL.SIL PE",
+                "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "PE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIL_P,   "CALL.SIL P",
+                "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "P"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIL_M,   "CALL.SIL M",
+                "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "M"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIL_LZ,  "CALL.SIL LZ",
+                "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "LZ"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIL_LO,  "CALL.SIL LO",
+                "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "LO"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIL_NV,  "CALL.SIL NV",
+                "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "NV"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIL_V,   "CALL.SIL V",
+                "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "V"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIL_X5,  "CALL.SIL X5",
+                "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "X5"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIL_NX5, "CALL.SIL NX5",
+                "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "NX5"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIL_K,   "CALL.SIL K",
+                "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "K"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIL_NK,  "CALL.SIL NK",
+                "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "NK"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIL_NE,  "CALL.SIL NE",
+                "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "NE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIL_EQ,  "CALL.SIL EQ",
+                "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "EQ"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIL_LTU, "CALL.SIL LTU",
+                "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "LTU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIL_LEU, "CALL.SIL LEU",
+                "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "LEU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIL_GTU, "CALL.SIL GTU",
+                "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "GTU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIL_GEU, "CALL.SIL GEU",
+                "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "GEU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIL_LT,  "CALL.SIL LT",
+                "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "LT"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIL_LE,  "CALL.SIL LE",
+                "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "LE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIL_GT,  "CALL.SIL GT",
+                "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "GT"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIL_GE,  "CALL.SIL GE",
+                "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "GE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_SIL_OF,  "CALL.SIL OF",
+                "CALL"i hspace0 "." hspace0 "SIL"i hspace1 "OF"i   hspace0 ",", p--; te--; )
 
-TOKEN_OPCODE_RE(TK_CALL_LIS_NZ,  "CALL.LIS NZ",  "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "NZ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIS_Z,   "CALL.LIS Z",   "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "Z"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIS_NC,  "CALL.LIS NC",  "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "NC"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIS_C,   "CALL.LIS C",   "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "C"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIS_PO,  "CALL.LIS PO",  "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "PO"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIS_PE,  "CALL.LIS PE",  "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "PE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIS_P,   "CALL.LIS P",   "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "P"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIS_M,   "CALL.LIS M",   "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "M"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIS_LZ,  "CALL.LIS LZ",  "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "LZ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIS_LO,  "CALL.LIS LO",  "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "LO"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIS_NV,  "CALL.LIS NV",  "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "NV"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIS_V,   "CALL.LIS V",   "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "V"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIS_X5,  "CALL.LIS X5",  "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "X5"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIS_NX5, "CALL.LIS NX5", "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "NX5"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIS_K,   "CALL.LIS K",   "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "K"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIS_NK,  "CALL.LIS NK",  "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "NK"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIS_NE,  "CALL.LIS NE",  "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "NE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIS_EQ,  "CALL.LIS EQ",  "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "EQ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIS_LTU, "CALL.LIS LTU", "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "LTU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIS_LEU, "CALL.LIS LEU", "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "LEU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIS_GTU, "CALL.LIS GTU", "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "GTU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIS_GEU, "CALL.LIS GEU", "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "GEU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIS_LT,  "CALL.LIS LT",  "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "LT"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIS_LE,  "CALL.LIS LE",  "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "LE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIS_GT,  "CALL.LIS GT",  "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "GT"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIS_GE,  "CALL.LIS GE",  "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "GE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIS_OF,  "CALL.LIS OF",  "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "OF"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIS_NZ,  "CALL.LIS NZ",
+                "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "NZ"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIS_Z,   "CALL.LIS Z",
+                "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "Z"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIS_NC,  "CALL.LIS NC",
+                "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "NC"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIS_C,   "CALL.LIS C",
+                "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "C"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIS_PO,  "CALL.LIS PO",
+                "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "PO"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIS_PE,  "CALL.LIS PE",
+                "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "PE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIS_P,   "CALL.LIS P",
+                "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "P"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIS_M,   "CALL.LIS M",
+                "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "M"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIS_LZ,  "CALL.LIS LZ",
+                "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "LZ"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIS_LO,  "CALL.LIS LO",
+                "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "LO"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIS_NV,  "CALL.LIS NV",
+                "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "NV"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIS_V,   "CALL.LIS V",
+                "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "V"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIS_X5,  "CALL.LIS X5",
+                "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "X5"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIS_NX5, "CALL.LIS NX5",
+                "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "NX5"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIS_K,   "CALL.LIS K",
+                "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "K"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIS_NK,  "CALL.LIS NK",
+                "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "NK"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIS_NE,  "CALL.LIS NE",
+                "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "NE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIS_EQ,  "CALL.LIS EQ",
+                "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "EQ"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIS_LTU, "CALL.LIS LTU",
+                "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "LTU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIS_LEU, "CALL.LIS LEU",
+                "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "LEU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIS_GTU, "CALL.LIS GTU",
+                "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "GTU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIS_GEU, "CALL.LIS GEU",
+                "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "GEU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIS_LT,  "CALL.LIS LT",
+                "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "LT"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIS_LE,  "CALL.LIS LE",
+                "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "LE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIS_GT,  "CALL.LIS GT",
+                "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "GT"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIS_GE,  "CALL.LIS GE",
+                "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "GE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIS_OF,  "CALL.LIS OF",
+                "CALL"i hspace0 "." hspace0 "LIS"i hspace1 "OF"i   hspace0 ",", p--; te--; )
 
-TOKEN_OPCODE_RE(TK_CALL_LIL_NZ,  "CALL.LIL NZ",  "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "NZ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIL_Z,   "CALL.LIL Z",   "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "Z"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIL_NC,  "CALL.LIL NC",  "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "NC"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIL_C,   "CALL.LIL C",   "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "C"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIL_PO,  "CALL.LIL PO",  "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "PO"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIL_PE,  "CALL.LIL PE",  "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "PE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIL_P,   "CALL.LIL P",   "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "P"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIL_M,   "CALL.LIL M",   "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "M"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIL_LZ,  "CALL.LIL LZ",  "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "LZ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIL_LO,  "CALL.LIL LO",  "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "LO"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIL_NV,  "CALL.LIL NV",  "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "NV"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIL_V,   "CALL.LIL V",   "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "V"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIL_X5,  "CALL.LIL X5",  "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "X5"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIL_NX5, "CALL.LIL NX5", "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "NX5"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIL_K,   "CALL.LIL K",   "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "K"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIL_NK,  "CALL.LIL NK",  "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "NK"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIL_NE,  "CALL.LIL NE",  "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "NE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIL_EQ,  "CALL.LIL EQ",  "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "EQ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIL_LTU, "CALL.LIL LTU", "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "LTU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIL_LEU, "CALL.LIL LEU", "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "LEU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIL_GTU, "CALL.LIL GTU", "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "GTU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIL_GEU, "CALL.LIL GEU", "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "GEU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIL_LT,  "CALL.LIL LT",  "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "LT"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIL_LE,  "CALL.LIL LE",  "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "LE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIL_GT,  "CALL.LIL GT",  "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "GT"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIL_GE,  "CALL.LIL GE",  "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "GE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_LIL_OF,  "CALL.LIL OF",  "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "OF"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIL_NZ,  "CALL.LIL NZ",
+                "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "NZ"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIL_Z,   "CALL.LIL Z",
+                "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "Z"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIL_NC,  "CALL.LIL NC",
+                "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "NC"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIL_C,   "CALL.LIL C",
+                "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "C"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIL_PO,  "CALL.LIL PO",
+                "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "PO"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIL_PE,  "CALL.LIL PE",
+                "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "PE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIL_P,   "CALL.LIL P",
+                "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "P"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIL_M,   "CALL.LIL M",
+                "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "M"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIL_LZ,  "CALL.LIL LZ",
+                "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "LZ"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIL_LO,  "CALL.LIL LO",
+                "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "LO"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIL_NV,  "CALL.LIL NV",
+                "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "NV"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIL_V,   "CALL.LIL V",
+                "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "V"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIL_X5,  "CALL.LIL X5",
+                "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "X5"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIL_NX5, "CALL.LIL NX5",
+                "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "NX5"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIL_K,   "CALL.LIL K",
+                "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "K"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIL_NK,  "CALL.LIL NK",
+                "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "NK"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIL_NE,  "CALL.LIL NE",
+                "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "NE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIL_EQ,  "CALL.LIL EQ",
+                "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "EQ"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIL_LTU, "CALL.LIL LTU",
+                "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "LTU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIL_LEU, "CALL.LIL LEU",
+                "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "LEU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIL_GTU, "CALL.LIL GTU",
+                "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "GTU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIL_GEU, "CALL.LIL GEU",
+                "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "GEU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIL_LT,  "CALL.LIL LT",
+                "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "LT"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIL_LE,  "CALL.LIL LE",
+                "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "LE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIL_GT,  "CALL.LIL GT",
+                "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "GT"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIL_GE,  "CALL.LIL GE",
+                "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "GE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_LIL_OF,  "CALL.LIL OF",
+                "CALL"i hspace0 "." hspace0 "LIL"i hspace1 "OF"i   hspace0 ",", p--; te--; )
 
-TOKEN_OPCODE_RE(TK_CALL_IS_NZ,  "CALL.IS NZ",  "CALL"i hspace0 "." hspace0 "IS"i hspace1 "NZ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IS_Z,   "CALL.IS Z",   "CALL"i hspace0 "." hspace0 "IS"i hspace1 "Z"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IS_NC,  "CALL.IS NC",  "CALL"i hspace0 "." hspace0 "IS"i hspace1 "NC"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IS_C,   "CALL.IS C",   "CALL"i hspace0 "." hspace0 "IS"i hspace1 "C"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IS_PO,  "CALL.IS PO",  "CALL"i hspace0 "." hspace0 "IS"i hspace1 "PO"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IS_PE,  "CALL.IS PE",  "CALL"i hspace0 "." hspace0 "IS"i hspace1 "PE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IS_P,   "CALL.IS P",   "CALL"i hspace0 "." hspace0 "IS"i hspace1 "P"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IS_M,   "CALL.IS M",   "CALL"i hspace0 "." hspace0 "IS"i hspace1 "M"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IS_LZ,  "CALL.IS LZ",  "CALL"i hspace0 "." hspace0 "IS"i hspace1 "LZ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IS_LO,  "CALL.IS LO",  "CALL"i hspace0 "." hspace0 "IS"i hspace1 "LO"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IS_NV,  "CALL.IS NV",  "CALL"i hspace0 "." hspace0 "IS"i hspace1 "NV"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IS_V,   "CALL.IS V",   "CALL"i hspace0 "." hspace0 "IS"i hspace1 "V"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IS_X5,  "CALL.IS X5",  "CALL"i hspace0 "." hspace0 "IS"i hspace1 "X5"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IS_NX5, "CALL.IS NX5", "CALL"i hspace0 "." hspace0 "IS"i hspace1 "NX5"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IS_K,   "CALL.IS K",   "CALL"i hspace0 "." hspace0 "IS"i hspace1 "K"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IS_NK,  "CALL.IS NK",  "CALL"i hspace0 "." hspace0 "IS"i hspace1 "NK"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IS_NE,  "CALL.IS NE",  "CALL"i hspace0 "." hspace0 "IS"i hspace1 "NE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IS_EQ,  "CALL.IS EQ",  "CALL"i hspace0 "." hspace0 "IS"i hspace1 "EQ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IS_LTU, "CALL.IS LTU", "CALL"i hspace0 "." hspace0 "IS"i hspace1 "LTU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IS_LEU, "CALL.IS LEU", "CALL"i hspace0 "." hspace0 "IS"i hspace1 "LEU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IS_GTU, "CALL.IS GTU", "CALL"i hspace0 "." hspace0 "IS"i hspace1 "GTU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IS_GEU, "CALL.IS GEU", "CALL"i hspace0 "." hspace0 "IS"i hspace1 "GEU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IS_LT,  "CALL.IS LT",  "CALL"i hspace0 "." hspace0 "IS"i hspace1 "LT"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IS_LE,  "CALL.IS LE",  "CALL"i hspace0 "." hspace0 "IS"i hspace1 "LE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IS_GT,  "CALL.IS GT",  "CALL"i hspace0 "." hspace0 "IS"i hspace1 "GT"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IS_GE,  "CALL.IS GE",  "CALL"i hspace0 "." hspace0 "IS"i hspace1 "GE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IS_OF,  "CALL.IS OF",  "CALL"i hspace0 "." hspace0 "IS"i hspace1 "OF"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IS_NZ,  "CALL.IS NZ",
+                "CALL"i hspace0 "." hspace0 "IS"i hspace1 "NZ"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IS_Z,   "CALL.IS Z",
+                "CALL"i hspace0 "." hspace0 "IS"i hspace1 "Z"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IS_NC,  "CALL.IS NC",
+                "CALL"i hspace0 "." hspace0 "IS"i hspace1 "NC"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IS_C,   "CALL.IS C",
+                "CALL"i hspace0 "." hspace0 "IS"i hspace1 "C"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IS_PO,  "CALL.IS PO",
+                "CALL"i hspace0 "." hspace0 "IS"i hspace1 "PO"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IS_PE,  "CALL.IS PE",
+                "CALL"i hspace0 "." hspace0 "IS"i hspace1 "PE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IS_P,   "CALL.IS P",
+                "CALL"i hspace0 "." hspace0 "IS"i hspace1 "P"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IS_M,   "CALL.IS M",
+                "CALL"i hspace0 "." hspace0 "IS"i hspace1 "M"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IS_LZ,  "CALL.IS LZ",
+                "CALL"i hspace0 "." hspace0 "IS"i hspace1 "LZ"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IS_LO,  "CALL.IS LO",
+                "CALL"i hspace0 "." hspace0 "IS"i hspace1 "LO"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IS_NV,  "CALL.IS NV",
+                "CALL"i hspace0 "." hspace0 "IS"i hspace1 "NV"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IS_V,   "CALL.IS V",
+                "CALL"i hspace0 "." hspace0 "IS"i hspace1 "V"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IS_X5,  "CALL.IS X5",
+                "CALL"i hspace0 "." hspace0 "IS"i hspace1 "X5"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IS_NX5, "CALL.IS NX5",
+                "CALL"i hspace0 "." hspace0 "IS"i hspace1 "NX5"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IS_K,   "CALL.IS K",
+                "CALL"i hspace0 "." hspace0 "IS"i hspace1 "K"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IS_NK,  "CALL.IS NK",
+                "CALL"i hspace0 "." hspace0 "IS"i hspace1 "NK"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IS_NE,  "CALL.IS NE",
+                "CALL"i hspace0 "." hspace0 "IS"i hspace1 "NE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IS_EQ,  "CALL.IS EQ",
+                "CALL"i hspace0 "." hspace0 "IS"i hspace1 "EQ"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IS_LTU, "CALL.IS LTU",
+                "CALL"i hspace0 "." hspace0 "IS"i hspace1 "LTU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IS_LEU, "CALL.IS LEU",
+                "CALL"i hspace0 "." hspace0 "IS"i hspace1 "LEU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IS_GTU, "CALL.IS GTU",
+                "CALL"i hspace0 "." hspace0 "IS"i hspace1 "GTU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IS_GEU, "CALL.IS GEU",
+                "CALL"i hspace0 "." hspace0 "IS"i hspace1 "GEU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IS_LT,  "CALL.IS LT",
+                "CALL"i hspace0 "." hspace0 "IS"i hspace1 "LT"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IS_LE,  "CALL.IS LE",
+                "CALL"i hspace0 "." hspace0 "IS"i hspace1 "LE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IS_GT,  "CALL.IS GT",
+                "CALL"i hspace0 "." hspace0 "IS"i hspace1 "GT"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IS_GE,  "CALL.IS GE",
+                "CALL"i hspace0 "." hspace0 "IS"i hspace1 "GE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IS_OF,  "CALL.IS OF",
+                "CALL"i hspace0 "." hspace0 "IS"i hspace1 "OF"i   hspace0 ",", p--; te--; )
 
-TOKEN_OPCODE_RE(TK_CALL_IL_NZ,  "CALL.IL NZ",  "CALL"i hspace0 "." hspace0 "IL"i hspace1 "NZ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IL_Z,   "CALL.IL Z",   "CALL"i hspace0 "." hspace0 "IL"i hspace1 "Z"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IL_NC,  "CALL.IL NC",  "CALL"i hspace0 "." hspace0 "IL"i hspace1 "NC"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IL_C,   "CALL.IL C",   "CALL"i hspace0 "." hspace0 "IL"i hspace1 "C"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IL_PO,  "CALL.IL PO",  "CALL"i hspace0 "." hspace0 "IL"i hspace1 "PO"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IL_PE,  "CALL.IL PE",  "CALL"i hspace0 "." hspace0 "IL"i hspace1 "PE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IL_P,   "CALL.IL P",   "CALL"i hspace0 "." hspace0 "IL"i hspace1 "P"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IL_M,   "CALL.IL M",   "CALL"i hspace0 "." hspace0 "IL"i hspace1 "M"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IL_LZ,  "CALL.IL LZ",  "CALL"i hspace0 "." hspace0 "IL"i hspace1 "LZ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IL_LO,  "CALL.IL LO",  "CALL"i hspace0 "." hspace0 "IL"i hspace1 "LO"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IL_NV,  "CALL.IL NV",  "CALL"i hspace0 "." hspace0 "IL"i hspace1 "NV"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IL_V,   "CALL.IL V",   "CALL"i hspace0 "." hspace0 "IL"i hspace1 "V"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IL_X5,  "CALL.IL X5",  "CALL"i hspace0 "." hspace0 "IL"i hspace1 "X5"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IL_NX5, "CALL.IL NX5", "CALL"i hspace0 "." hspace0 "IL"i hspace1 "NX5"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IL_K,   "CALL.IL K",   "CALL"i hspace0 "." hspace0 "IL"i hspace1 "K"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IL_NK,  "CALL.IL NK",  "CALL"i hspace0 "." hspace0 "IL"i hspace1 "NK"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IL_NE,  "CALL.IL NE",  "CALL"i hspace0 "." hspace0 "IL"i hspace1 "NE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IL_EQ,  "CALL.IL EQ",  "CALL"i hspace0 "." hspace0 "IL"i hspace1 "EQ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IL_LTU, "CALL.IL LTU", "CALL"i hspace0 "." hspace0 "IL"i hspace1 "LTU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IL_LEU, "CALL.IL LEU", "CALL"i hspace0 "." hspace0 "IL"i hspace1 "LEU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IL_GTU, "CALL.IL GTU", "CALL"i hspace0 "." hspace0 "IL"i hspace1 "GTU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IL_GEU, "CALL.IL GEU", "CALL"i hspace0 "." hspace0 "IL"i hspace1 "GEU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IL_LT,  "CALL.IL LT",  "CALL"i hspace0 "." hspace0 "IL"i hspace1 "LT"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IL_LE,  "CALL.IL LE",  "CALL"i hspace0 "." hspace0 "IL"i hspace1 "LE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IL_GT,  "CALL.IL GT",  "CALL"i hspace0 "." hspace0 "IL"i hspace1 "GT"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IL_GE,  "CALL.IL GE",  "CALL"i hspace0 "." hspace0 "IL"i hspace1 "GE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_CALL_IL_OF,  "CALL.IL OF",  "CALL"i hspace0 "." hspace0 "IL"i hspace1 "OF"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IL_NZ,  "CALL.IL NZ",
+                "CALL"i hspace0 "." hspace0 "IL"i hspace1 "NZ"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IL_Z,   "CALL.IL Z",
+                "CALL"i hspace0 "." hspace0 "IL"i hspace1 "Z"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IL_NC,  "CALL.IL NC",
+                "CALL"i hspace0 "." hspace0 "IL"i hspace1 "NC"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IL_C,   "CALL.IL C",
+                "CALL"i hspace0 "." hspace0 "IL"i hspace1 "C"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IL_PO,  "CALL.IL PO",
+                "CALL"i hspace0 "." hspace0 "IL"i hspace1 "PO"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IL_PE,  "CALL.IL PE",
+                "CALL"i hspace0 "." hspace0 "IL"i hspace1 "PE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IL_P,   "CALL.IL P",
+                "CALL"i hspace0 "." hspace0 "IL"i hspace1 "P"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IL_M,   "CALL.IL M",
+                "CALL"i hspace0 "." hspace0 "IL"i hspace1 "M"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IL_LZ,  "CALL.IL LZ",
+                "CALL"i hspace0 "." hspace0 "IL"i hspace1 "LZ"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IL_LO,  "CALL.IL LO",
+                "CALL"i hspace0 "." hspace0 "IL"i hspace1 "LO"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IL_NV,  "CALL.IL NV",
+                "CALL"i hspace0 "." hspace0 "IL"i hspace1 "NV"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IL_V,   "CALL.IL V",
+                "CALL"i hspace0 "." hspace0 "IL"i hspace1 "V"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IL_X5,  "CALL.IL X5",
+                "CALL"i hspace0 "." hspace0 "IL"i hspace1 "X5"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IL_NX5, "CALL.IL NX5",
+                "CALL"i hspace0 "." hspace0 "IL"i hspace1 "NX5"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IL_K,   "CALL.IL K",
+                "CALL"i hspace0 "." hspace0 "IL"i hspace1 "K"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IL_NK,  "CALL.IL NK",
+                "CALL"i hspace0 "." hspace0 "IL"i hspace1 "NK"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IL_NE,  "CALL.IL NE",
+                "CALL"i hspace0 "." hspace0 "IL"i hspace1 "NE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IL_EQ,  "CALL.IL EQ",
+                "CALL"i hspace0 "." hspace0 "IL"i hspace1 "EQ"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IL_LTU, "CALL.IL LTU",
+                "CALL"i hspace0 "." hspace0 "IL"i hspace1 "LTU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IL_LEU, "CALL.IL LEU",
+                "CALL"i hspace0 "." hspace0 "IL"i hspace1 "LEU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IL_GTU, "CALL.IL GTU",
+                "CALL"i hspace0 "." hspace0 "IL"i hspace1 "GTU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IL_GEU, "CALL.IL GEU",
+                "CALL"i hspace0 "." hspace0 "IL"i hspace1 "GEU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IL_LT,  "CALL.IL LT",
+                "CALL"i hspace0 "." hspace0 "IL"i hspace1 "LT"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IL_LE,  "CALL.IL LE",
+                "CALL"i hspace0 "." hspace0 "IL"i hspace1 "LE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IL_GT,  "CALL.IL GT",
+                "CALL"i hspace0 "." hspace0 "IL"i hspace1 "GT"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IL_GE,  "CALL.IL GE",
+                "CALL"i hspace0 "." hspace0 "IL"i hspace1 "GE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_CALL_IL_OF,  "CALL.IL OF",
+                "CALL"i hspace0 "." hspace0 "IL"i hspace1 "OF"i   hspace0 ",", p--; te--; )
 
-TOKEN_OPCODE_RE(TK_JR_NZ,  "JR NZ",  "JR"i hspace1 "NZ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JR_Z,   "JR Z",   "JR"i hspace1 "Z"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JR_NC,  "JR NC",  "JR"i hspace1 "NC"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JR_C,   "JR C",   "JR"i hspace1 "C"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JR_PO,  "JR PO",  "JR"i hspace1 "PO"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JR_PE,  "JR PE",  "JR"i hspace1 "PE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JR_P,   "JR P",   "JR"i hspace1 "P"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JR_M,   "JR M",   "JR"i hspace1 "M"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JR_LZ,  "JR LZ",  "JR"i hspace1 "LZ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JR_LO,  "JR LO",  "JR"i hspace1 "LO"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JR_NV,  "JR NV",  "JR"i hspace1 "NV"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JR_V,   "JR V",   "JR"i hspace1 "V"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JR_X5,  "JR X5",  "JR"i hspace1 "X5"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JR_NX5, "JR NX5", "JR"i hspace1 "NX5"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JR_K,   "JR K",   "JR"i hspace1 "K"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JR_NK,  "JR NK",  "JR"i hspace1 "NK"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JR_NE,  "JR NE",  "JR"i hspace1 "NE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JR_EQ,  "JR EQ",  "JR"i hspace1 "EQ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JR_LTU, "JR LTU", "JR"i hspace1 "LTU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JR_LEU, "JR LEU", "JR"i hspace1 "LEU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JR_GTU, "JR GTU", "JR"i hspace1 "GTU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JR_GEU, "JR GEU", "JR"i hspace1 "GEU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JR_LT,  "JR LT",  "JR"i hspace1 "LT"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JR_LE,  "JR LE",  "JR"i hspace1 "LE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JR_GT,  "JR GT",  "JR"i hspace1 "GT"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JR_GE,  "JR GE",  "JR"i hspace1 "GE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JR_OF,  "JR OF",  "JR"i hspace1 "OF"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JR_NZ,  "JR NZ",  "JR"i hspace1 "NZ"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JR_Z,   "JR Z",   "JR"i hspace1 "Z"i    hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JR_NC,  "JR NC",  "JR"i hspace1 "NC"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JR_C,   "JR C",   "JR"i hspace1 "C"i    hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JR_PO,  "JR PO",  "JR"i hspace1 "PO"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JR_PE,  "JR PE",  "JR"i hspace1 "PE"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JR_P,   "JR P",   "JR"i hspace1 "P"i    hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JR_M,   "JR M",   "JR"i hspace1 "M"i    hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JR_LZ,  "JR LZ",  "JR"i hspace1 "LZ"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JR_LO,  "JR LO",  "JR"i hspace1 "LO"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JR_NV,  "JR NV",  "JR"i hspace1 "NV"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JR_V,   "JR V",   "JR"i hspace1 "V"i    hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JR_X5,  "JR X5",  "JR"i hspace1 "X5"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JR_NX5, "JR NX5", "JR"i hspace1 "NX5"i  hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JR_K,   "JR K",   "JR"i hspace1 "K"i    hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JR_NK,  "JR NK",  "JR"i hspace1 "NK"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JR_NE,  "JR NE",  "JR"i hspace1 "NE"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JR_EQ,  "JR EQ",  "JR"i hspace1 "EQ"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JR_LTU, "JR LTU", "JR"i hspace1 "LTU"i  hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JR_LEU, "JR LEU", "JR"i hspace1 "LEU"i  hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JR_GTU, "JR GTU", "JR"i hspace1 "GTU"i  hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JR_GEU, "JR GEU", "JR"i hspace1 "GEU"i  hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JR_LT,  "JR LT",  "JR"i hspace1 "LT"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JR_LE,  "JR LE",  "JR"i hspace1 "LE"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JR_GT,  "JR GT",  "JR"i hspace1 "GT"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JR_GE,  "JR GE",  "JR"i hspace1 "GE"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JR_OF,  "JR OF",  "JR"i hspace1 "OF"i   hspace0 ",", p--;
+                te--; )
 
-TOKEN_OPCODE_RE(TK_JRE_NZ,  "JRE NZ",  "JRE"i hspace1 "NZ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JRE_Z,   "JRE Z",   "JRE"i hspace1 "Z"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JRE_NC,  "JRE NC",  "JRE"i hspace1 "NC"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JRE_C,   "JRE C",   "JRE"i hspace1 "C"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JRE_PO,  "JRE PO",  "JRE"i hspace1 "PO"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JRE_PE,  "JRE PE",  "JRE"i hspace1 "PE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JRE_P,   "JRE P",   "JRE"i hspace1 "P"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JRE_M,   "JRE M",   "JRE"i hspace1 "M"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JRE_LZ,  "JRE LZ",  "JRE"i hspace1 "LZ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JRE_LO,  "JRE LO",  "JRE"i hspace1 "LO"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JRE_NV,  "JRE NV",  "JRE"i hspace1 "NV"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JRE_V,   "JRE V",   "JRE"i hspace1 "V"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JRE_X5,  "JRE X5",  "JRE"i hspace1 "X5"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JRE_NX5, "JRE NX5", "JRE"i hspace1 "NX5"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JRE_K,   "JRE K",   "JRE"i hspace1 "K"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JRE_NK,  "JRE NK",  "JRE"i hspace1 "NK"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JRE_NE,  "JRE NE",  "JRE"i hspace1 "NE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JRE_EQ,  "JRE EQ",  "JRE"i hspace1 "EQ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JRE_LTU, "JRE LTU", "JRE"i hspace1 "LTU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JRE_LEU, "JRE LEU", "JRE"i hspace1 "LEU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JRE_GTU, "JRE GTU", "JRE"i hspace1 "GTU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JRE_GEU, "JRE GEU", "JRE"i hspace1 "GEU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JRE_LT,  "JRE LT",  "JRE"i hspace1 "LT"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JRE_LE,  "JRE LE",  "JRE"i hspace1 "LE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JRE_GT,  "JRE GT",  "JRE"i hspace1 "GT"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JRE_GE,  "JRE GE",  "JRE"i hspace1 "GE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JRE_OF,  "JRE OF",  "JRE"i hspace1 "OF"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JRE_NZ,  "JRE NZ",  "JRE"i hspace1 "NZ"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JRE_Z,   "JRE Z",   "JRE"i hspace1 "Z"i    hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JRE_NC,  "JRE NC",  "JRE"i hspace1 "NC"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JRE_C,   "JRE C",   "JRE"i hspace1 "C"i    hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JRE_PO,  "JRE PO",  "JRE"i hspace1 "PO"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JRE_PE,  "JRE PE",  "JRE"i hspace1 "PE"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JRE_P,   "JRE P",   "JRE"i hspace1 "P"i    hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JRE_M,   "JRE M",   "JRE"i hspace1 "M"i    hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JRE_LZ,  "JRE LZ",  "JRE"i hspace1 "LZ"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JRE_LO,  "JRE LO",  "JRE"i hspace1 "LO"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JRE_NV,  "JRE NV",  "JRE"i hspace1 "NV"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JRE_V,   "JRE V",   "JRE"i hspace1 "V"i    hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JRE_X5,  "JRE X5",  "JRE"i hspace1 "X5"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JRE_NX5, "JRE NX5", "JRE"i hspace1 "NX5"i  hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JRE_K,   "JRE K",   "JRE"i hspace1 "K"i    hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JRE_NK,  "JRE NK",  "JRE"i hspace1 "NK"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JRE_NE,  "JRE NE",  "JRE"i hspace1 "NE"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JRE_EQ,  "JRE EQ",  "JRE"i hspace1 "EQ"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JRE_LTU, "JRE LTU", "JRE"i hspace1 "LTU"i  hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JRE_LEU, "JRE LEU", "JRE"i hspace1 "LEU"i  hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JRE_GTU, "JRE GTU", "JRE"i hspace1 "GTU"i  hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JRE_GEU, "JRE GEU", "JRE"i hspace1 "GEU"i  hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JRE_LT,  "JRE LT",  "JRE"i hspace1 "LT"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JRE_LE,  "JRE LE",  "JRE"i hspace1 "LE"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JRE_GT,  "JRE GT",  "JRE"i hspace1 "GT"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JRE_GE,  "JRE GE",  "JRE"i hspace1 "GE"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JRE_OF,  "JRE OF",  "JRE"i hspace1 "OF"i   hspace0 ",", p--;
+                te--; )
 
-TOKEN_OPCODE_RE(TK_JP_NZ,  "JP NZ",  "JP"i hspace1 "NZ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_Z,   "JP Z",   "JP"i hspace1 "Z"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_NC,  "JP NC",  "JP"i hspace1 "NC"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_C,   "JP C",   "JP"i hspace1 "C"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_PO,  "JP PO",  "JP"i hspace1 "PO"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_PE,  "JP PE",  "JP"i hspace1 "PE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_P,   "JP P",   "JP"i hspace1 "P"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_M,   "JP M",   "JP"i hspace1 "M"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_LZ,  "JP LZ",  "JP"i hspace1 "LZ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_LO,  "JP LO",  "JP"i hspace1 "LO"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_NV,  "JP NV",  "JP"i hspace1 "NV"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_V,   "JP V",   "JP"i hspace1 "V"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_X5,  "JP X5",  "JP"i hspace1 "X5"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_NX5, "JP NX5", "JP"i hspace1 "NX5"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_K,   "JP K",   "JP"i hspace1 "K"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_NK,  "JP NK",  "JP"i hspace1 "NK"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_NE,  "JP NE",  "JP"i hspace1 "NE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_EQ,  "JP EQ",  "JP"i hspace1 "EQ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_LTU, "JP LTU", "JP"i hspace1 "LTU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_LEU, "JP LEU", "JP"i hspace1 "LEU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_GTU, "JP GTU", "JP"i hspace1 "GTU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_GEU, "JP GEU", "JP"i hspace1 "GEU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_LT,  "JP LT",  "JP"i hspace1 "LT"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_LE,  "JP LE",  "JP"i hspace1 "LE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_GT,  "JP GT",  "JP"i hspace1 "GT"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_GE,  "JP GE",  "JP"i hspace1 "GE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_OF,  "JP OF",  "JP"i hspace1 "OF"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_NZ,  "JP NZ",  "JP"i hspace1 "NZ"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP_Z,   "JP Z",   "JP"i hspace1 "Z"i    hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP_NC,  "JP NC",  "JP"i hspace1 "NC"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP_C,   "JP C",   "JP"i hspace1 "C"i    hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP_PO,  "JP PO",  "JP"i hspace1 "PO"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP_PE,  "JP PE",  "JP"i hspace1 "PE"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP_P,   "JP P",   "JP"i hspace1 "P"i    hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP_M,   "JP M",   "JP"i hspace1 "M"i    hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP_LZ,  "JP LZ",  "JP"i hspace1 "LZ"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP_LO,  "JP LO",  "JP"i hspace1 "LO"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP_NV,  "JP NV",  "JP"i hspace1 "NV"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP_V,   "JP V",   "JP"i hspace1 "V"i    hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP_X5,  "JP X5",  "JP"i hspace1 "X5"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP_NX5, "JP NX5", "JP"i hspace1 "NX5"i  hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP_K,   "JP K",   "JP"i hspace1 "K"i    hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP_NK,  "JP NK",  "JP"i hspace1 "NK"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP_NE,  "JP NE",  "JP"i hspace1 "NE"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP_EQ,  "JP EQ",  "JP"i hspace1 "EQ"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP_LTU, "JP LTU", "JP"i hspace1 "LTU"i  hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP_LEU, "JP LEU", "JP"i hspace1 "LEU"i  hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP_GTU, "JP GTU", "JP"i hspace1 "GTU"i  hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP_GEU, "JP GEU", "JP"i hspace1 "GEU"i  hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP_LT,  "JP LT",  "JP"i hspace1 "LT"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP_LE,  "JP LE",  "JP"i hspace1 "LE"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP_GT,  "JP GT",  "JP"i hspace1 "GT"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP_GE,  "JP GE",  "JP"i hspace1 "GE"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP_OF,  "JP OF",  "JP"i hspace1 "OF"i   hspace0 ",", p--;
+                te--; )
 
-TOKEN_OPCODE_RE(TK_LLJP_NZ,  "LLJP NZ",  "LLJP"i hspace1 "NZ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_LLJP_Z,   "LLJP Z",   "LLJP"i hspace1 "Z"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_LLJP_NC,  "LLJP NC",  "LLJP"i hspace1 "NC"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_LLJP_C,   "LLJP C",   "LLJP"i hspace1 "C"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_LLJP_PO,  "LLJP PO",  "LLJP"i hspace1 "PO"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_LLJP_PE,  "LLJP PE",  "LLJP"i hspace1 "PE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_LLJP_P,   "LLJP P",   "LLJP"i hspace1 "P"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_LLJP_M,   "LLJP M",   "LLJP"i hspace1 "M"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_LLJP_LZ,  "LLJP LZ",  "LLJP"i hspace1 "LZ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_LLJP_LO,  "LLJP LO",  "LLJP"i hspace1 "LO"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_LLJP_NV,  "LLJP NV",  "LLJP"i hspace1 "NV"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_LLJP_V,   "LLJP V",   "LLJP"i hspace1 "V"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_LLJP_X5,  "LLJP X5",  "LLJP"i hspace1 "X5"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_LLJP_NX5, "LLJP NX5", "LLJP"i hspace1 "NX5"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_LLJP_K,   "LLJP K",   "LLJP"i hspace1 "K"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_LLJP_NK,  "LLJP NK",  "LLJP"i hspace1 "NK"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_LLJP_NE,  "LLJP NE",  "LLJP"i hspace1 "NE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_LLJP_EQ,  "LLJP EQ",  "LLJP"i hspace1 "EQ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_LLJP_LTU, "LLJP LTU", "LLJP"i hspace1 "LTU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_LLJP_LEU, "LLJP LEU", "LLJP"i hspace1 "LEU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_LLJP_GTU, "LLJP GTU", "LLJP"i hspace1 "GTU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_LLJP_GEU, "LLJP GEU", "LLJP"i hspace1 "GEU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_LLJP_LT,  "LLJP LT",  "LLJP"i hspace1 "LT"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_LLJP_LE,  "LLJP LE",  "LLJP"i hspace1 "LE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_LLJP_GT,  "LLJP GT",  "LLJP"i hspace1 "GT"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_LLJP_GE,  "LLJP GE",  "LLJP"i hspace1 "GE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_LLJP_OF,  "LLJP OF",  "LLJP"i hspace1 "OF"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_LLJP_NZ,  "LLJP NZ",  "LLJP"i hspace1 "NZ"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_LLJP_Z,   "LLJP Z",   "LLJP"i hspace1 "Z"i    hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_LLJP_NC,  "LLJP NC",  "LLJP"i hspace1 "NC"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_LLJP_C,   "LLJP C",   "LLJP"i hspace1 "C"i    hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_LLJP_PO,  "LLJP PO",  "LLJP"i hspace1 "PO"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_LLJP_PE,  "LLJP PE",  "LLJP"i hspace1 "PE"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_LLJP_P,   "LLJP P",   "LLJP"i hspace1 "P"i    hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_LLJP_M,   "LLJP M",   "LLJP"i hspace1 "M"i    hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_LLJP_LZ,  "LLJP LZ",  "LLJP"i hspace1 "LZ"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_LLJP_LO,  "LLJP LO",  "LLJP"i hspace1 "LO"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_LLJP_NV,  "LLJP NV",  "LLJP"i hspace1 "NV"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_LLJP_V,   "LLJP V",   "LLJP"i hspace1 "V"i    hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_LLJP_X5,  "LLJP X5",  "LLJP"i hspace1 "X5"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_LLJP_NX5, "LLJP NX5", "LLJP"i hspace1 "NX5"i  hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_LLJP_K,   "LLJP K",   "LLJP"i hspace1 "K"i    hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_LLJP_NK,  "LLJP NK",  "LLJP"i hspace1 "NK"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_LLJP_NE,  "LLJP NE",  "LLJP"i hspace1 "NE"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_LLJP_EQ,  "LLJP EQ",  "LLJP"i hspace1 "EQ"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_LLJP_LTU, "LLJP LTU", "LLJP"i hspace1 "LTU"i  hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_LLJP_LEU, "LLJP LEU", "LLJP"i hspace1 "LEU"i  hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_LLJP_GTU, "LLJP GTU", "LLJP"i hspace1 "GTU"i  hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_LLJP_GEU, "LLJP GEU", "LLJP"i hspace1 "GEU"i  hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_LLJP_LT,  "LLJP LT",  "LLJP"i hspace1 "LT"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_LLJP_LE,  "LLJP LE",  "LLJP"i hspace1 "LE"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_LLJP_GT,  "LLJP GT",  "LLJP"i hspace1 "GT"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_LLJP_GE,  "LLJP GE",  "LLJP"i hspace1 "GE"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_LLJP_OF,  "LLJP OF",  "LLJP"i hspace1 "OF"i   hspace0 ",",
+                p--; te--; )
 
-TOKEN_OPCODE_RE(TK_JP_SIS_NZ,  "JP.SIS NZ",  "JP"i hspace0 "." hspace0 "SIS"i hspace1 "NZ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_SIS_Z,   "JP.SIS Z",   "JP"i hspace0 "." hspace0 "SIS"i hspace1 "Z"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_SIS_NC,  "JP.SIS NC",  "JP"i hspace0 "." hspace0 "SIS"i hspace1 "NC"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_SIS_C,   "JP.SIS C",   "JP"i hspace0 "." hspace0 "SIS"i hspace1 "C"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_SIS_PO,  "JP.SIS PO",  "JP"i hspace0 "." hspace0 "SIS"i hspace1 "PO"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_SIS_PE,  "JP.SIS PE",  "JP"i hspace0 "." hspace0 "SIS"i hspace1 "PE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_SIS_P,   "JP.SIS P",   "JP"i hspace0 "." hspace0 "SIS"i hspace1 "P"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_SIS_M,   "JP.SIS M",   "JP"i hspace0 "." hspace0 "SIS"i hspace1 "M"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_SIS_LZ,  "JP.SIS LZ",  "JP"i hspace0 "." hspace0 "SIS"i hspace1 "LZ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_SIS_LO,  "JP.SIS LO",  "JP"i hspace0 "." hspace0 "SIS"i hspace1 "LO"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_SIS_NV,  "JP.SIS NV",  "JP"i hspace0 "." hspace0 "SIS"i hspace1 "NV"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_SIS_V,   "JP.SIS V",   "JP"i hspace0 "." hspace0 "SIS"i hspace1 "V"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_SIS_X5,  "JP.SIS X5",  "JP"i hspace0 "." hspace0 "SIS"i hspace1 "X5"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_SIS_NX5, "JP.SIS NX5", "JP"i hspace0 "." hspace0 "SIS"i hspace1 "NX5"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_SIS_K,   "JP.SIS K",   "JP"i hspace0 "." hspace0 "SIS"i hspace1 "K"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_SIS_NK,  "JP.SIS NK",  "JP"i hspace0 "." hspace0 "SIS"i hspace1 "NK"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_SIS_NE,  "JP.SIS NE",  "JP"i hspace0 "." hspace0 "SIS"i hspace1 "NE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_SIS_EQ,  "JP.SIS EQ",  "JP"i hspace0 "." hspace0 "SIS"i hspace1 "EQ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_SIS_LTU, "JP.SIS LTU", "JP"i hspace0 "." hspace0 "SIS"i hspace1 "LTU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_SIS_LEU, "JP.SIS LEU", "JP"i hspace0 "." hspace0 "SIS"i hspace1 "LEU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_SIS_GTU, "JP.SIS GTU", "JP"i hspace0 "." hspace0 "SIS"i hspace1 "GTU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_SIS_GEU, "JP.SIS GEU", "JP"i hspace0 "." hspace0 "SIS"i hspace1 "GEU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_SIS_LT,  "JP.SIS LT",  "JP"i hspace0 "." hspace0 "SIS"i hspace1 "LT"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_SIS_LE,  "JP.SIS LE",  "JP"i hspace0 "." hspace0 "SIS"i hspace1 "LE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_SIS_GT,  "JP.SIS GT",  "JP"i hspace0 "." hspace0 "SIS"i hspace1 "GT"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_SIS_GE,  "JP.SIS GE",  "JP"i hspace0 "." hspace0 "SIS"i hspace1 "GE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_SIS_OF,  "JP.SIS OF",  "JP"i hspace0 "." hspace0 "SIS"i hspace1 "OF"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_SIS_NZ,  "JP.SIS NZ",
+                "JP"i hspace0 "." hspace0 "SIS"i hspace1 "NZ"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_SIS_Z,   "JP.SIS Z",
+                "JP"i hspace0 "." hspace0 "SIS"i hspace1 "Z"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_SIS_NC,  "JP.SIS NC",
+                "JP"i hspace0 "." hspace0 "SIS"i hspace1 "NC"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_SIS_C,   "JP.SIS C",
+                "JP"i hspace0 "." hspace0 "SIS"i hspace1 "C"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_SIS_PO,  "JP.SIS PO",
+                "JP"i hspace0 "." hspace0 "SIS"i hspace1 "PO"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_SIS_PE,  "JP.SIS PE",
+                "JP"i hspace0 "." hspace0 "SIS"i hspace1 "PE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_SIS_P,   "JP.SIS P",
+                "JP"i hspace0 "." hspace0 "SIS"i hspace1 "P"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_SIS_M,   "JP.SIS M",
+                "JP"i hspace0 "." hspace0 "SIS"i hspace1 "M"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_SIS_LZ,  "JP.SIS LZ",
+                "JP"i hspace0 "." hspace0 "SIS"i hspace1 "LZ"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_SIS_LO,  "JP.SIS LO",
+                "JP"i hspace0 "." hspace0 "SIS"i hspace1 "LO"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_SIS_NV,  "JP.SIS NV",
+                "JP"i hspace0 "." hspace0 "SIS"i hspace1 "NV"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_SIS_V,   "JP.SIS V",
+                "JP"i hspace0 "." hspace0 "SIS"i hspace1 "V"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_SIS_X5,  "JP.SIS X5",
+                "JP"i hspace0 "." hspace0 "SIS"i hspace1 "X5"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_SIS_NX5, "JP.SIS NX5",
+                "JP"i hspace0 "." hspace0 "SIS"i hspace1 "NX5"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_SIS_K,   "JP.SIS K",
+                "JP"i hspace0 "." hspace0 "SIS"i hspace1 "K"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_SIS_NK,  "JP.SIS NK",
+                "JP"i hspace0 "." hspace0 "SIS"i hspace1 "NK"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_SIS_NE,  "JP.SIS NE",
+                "JP"i hspace0 "." hspace0 "SIS"i hspace1 "NE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_SIS_EQ,  "JP.SIS EQ",
+                "JP"i hspace0 "." hspace0 "SIS"i hspace1 "EQ"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_SIS_LTU, "JP.SIS LTU",
+                "JP"i hspace0 "." hspace0 "SIS"i hspace1 "LTU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_SIS_LEU, "JP.SIS LEU",
+                "JP"i hspace0 "." hspace0 "SIS"i hspace1 "LEU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_SIS_GTU, "JP.SIS GTU",
+                "JP"i hspace0 "." hspace0 "SIS"i hspace1 "GTU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_SIS_GEU, "JP.SIS GEU",
+                "JP"i hspace0 "." hspace0 "SIS"i hspace1 "GEU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_SIS_LT,  "JP.SIS LT",
+                "JP"i hspace0 "." hspace0 "SIS"i hspace1 "LT"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_SIS_LE,  "JP.SIS LE",
+                "JP"i hspace0 "." hspace0 "SIS"i hspace1 "LE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_SIS_GT,  "JP.SIS GT",
+                "JP"i hspace0 "." hspace0 "SIS"i hspace1 "GT"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_SIS_GE,  "JP.SIS GE",
+                "JP"i hspace0 "." hspace0 "SIS"i hspace1 "GE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_SIS_OF,  "JP.SIS OF",
+                "JP"i hspace0 "." hspace0 "SIS"i hspace1 "OF"i   hspace0 ",", p--; te--; )
 
-TOKEN_OPCODE_RE(TK_JP_LIL_NZ,  "JP.LIL NZ",  "JP"i hspace0 "." hspace0 "LIL"i hspace1 "NZ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_LIL_Z,   "JP.LIL Z",   "JP"i hspace0 "." hspace0 "LIL"i hspace1 "Z"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_LIL_NC,  "JP.LIL NC",  "JP"i hspace0 "." hspace0 "LIL"i hspace1 "NC"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_LIL_C,   "JP.LIL C",   "JP"i hspace0 "." hspace0 "LIL"i hspace1 "C"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_LIL_PO,  "JP.LIL PO",  "JP"i hspace0 "." hspace0 "LIL"i hspace1 "PO"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_LIL_PE,  "JP.LIL PE",  "JP"i hspace0 "." hspace0 "LIL"i hspace1 "PE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_LIL_P,   "JP.LIL P",   "JP"i hspace0 "." hspace0 "LIL"i hspace1 "P"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_LIL_M,   "JP.LIL M",   "JP"i hspace0 "." hspace0 "LIL"i hspace1 "M"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_LIL_LZ,  "JP.LIL LZ",  "JP"i hspace0 "." hspace0 "LIL"i hspace1 "LZ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_LIL_LO,  "JP.LIL LO",  "JP"i hspace0 "." hspace0 "LIL"i hspace1 "LO"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_LIL_NV,  "JP.LIL NV",  "JP"i hspace0 "." hspace0 "LIL"i hspace1 "NV"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_LIL_V,   "JP.LIL V",   "JP"i hspace0 "." hspace0 "LIL"i hspace1 "V"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_LIL_X5,  "JP.LIL X5",  "JP"i hspace0 "." hspace0 "LIL"i hspace1 "X5"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_LIL_NX5, "JP.LIL NX5", "JP"i hspace0 "." hspace0 "LIL"i hspace1 "NX5"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_LIL_K,   "JP.LIL K",   "JP"i hspace0 "." hspace0 "LIL"i hspace1 "K"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_LIL_NK,  "JP.LIL NK",  "JP"i hspace0 "." hspace0 "LIL"i hspace1 "NK"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_LIL_NE,  "JP.LIL NE",  "JP"i hspace0 "." hspace0 "LIL"i hspace1 "NE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_LIL_EQ,  "JP.LIL EQ",  "JP"i hspace0 "." hspace0 "LIL"i hspace1 "EQ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_LIL_LTU, "JP.LIL LTU", "JP"i hspace0 "." hspace0 "LIL"i hspace1 "LTU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_LIL_LEU, "JP.LIL LEU", "JP"i hspace0 "." hspace0 "LIL"i hspace1 "LEU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_LIL_GTU, "JP.LIL GTU", "JP"i hspace0 "." hspace0 "LIL"i hspace1 "GTU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_LIL_GEU, "JP.LIL GEU", "JP"i hspace0 "." hspace0 "LIL"i hspace1 "GEU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_LIL_LT,  "JP.LIL LT",  "JP"i hspace0 "." hspace0 "LIL"i hspace1 "LT"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_LIL_LE,  "JP.LIL LE",  "JP"i hspace0 "." hspace0 "LIL"i hspace1 "LE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_LIL_GT,  "JP.LIL GT",  "JP"i hspace0 "." hspace0 "LIL"i hspace1 "GT"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_LIL_GE,  "JP.LIL GE",  "JP"i hspace0 "." hspace0 "LIL"i hspace1 "GE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP_LIL_OF,  "JP.LIL OF",  "JP"i hspace0 "." hspace0 "LIL"i hspace1 "OF"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_LIL_NZ,  "JP.LIL NZ",
+                "JP"i hspace0 "." hspace0 "LIL"i hspace1 "NZ"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_LIL_Z,   "JP.LIL Z",
+                "JP"i hspace0 "." hspace0 "LIL"i hspace1 "Z"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_LIL_NC,  "JP.LIL NC",
+                "JP"i hspace0 "." hspace0 "LIL"i hspace1 "NC"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_LIL_C,   "JP.LIL C",
+                "JP"i hspace0 "." hspace0 "LIL"i hspace1 "C"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_LIL_PO,  "JP.LIL PO",
+                "JP"i hspace0 "." hspace0 "LIL"i hspace1 "PO"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_LIL_PE,  "JP.LIL PE",
+                "JP"i hspace0 "." hspace0 "LIL"i hspace1 "PE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_LIL_P,   "JP.LIL P",
+                "JP"i hspace0 "." hspace0 "LIL"i hspace1 "P"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_LIL_M,   "JP.LIL M",
+                "JP"i hspace0 "." hspace0 "LIL"i hspace1 "M"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_LIL_LZ,  "JP.LIL LZ",
+                "JP"i hspace0 "." hspace0 "LIL"i hspace1 "LZ"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_LIL_LO,  "JP.LIL LO",
+                "JP"i hspace0 "." hspace0 "LIL"i hspace1 "LO"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_LIL_NV,  "JP.LIL NV",
+                "JP"i hspace0 "." hspace0 "LIL"i hspace1 "NV"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_LIL_V,   "JP.LIL V",
+                "JP"i hspace0 "." hspace0 "LIL"i hspace1 "V"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_LIL_X5,  "JP.LIL X5",
+                "JP"i hspace0 "." hspace0 "LIL"i hspace1 "X5"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_LIL_NX5, "JP.LIL NX5",
+                "JP"i hspace0 "." hspace0 "LIL"i hspace1 "NX5"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_LIL_K,   "JP.LIL K",
+                "JP"i hspace0 "." hspace0 "LIL"i hspace1 "K"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_LIL_NK,  "JP.LIL NK",
+                "JP"i hspace0 "." hspace0 "LIL"i hspace1 "NK"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_LIL_NE,  "JP.LIL NE",
+                "JP"i hspace0 "." hspace0 "LIL"i hspace1 "NE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_LIL_EQ,  "JP.LIL EQ",
+                "JP"i hspace0 "." hspace0 "LIL"i hspace1 "EQ"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_LIL_LTU, "JP.LIL LTU",
+                "JP"i hspace0 "." hspace0 "LIL"i hspace1 "LTU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_LIL_LEU, "JP.LIL LEU",
+                "JP"i hspace0 "." hspace0 "LIL"i hspace1 "LEU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_LIL_GTU, "JP.LIL GTU",
+                "JP"i hspace0 "." hspace0 "LIL"i hspace1 "GTU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_LIL_GEU, "JP.LIL GEU",
+                "JP"i hspace0 "." hspace0 "LIL"i hspace1 "GEU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_LIL_LT,  "JP.LIL LT",
+                "JP"i hspace0 "." hspace0 "LIL"i hspace1 "LT"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_LIL_LE,  "JP.LIL LE",
+                "JP"i hspace0 "." hspace0 "LIL"i hspace1 "LE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_LIL_GT,  "JP.LIL GT",
+                "JP"i hspace0 "." hspace0 "LIL"i hspace1 "GT"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_LIL_GE,  "JP.LIL GE",
+                "JP"i hspace0 "." hspace0 "LIL"i hspace1 "GE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP_LIL_OF,  "JP.LIL OF",
+                "JP"i hspace0 "." hspace0 "LIL"i hspace1 "OF"i   hspace0 ",", p--; te--; )
 
-TOKEN_OPCODE_RE(TK_JP3_NZ,  "JP3 NZ",  "JP3"i hspace1 "NZ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP3_Z,   "JP3 Z",   "JP3"i hspace1 "Z"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP3_NC,  "JP3 NC",  "JP3"i hspace1 "NC"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP3_C,   "JP3 C",   "JP3"i hspace1 "C"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP3_PO,  "JP3 PO",  "JP3"i hspace1 "PO"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP3_PE,  "JP3 PE",  "JP3"i hspace1 "PE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP3_P,   "JP3 P",   "JP3"i hspace1 "P"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP3_M,   "JP3 M",   "JP3"i hspace1 "M"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP3_LZ,  "JP3 LZ",  "JP3"i hspace1 "LZ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP3_LO,  "JP3 LO",  "JP3"i hspace1 "LO"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP3_NV,  "JP3 NV",  "JP3"i hspace1 "NV"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP3_V,   "JP3 V",   "JP3"i hspace1 "V"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP3_X5,  "JP3 X5",  "JP3"i hspace1 "X5"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP3_NX5, "JP3 NX5", "JP3"i hspace1 "NX5"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP3_K,   "JP3 K",   "JP3"i hspace1 "K"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP3_NK,  "JP3 NK",  "JP3"i hspace1 "NK"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP3_NE,  "JP3 NE",  "JP3"i hspace1 "NE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP3_EQ,  "JP3 EQ",  "JP3"i hspace1 "EQ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP3_LTU, "JP3 LTU", "JP3"i hspace1 "LTU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP3_LEU, "JP3 LEU", "JP3"i hspace1 "LEU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP3_GTU, "JP3 GTU", "JP3"i hspace1 "GTU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP3_GEU, "JP3 GEU", "JP3"i hspace1 "GEU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP3_LT,  "JP3 LT",  "JP3"i hspace1 "LT"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP3_LE,  "JP3 LE",  "JP3"i hspace1 "LE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP3_GT,  "JP3 GT",  "JP3"i hspace1 "GT"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP3_GE,  "JP3 GE",  "JP3"i hspace1 "GE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JP3_OF,  "JP3 OF",  "JP3"i hspace1 "OF"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JP3_NZ,  "JP3 NZ",  "JP3"i hspace1 "NZ"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP3_Z,   "JP3 Z",   "JP3"i hspace1 "Z"i    hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP3_NC,  "JP3 NC",  "JP3"i hspace1 "NC"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP3_C,   "JP3 C",   "JP3"i hspace1 "C"i    hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP3_PO,  "JP3 PO",  "JP3"i hspace1 "PO"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP3_PE,  "JP3 PE",  "JP3"i hspace1 "PE"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP3_P,   "JP3 P",   "JP3"i hspace1 "P"i    hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP3_M,   "JP3 M",   "JP3"i hspace1 "M"i    hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP3_LZ,  "JP3 LZ",  "JP3"i hspace1 "LZ"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP3_LO,  "JP3 LO",  "JP3"i hspace1 "LO"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP3_NV,  "JP3 NV",  "JP3"i hspace1 "NV"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP3_V,   "JP3 V",   "JP3"i hspace1 "V"i    hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP3_X5,  "JP3 X5",  "JP3"i hspace1 "X5"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP3_NX5, "JP3 NX5", "JP3"i hspace1 "NX5"i  hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP3_K,   "JP3 K",   "JP3"i hspace1 "K"i    hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP3_NK,  "JP3 NK",  "JP3"i hspace1 "NK"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP3_NE,  "JP3 NE",  "JP3"i hspace1 "NE"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP3_EQ,  "JP3 EQ",  "JP3"i hspace1 "EQ"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP3_LTU, "JP3 LTU", "JP3"i hspace1 "LTU"i  hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP3_LEU, "JP3 LEU", "JP3"i hspace1 "LEU"i  hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP3_GTU, "JP3 GTU", "JP3"i hspace1 "GTU"i  hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP3_GEU, "JP3 GEU", "JP3"i hspace1 "GEU"i  hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP3_LT,  "JP3 LT",  "JP3"i hspace1 "LT"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP3_LE,  "JP3 LE",  "JP3"i hspace1 "LE"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP3_GT,  "JP3 GT",  "JP3"i hspace1 "GT"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP3_GE,  "JP3 GE",  "JP3"i hspace1 "GE"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JP3_OF,  "JP3 OF",  "JP3"i hspace1 "OF"i   hspace0 ",", p--;
+                te--; )
 
-TOKEN_OPCODE_RE(TK_JMP_NZ,  "JMP NZ",  "JMP"i hspace1 "NZ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_Z,   "JMP Z",   "JMP"i hspace1 "Z"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_NC,  "JMP NC",  "JMP"i hspace1 "NC"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_C,   "JMP C",   "JMP"i hspace1 "C"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_PO,  "JMP PO",  "JMP"i hspace1 "PO"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_PE,  "JMP PE",  "JMP"i hspace1 "PE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_P,   "JMP P",   "JMP"i hspace1 "P"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_M,   "JMP M",   "JMP"i hspace1 "M"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_LZ,  "JMP LZ",  "JMP"i hspace1 "LZ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_LO,  "JMP LO",  "JMP"i hspace1 "LO"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_NV,  "JMP NV",  "JMP"i hspace1 "NV"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_V,   "JMP V",   "JMP"i hspace1 "V"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_X5,  "JMP X5",  "JMP"i hspace1 "X5"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_NX5, "JMP NX5", "JMP"i hspace1 "NX5"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_K,   "JMP K",   "JMP"i hspace1 "K"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_NK,  "JMP NK",  "JMP"i hspace1 "NK"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_NE,  "JMP NE",  "JMP"i hspace1 "NE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_EQ,  "JMP EQ",  "JMP"i hspace1 "EQ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_LTU, "JMP LTU", "JMP"i hspace1 "LTU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_LEU, "JMP LEU", "JMP"i hspace1 "LEU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_GTU, "JMP GTU", "JMP"i hspace1 "GTU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_GEU, "JMP GEU", "JMP"i hspace1 "GEU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_LT,  "JMP LT",  "JMP"i hspace1 "LT"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_LE,  "JMP LE",  "JMP"i hspace1 "LE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_GT,  "JMP GT",  "JMP"i hspace1 "GT"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_GE,  "JMP GE",  "JMP"i hspace1 "GE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_OF,  "JMP OF",  "JMP"i hspace1 "OF"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_NZ,  "JMP NZ",  "JMP"i hspace1 "NZ"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JMP_Z,   "JMP Z",   "JMP"i hspace1 "Z"i    hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JMP_NC,  "JMP NC",  "JMP"i hspace1 "NC"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JMP_C,   "JMP C",   "JMP"i hspace1 "C"i    hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JMP_PO,  "JMP PO",  "JMP"i hspace1 "PO"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JMP_PE,  "JMP PE",  "JMP"i hspace1 "PE"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JMP_P,   "JMP P",   "JMP"i hspace1 "P"i    hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JMP_M,   "JMP M",   "JMP"i hspace1 "M"i    hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JMP_LZ,  "JMP LZ",  "JMP"i hspace1 "LZ"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JMP_LO,  "JMP LO",  "JMP"i hspace1 "LO"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JMP_NV,  "JMP NV",  "JMP"i hspace1 "NV"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JMP_V,   "JMP V",   "JMP"i hspace1 "V"i    hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JMP_X5,  "JMP X5",  "JMP"i hspace1 "X5"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JMP_NX5, "JMP NX5", "JMP"i hspace1 "NX5"i  hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JMP_K,   "JMP K",   "JMP"i hspace1 "K"i    hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JMP_NK,  "JMP NK",  "JMP"i hspace1 "NK"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JMP_NE,  "JMP NE",  "JMP"i hspace1 "NE"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JMP_EQ,  "JMP EQ",  "JMP"i hspace1 "EQ"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JMP_LTU, "JMP LTU", "JMP"i hspace1 "LTU"i  hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JMP_LEU, "JMP LEU", "JMP"i hspace1 "LEU"i  hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JMP_GTU, "JMP GTU", "JMP"i hspace1 "GTU"i  hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JMP_GEU, "JMP GEU", "JMP"i hspace1 "GEU"i  hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JMP_LT,  "JMP LT",  "JMP"i hspace1 "LT"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JMP_LE,  "JMP LE",  "JMP"i hspace1 "LE"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JMP_GT,  "JMP GT",  "JMP"i hspace1 "GT"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JMP_GE,  "JMP GE",  "JMP"i hspace1 "GE"i   hspace0 ",", p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_JMP_OF,  "JMP OF",  "JMP"i hspace1 "OF"i   hspace0 ",", p--;
+                te--; )
 
-TOKEN_OPCODE_RE(TK_JMP_SIS_NZ,  "JMP.SIS NZ",  "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "NZ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_SIS_Z,   "JMP.SIS Z",   "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "Z"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_SIS_NC,  "JMP.SIS NC",  "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "NC"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_SIS_C,   "JMP.SIS C",   "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "C"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_SIS_PO,  "JMP.SIS PO",  "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "PO"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_SIS_PE,  "JMP.SIS PE",  "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "PE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_SIS_P,   "JMP.SIS P",   "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "P"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_SIS_M,   "JMP.SIS M",   "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "M"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_SIS_LZ,  "JMP.SIS LZ",  "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "LZ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_SIS_LO,  "JMP.SIS LO",  "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "LO"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_SIS_NV,  "JMP.SIS NV",  "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "NV"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_SIS_V,   "JMP.SIS V",   "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "V"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_SIS_X5,  "JMP.SIS X5",  "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "X5"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_SIS_NX5, "JMP.SIS NX5", "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "NX5"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_SIS_K,   "JMP.SIS K",   "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "K"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_SIS_NK,  "JMP.SIS NK",  "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "NK"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_SIS_NE,  "JMP.SIS NE",  "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "NE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_SIS_EQ,  "JMP.SIS EQ",  "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "EQ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_SIS_LTU, "JMP.SIS LTU", "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "LTU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_SIS_LEU, "JMP.SIS LEU", "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "LEU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_SIS_GTU, "JMP.SIS GTU", "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "GTU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_SIS_GEU, "JMP.SIS GEU", "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "GEU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_SIS_LT,  "JMP.SIS LT",  "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "LT"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_SIS_LE,  "JMP.SIS LE",  "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "LE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_SIS_GT,  "JMP.SIS GT",  "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "GT"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_SIS_GE,  "JMP.SIS GE",  "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "GE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_SIS_OF,  "JMP.SIS OF",  "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "OF"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_SIS_NZ,  "JMP.SIS NZ",
+                "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "NZ"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_SIS_Z,   "JMP.SIS Z",
+                "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "Z"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_SIS_NC,  "JMP.SIS NC",
+                "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "NC"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_SIS_C,   "JMP.SIS C",
+                "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "C"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_SIS_PO,  "JMP.SIS PO",
+                "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "PO"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_SIS_PE,  "JMP.SIS PE",
+                "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "PE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_SIS_P,   "JMP.SIS P",
+                "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "P"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_SIS_M,   "JMP.SIS M",
+                "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "M"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_SIS_LZ,  "JMP.SIS LZ",
+                "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "LZ"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_SIS_LO,  "JMP.SIS LO",
+                "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "LO"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_SIS_NV,  "JMP.SIS NV",
+                "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "NV"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_SIS_V,   "JMP.SIS V",
+                "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "V"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_SIS_X5,  "JMP.SIS X5",
+                "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "X5"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_SIS_NX5, "JMP.SIS NX5",
+                "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "NX5"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_SIS_K,   "JMP.SIS K",
+                "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "K"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_SIS_NK,  "JMP.SIS NK",
+                "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "NK"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_SIS_NE,  "JMP.SIS NE",
+                "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "NE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_SIS_EQ,  "JMP.SIS EQ",
+                "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "EQ"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_SIS_LTU, "JMP.SIS LTU",
+                "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "LTU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_SIS_LEU, "JMP.SIS LEU",
+                "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "LEU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_SIS_GTU, "JMP.SIS GTU",
+                "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "GTU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_SIS_GEU, "JMP.SIS GEU",
+                "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "GEU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_SIS_LT,  "JMP.SIS LT",
+                "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "LT"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_SIS_LE,  "JMP.SIS LE",
+                "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "LE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_SIS_GT,  "JMP.SIS GT",
+                "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "GT"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_SIS_GE,  "JMP.SIS GE",
+                "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "GE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_SIS_OF,  "JMP.SIS OF",
+                "JMP"i hspace0 "." hspace0 "SIS"i hspace1 "OF"i   hspace0 ",", p--; te--; )
 
-TOKEN_OPCODE_RE(TK_JMP_LIL_NZ,  "JMP.LIL NZ",  "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "NZ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_LIL_Z,   "JMP.LIL Z",   "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "Z"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_LIL_NC,  "JMP.LIL NC",  "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "NC"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_LIL_C,   "JMP.LIL C",   "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "C"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_LIL_PO,  "JMP.LIL PO",  "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "PO"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_LIL_PE,  "JMP.LIL PE",  "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "PE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_LIL_P,   "JMP.LIL P",   "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "P"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_LIL_M,   "JMP.LIL M",   "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "M"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_LIL_LZ,  "JMP.LIL LZ",  "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "LZ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_LIL_LO,  "JMP.LIL LO",  "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "LO"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_LIL_NV,  "JMP.LIL NV",  "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "NV"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_LIL_V,   "JMP.LIL V",   "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "V"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_LIL_X5,  "JMP.LIL X5",  "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "X5"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_LIL_NX5, "JMP.LIL NX5", "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "NX5"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_LIL_K,   "JMP.LIL K",   "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "K"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_LIL_NK,  "JMP.LIL NK",  "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "NK"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_LIL_NE,  "JMP.LIL NE",  "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "NE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_LIL_EQ,  "JMP.LIL EQ",  "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "EQ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_LIL_LTU, "JMP.LIL LTU", "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "LTU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_LIL_LEU, "JMP.LIL LEU", "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "LEU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_LIL_GTU, "JMP.LIL GTU", "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "GTU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_LIL_GEU, "JMP.LIL GEU", "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "GEU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_LIL_LT,  "JMP.LIL LT",  "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "LT"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_LIL_LE,  "JMP.LIL LE",  "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "LE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_LIL_GT,  "JMP.LIL GT",  "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "GT"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_LIL_GE,  "JMP.LIL GE",  "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "GE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_JMP_LIL_OF,  "JMP.LIL OF",  "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "OF"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_LIL_NZ,  "JMP.LIL NZ",
+                "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "NZ"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_LIL_Z,   "JMP.LIL Z",
+                "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "Z"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_LIL_NC,  "JMP.LIL NC",
+                "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "NC"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_LIL_C,   "JMP.LIL C",
+                "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "C"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_LIL_PO,  "JMP.LIL PO",
+                "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "PO"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_LIL_PE,  "JMP.LIL PE",
+                "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "PE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_LIL_P,   "JMP.LIL P",
+                "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "P"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_LIL_M,   "JMP.LIL M",
+                "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "M"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_LIL_LZ,  "JMP.LIL LZ",
+                "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "LZ"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_LIL_LO,  "JMP.LIL LO",
+                "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "LO"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_LIL_NV,  "JMP.LIL NV",
+                "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "NV"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_LIL_V,   "JMP.LIL V",
+                "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "V"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_LIL_X5,  "JMP.LIL X5",
+                "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "X5"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_LIL_NX5, "JMP.LIL NX5",
+                "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "NX5"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_LIL_K,   "JMP.LIL K",
+                "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "K"i    hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_LIL_NK,  "JMP.LIL NK",
+                "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "NK"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_LIL_NE,  "JMP.LIL NE",
+                "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "NE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_LIL_EQ,  "JMP.LIL EQ",
+                "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "EQ"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_LIL_LTU, "JMP.LIL LTU",
+                "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "LTU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_LIL_LEU, "JMP.LIL LEU",
+                "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "LEU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_LIL_GTU, "JMP.LIL GTU",
+                "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "GTU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_LIL_GEU, "JMP.LIL GEU",
+                "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "GEU"i  hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_LIL_LT,  "JMP.LIL LT",
+                "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "LT"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_LIL_LE,  "JMP.LIL LE",
+                "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "LE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_LIL_GT,  "JMP.LIL GT",
+                "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "GT"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_LIL_GE,  "JMP.LIL GE",
+                "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "GE"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_JMP_LIL_OF,  "JMP.LIL OF",
+                "JMP"i hspace0 "." hspace0 "LIL"i hspace1 "OF"i   hspace0 ",", p--; te--; )
 
-TOKEN_OPCODE_RE(TK_RET_NZ,  "RET NZ",  "RET"i hspace1 "NZ"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_Z,   "RET Z",   "RET"i hspace1 "Z"i    [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_NC,  "RET NC",  "RET"i hspace1 "NC"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_C,   "RET C",   "RET"i hspace1 "C"i    [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_PO,  "RET PO",  "RET"i hspace1 "PO"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_PE,  "RET PE",  "RET"i hspace1 "PE"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_P,   "RET P",   "RET"i hspace1 "P"i    [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_M,   "RET M",   "RET"i hspace1 "M"i    [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LZ,  "RET LZ",  "RET"i hspace1 "LZ"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LO,  "RET LO",  "RET"i hspace1 "LO"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_NV,  "RET NV",  "RET"i hspace1 "NV"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_V,   "RET V",   "RET"i hspace1 "V"i    [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_X5,  "RET X5",  "RET"i hspace1 "X5"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_NX5, "RET NX5", "RET"i hspace1 "NX5"i  [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_K,   "RET K",   "RET"i hspace1 "K"i    [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_NK,  "RET NK",  "RET"i hspace1 "NK"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_NE,  "RET NE",  "RET"i hspace1 "NE"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_EQ,  "RET EQ",  "RET"i hspace1 "EQ"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LTU, "RET LTU", "RET"i hspace1 "LTU"i  [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LEU, "RET LEU", "RET"i hspace1 "LEU"i  [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_GTU, "RET GTU", "RET"i hspace1 "GTU"i  [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_GEU, "RET GEU", "RET"i hspace1 "GEU"i  [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LT,  "RET LT",  "RET"i hspace1 "LT"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LE,  "RET LE",  "RET"i hspace1 "LE"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_GT,  "RET GT",  "RET"i hspace1 "GT"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_GE,  "RET GE",  "RET"i hspace1 "GE"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_OF,  "RET OF",  "RET"i hspace1 "OF"i   [^a-zA-Z_0-9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET_NZ,  "RET NZ",
+                "RET"i hspace1 "NZ"i   [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET_Z,   "RET Z",
+                "RET"i hspace1 "Z"i    [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET_NC,  "RET NC",
+                "RET"i hspace1 "NC"i   [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET_C,   "RET C",
+                "RET"i hspace1 "C"i    [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET_PO,  "RET PO",
+                "RET"i hspace1 "PO"i   [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET_PE,  "RET PE",
+                "RET"i hspace1 "PE"i   [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET_P,   "RET P",
+                "RET"i hspace1 "P"i    [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET_M,   "RET M",
+                "RET"i hspace1 "M"i    [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET_LZ,  "RET LZ",
+                "RET"i hspace1 "LZ"i   [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET_LO,  "RET LO",
+                "RET"i hspace1 "LO"i   [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET_NV,  "RET NV",
+                "RET"i hspace1 "NV"i   [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET_V,   "RET V",
+                "RET"i hspace1 "V"i    [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET_X5,  "RET X5",
+                "RET"i hspace1 "X5"i   [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET_NX5, "RET NX5",
+                "RET"i hspace1 "NX5"i  [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET_K,   "RET K",
+                "RET"i hspace1 "K"i    [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET_NK,  "RET NK",
+                "RET"i hspace1 "NK"i   [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET_NE,  "RET NE",
+                "RET"i hspace1 "NE"i   [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET_EQ,  "RET EQ",
+                "RET"i hspace1 "EQ"i   [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET_LTU, "RET LTU",
+                "RET"i hspace1 "LTU"i  [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET_LEU, "RET LEU",
+                "RET"i hspace1 "LEU"i  [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET_GTU, "RET GTU",
+                "RET"i hspace1 "GTU"i  [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET_GEU, "RET GEU",
+                "RET"i hspace1 "GEU"i  [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET_LT,  "RET LT",
+                "RET"i hspace1 "LT"i   [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET_LE,  "RET LE",
+                "RET"i hspace1 "LE"i   [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET_GT,  "RET GT",
+                "RET"i hspace1 "GT"i   [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET_GE,  "RET GE",
+                "RET"i hspace1 "GE"i   [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET_OF,  "RET OF",
+                "RET"i hspace1 "OF"i   [^a - zA - Z_0 - 9], p--; te--; )
 
-TOKEN_OPCODE_RE(TK_RET3_NZ,  "RET3 NZ",  "RET3"i hspace1 "NZ"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET3_Z,   "RET3 Z",   "RET3"i hspace1 "Z"i    [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET3_NC,  "RET3 NC",  "RET3"i hspace1 "NC"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET3_C,   "RET3 C",   "RET3"i hspace1 "C"i    [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET3_PO,  "RET3 PO",  "RET3"i hspace1 "PO"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET3_PE,  "RET3 PE",  "RET3"i hspace1 "PE"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET3_P,   "RET3 P",   "RET3"i hspace1 "P"i    [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET3_M,   "RET3 M",   "RET3"i hspace1 "M"i    [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET3_LZ,  "RET3 LZ",  "RET3"i hspace1 "LZ"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET3_LO,  "RET3 LO",  "RET3"i hspace1 "LO"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET3_NV,  "RET3 NV",  "RET3"i hspace1 "NV"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET3_V,   "RET3 V",   "RET3"i hspace1 "V"i    [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET3_X5,  "RET3 X5",  "RET3"i hspace1 "X5"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET3_NX5, "RET3 NX5", "RET3"i hspace1 "NX5"i  [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET3_K,   "RET3 K",   "RET3"i hspace1 "K"i    [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET3_NK,  "RET3 NK",  "RET3"i hspace1 "NK"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET3_NE,  "RET3 NE",  "RET3"i hspace1 "NE"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET3_EQ,  "RET3 EQ",  "RET3"i hspace1 "EQ"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET3_LTU, "RET3 LTU", "RET3"i hspace1 "LTU"i  [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET3_LEU, "RET3 LEU", "RET3"i hspace1 "LEU"i  [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET3_GTU, "RET3 GTU", "RET3"i hspace1 "GTU"i  [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET3_GEU, "RET3 GEU", "RET3"i hspace1 "GEU"i  [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET3_LT,  "RET3 LT",  "RET3"i hspace1 "LT"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET3_LE,  "RET3 LE",  "RET3"i hspace1 "LE"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET3_GT,  "RET3 GT",  "RET3"i hspace1 "GT"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET3_GE,  "RET3 GE",  "RET3"i hspace1 "GE"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET3_OF,  "RET3 OF",  "RET3"i hspace1 "OF"i   [^a-zA-Z_0-9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET3_NZ,  "RET3 NZ",
+                "RET3"i hspace1 "NZ"i   [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET3_Z,   "RET3 Z",
+                "RET3"i hspace1 "Z"i    [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET3_NC,  "RET3 NC",
+                "RET3"i hspace1 "NC"i   [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET3_C,   "RET3 C",
+                "RET3"i hspace1 "C"i    [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET3_PO,  "RET3 PO",
+                "RET3"i hspace1 "PO"i   [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET3_PE,  "RET3 PE",
+                "RET3"i hspace1 "PE"i   [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET3_P,   "RET3 P",
+                "RET3"i hspace1 "P"i    [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET3_M,   "RET3 M",
+                "RET3"i hspace1 "M"i    [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET3_LZ,  "RET3 LZ",
+                "RET3"i hspace1 "LZ"i   [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET3_LO,  "RET3 LO",
+                "RET3"i hspace1 "LO"i   [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET3_NV,  "RET3 NV",
+                "RET3"i hspace1 "NV"i   [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET3_V,   "RET3 V",
+                "RET3"i hspace1 "V"i    [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET3_X5,  "RET3 X5",
+                "RET3"i hspace1 "X5"i   [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET3_NX5, "RET3 NX5",
+                "RET3"i hspace1 "NX5"i  [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET3_K,   "RET3 K",
+                "RET3"i hspace1 "K"i    [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET3_NK,  "RET3 NK",
+                "RET3"i hspace1 "NK"i   [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET3_NE,  "RET3 NE",
+                "RET3"i hspace1 "NE"i   [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET3_EQ,  "RET3 EQ",
+                "RET3"i hspace1 "EQ"i   [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET3_LTU, "RET3 LTU",
+                "RET3"i hspace1 "LTU"i  [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET3_LEU, "RET3 LEU",
+                "RET3"i hspace1 "LEU"i  [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET3_GTU, "RET3 GTU",
+                "RET3"i hspace1 "GTU"i  [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET3_GEU, "RET3 GEU",
+                "RET3"i hspace1 "GEU"i  [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET3_LT,  "RET3 LT",
+                "RET3"i hspace1 "LT"i   [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET3_LE,  "RET3 LE",
+                "RET3"i hspace1 "LE"i   [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET3_GT,  "RET3 GT",
+                "RET3"i hspace1 "GT"i   [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET3_GE,  "RET3 GE",
+                "RET3"i hspace1 "GE"i   [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET3_OF,  "RET3 OF",
+                "RET3"i hspace1 "OF"i   [^a - zA - Z_0 - 9], p--; te--; )
 
-TOKEN_OPCODE_RE(TK_RET_L_NZ,  "RET.L NZ",  "RET"i hspace0 "." hspace0 "L"i hspace1 "NZ"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_L_Z,   "RET.L Z",   "RET"i hspace0 "." hspace0 "L"i hspace1 "Z"i    [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_L_NC,  "RET.L NC",  "RET"i hspace0 "." hspace0 "L"i hspace1 "NC"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_L_C,   "RET.L C",   "RET"i hspace0 "." hspace0 "L"i hspace1 "C"i    [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_L_PO,  "RET.L PO",  "RET"i hspace0 "." hspace0 "L"i hspace1 "PO"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_L_PE,  "RET.L PE",  "RET"i hspace0 "." hspace0 "L"i hspace1 "PE"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_L_P,   "RET.L P",   "RET"i hspace0 "." hspace0 "L"i hspace1 "P"i    [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_L_M,   "RET.L M",   "RET"i hspace0 "." hspace0 "L"i hspace1 "M"i    [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_L_LZ,  "RET.L LZ",  "RET"i hspace0 "." hspace0 "L"i hspace1 "LZ"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_L_LO,  "RET.L LO",  "RET"i hspace0 "." hspace0 "L"i hspace1 "LO"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_L_NV,  "RET.L NV",  "RET"i hspace0 "." hspace0 "L"i hspace1 "NV"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_L_V,   "RET.L V",   "RET"i hspace0 "." hspace0 "L"i hspace1 "V"i    [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_L_X5,  "RET.L X5",  "RET"i hspace0 "." hspace0 "L"i hspace1 "X5"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_L_NX5, "RET.L NX5", "RET"i hspace0 "." hspace0 "L"i hspace1 "NX5"i  [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_L_K,   "RET.L K",   "RET"i hspace0 "." hspace0 "L"i hspace1 "K"i    [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_L_NK,  "RET.L NK",  "RET"i hspace0 "." hspace0 "L"i hspace1 "NK"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_L_NE,  "RET.L NE",  "RET"i hspace0 "." hspace0 "L"i hspace1 "NE"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_L_EQ,  "RET.L EQ",  "RET"i hspace0 "." hspace0 "L"i hspace1 "EQ"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_L_LTU, "RET.L LTU", "RET"i hspace0 "." hspace0 "L"i hspace1 "LTU"i  [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_L_LEU, "RET.L LEU", "RET"i hspace0 "." hspace0 "L"i hspace1 "LEU"i  [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_L_GTU, "RET.L GTU", "RET"i hspace0 "." hspace0 "L"i hspace1 "GTU"i  [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_L_GEU, "RET.L GEU", "RET"i hspace0 "." hspace0 "L"i hspace1 "GEU"i  [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_L_LT,  "RET.L LT",  "RET"i hspace0 "." hspace0 "L"i hspace1 "LT"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_L_LE,  "RET.L LE",  "RET"i hspace0 "." hspace0 "L"i hspace1 "LE"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_L_GT,  "RET.L GT",  "RET"i hspace0 "." hspace0 "L"i hspace1 "GT"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_L_GE,  "RET.L GE",  "RET"i hspace0 "." hspace0 "L"i hspace1 "GE"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_L_OF,  "RET.L OF",  "RET"i hspace0 "." hspace0 "L"i hspace1 "OF"i   [^a-zA-Z_0-9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET_L_NZ,  "RET.L NZ",
+                "RET"i hspace0 "." hspace0 "L"i hspace1 "NZ"i   [^a - zA - Z_0 - 9], p--; te--;
+               )
+TOKEN_OPCODE_RE(TK_RET_L_Z,   "RET.L Z",
+                "RET"i hspace0 "." hspace0 "L"i hspace1 "Z"i    [^a - zA - Z_0 - 9], p--; te--;
+               )
+TOKEN_OPCODE_RE(TK_RET_L_NC,  "RET.L NC",
+                "RET"i hspace0 "." hspace0 "L"i hspace1 "NC"i   [^a - zA - Z_0 - 9], p--; te--;
+               )
+TOKEN_OPCODE_RE(TK_RET_L_C,   "RET.L C",
+                "RET"i hspace0 "." hspace0 "L"i hspace1 "C"i    [^a - zA - Z_0 - 9], p--; te--;
+               )
+TOKEN_OPCODE_RE(TK_RET_L_PO,  "RET.L PO",
+                "RET"i hspace0 "." hspace0 "L"i hspace1 "PO"i   [^a - zA - Z_0 - 9], p--; te--;
+               )
+TOKEN_OPCODE_RE(TK_RET_L_PE,  "RET.L PE",
+                "RET"i hspace0 "." hspace0 "L"i hspace1 "PE"i   [^a - zA - Z_0 - 9], p--; te--;
+               )
+TOKEN_OPCODE_RE(TK_RET_L_P,   "RET.L P",
+                "RET"i hspace0 "." hspace0 "L"i hspace1 "P"i    [^a - zA - Z_0 - 9], p--; te--;
+               )
+TOKEN_OPCODE_RE(TK_RET_L_M,   "RET.L M",
+                "RET"i hspace0 "." hspace0 "L"i hspace1 "M"i    [^a - zA - Z_0 - 9], p--; te--;
+               )
+TOKEN_OPCODE_RE(TK_RET_L_LZ,  "RET.L LZ",
+                "RET"i hspace0 "." hspace0 "L"i hspace1 "LZ"i   [^a - zA - Z_0 - 9], p--; te--;
+               )
+TOKEN_OPCODE_RE(TK_RET_L_LO,  "RET.L LO",
+                "RET"i hspace0 "." hspace0 "L"i hspace1 "LO"i   [^a - zA - Z_0 - 9], p--; te--;
+               )
+TOKEN_OPCODE_RE(TK_RET_L_NV,  "RET.L NV",
+                "RET"i hspace0 "." hspace0 "L"i hspace1 "NV"i   [^a - zA - Z_0 - 9], p--; te--;
+               )
+TOKEN_OPCODE_RE(TK_RET_L_V,   "RET.L V",
+                "RET"i hspace0 "." hspace0 "L"i hspace1 "V"i    [^a - zA - Z_0 - 9], p--; te--;
+               )
+TOKEN_OPCODE_RE(TK_RET_L_X5,  "RET.L X5",
+                "RET"i hspace0 "." hspace0 "L"i hspace1 "X5"i   [^a - zA - Z_0 - 9], p--; te--;
+               )
+TOKEN_OPCODE_RE(TK_RET_L_NX5, "RET.L NX5",
+                "RET"i hspace0 "." hspace0 "L"i hspace1 "NX5"i  [^a - zA - Z_0 - 9], p--; te--;
+               )
+TOKEN_OPCODE_RE(TK_RET_L_K,   "RET.L K",
+                "RET"i hspace0 "." hspace0 "L"i hspace1 "K"i    [^a - zA - Z_0 - 9], p--; te--;
+               )
+TOKEN_OPCODE_RE(TK_RET_L_NK,  "RET.L NK",
+                "RET"i hspace0 "." hspace0 "L"i hspace1 "NK"i   [^a - zA - Z_0 - 9], p--; te--;
+               )
+TOKEN_OPCODE_RE(TK_RET_L_NE,  "RET.L NE",
+                "RET"i hspace0 "." hspace0 "L"i hspace1 "NE"i   [^a - zA - Z_0 - 9], p--; te--;
+               )
+TOKEN_OPCODE_RE(TK_RET_L_EQ,  "RET.L EQ",
+                "RET"i hspace0 "." hspace0 "L"i hspace1 "EQ"i   [^a - zA - Z_0 - 9], p--; te--;
+               )
+TOKEN_OPCODE_RE(TK_RET_L_LTU, "RET.L LTU",
+                "RET"i hspace0 "." hspace0 "L"i hspace1 "LTU"i  [^a - zA - Z_0 - 9], p--; te--;
+               )
+TOKEN_OPCODE_RE(TK_RET_L_LEU, "RET.L LEU",
+                "RET"i hspace0 "." hspace0 "L"i hspace1 "LEU"i  [^a - zA - Z_0 - 9], p--; te--;
+               )
+TOKEN_OPCODE_RE(TK_RET_L_GTU, "RET.L GTU",
+                "RET"i hspace0 "." hspace0 "L"i hspace1 "GTU"i  [^a - zA - Z_0 - 9], p--; te--;
+               )
+TOKEN_OPCODE_RE(TK_RET_L_GEU, "RET.L GEU",
+                "RET"i hspace0 "." hspace0 "L"i hspace1 "GEU"i  [^a - zA - Z_0 - 9], p--; te--;
+               )
+TOKEN_OPCODE_RE(TK_RET_L_LT,  "RET.L LT",
+                "RET"i hspace0 "." hspace0 "L"i hspace1 "LT"i   [^a - zA - Z_0 - 9], p--; te--;
+               )
+TOKEN_OPCODE_RE(TK_RET_L_LE,  "RET.L LE",
+                "RET"i hspace0 "." hspace0 "L"i hspace1 "LE"i   [^a - zA - Z_0 - 9], p--; te--;
+               )
+TOKEN_OPCODE_RE(TK_RET_L_GT,  "RET.L GT",
+                "RET"i hspace0 "." hspace0 "L"i hspace1 "GT"i   [^a - zA - Z_0 - 9], p--; te--;
+               )
+TOKEN_OPCODE_RE(TK_RET_L_GE,  "RET.L GE",
+                "RET"i hspace0 "." hspace0 "L"i hspace1 "GE"i   [^a - zA - Z_0 - 9], p--; te--;
+               )
+TOKEN_OPCODE_RE(TK_RET_L_OF,  "RET.L OF",
+                "RET"i hspace0 "." hspace0 "L"i hspace1 "OF"i   [^a - zA - Z_0 - 9], p--; te--;
+               )
 
-TOKEN_OPCODE_RE(TK_RET_LIS_NZ,  "RET.LIS NZ",  "RET"i hspace0 "." hspace0 "LIS"i hspace1 "NZ"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIS_Z,   "RET.LIS Z",   "RET"i hspace0 "." hspace0 "LIS"i hspace1 "Z"i    [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIS_NC,  "RET.LIS NC",  "RET"i hspace0 "." hspace0 "LIS"i hspace1 "NC"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIS_C,   "RET.LIS C",   "RET"i hspace0 "." hspace0 "LIS"i hspace1 "C"i    [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIS_PO,  "RET.LIS PO",  "RET"i hspace0 "." hspace0 "LIS"i hspace1 "PO"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIS_PE,  "RET.LIS PE",  "RET"i hspace0 "." hspace0 "LIS"i hspace1 "PE"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIS_P,   "RET.LIS P",   "RET"i hspace0 "." hspace0 "LIS"i hspace1 "P"i    [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIS_M,   "RET.LIS M",   "RET"i hspace0 "." hspace0 "LIS"i hspace1 "M"i    [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIS_LZ,  "RET.LIS LZ",  "RET"i hspace0 "." hspace0 "LIS"i hspace1 "LZ"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIS_LO,  "RET.LIS LO",  "RET"i hspace0 "." hspace0 "LIS"i hspace1 "LO"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIS_NV,  "RET.LIS NV",  "RET"i hspace0 "." hspace0 "LIS"i hspace1 "NV"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIS_V,   "RET.LIS V",   "RET"i hspace0 "." hspace0 "LIS"i hspace1 "V"i    [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIS_X5,  "RET.LIS X5",  "RET"i hspace0 "." hspace0 "LIS"i hspace1 "X5"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIS_NX5, "RET.LIS NX5", "RET"i hspace0 "." hspace0 "LIS"i hspace1 "NX5"i  [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIS_K,   "RET.LIS K",   "RET"i hspace0 "." hspace0 "LIS"i hspace1 "K"i    [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIS_NK,  "RET.LIS NK",  "RET"i hspace0 "." hspace0 "LIS"i hspace1 "NK"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIS_NE,  "RET.LIS NE",  "RET"i hspace0 "." hspace0 "LIS"i hspace1 "NE"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIS_EQ,  "RET.LIS EQ",  "RET"i hspace0 "." hspace0 "LIS"i hspace1 "EQ"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIS_LTU, "RET.LIS LTU", "RET"i hspace0 "." hspace0 "LIS"i hspace1 "LTU"i  [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIS_LEU, "RET.LIS LEU", "RET"i hspace0 "." hspace0 "LIS"i hspace1 "LEU"i  [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIS_GTU, "RET.LIS GTU", "RET"i hspace0 "." hspace0 "LIS"i hspace1 "GTU"i  [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIS_GEU, "RET.LIS GEU", "RET"i hspace0 "." hspace0 "LIS"i hspace1 "GEU"i  [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIS_LT,  "RET.LIS LT",  "RET"i hspace0 "." hspace0 "LIS"i hspace1 "LT"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIS_LE,  "RET.LIS LE",  "RET"i hspace0 "." hspace0 "LIS"i hspace1 "LE"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIS_GT,  "RET.LIS GT",  "RET"i hspace0 "." hspace0 "LIS"i hspace1 "GT"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIS_GE,  "RET.LIS GE",  "RET"i hspace0 "." hspace0 "LIS"i hspace1 "GE"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIS_OF,  "RET.LIS OF",  "RET"i hspace0 "." hspace0 "LIS"i hspace1 "OF"i   [^a-zA-Z_0-9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET_LIS_NZ,  "RET.LIS NZ",
+                "RET"i hspace0 "." hspace0 "LIS"i hspace1 "NZ"i   [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIS_Z,   "RET.LIS Z",
+                "RET"i hspace0 "." hspace0 "LIS"i hspace1 "Z"i    [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIS_NC,  "RET.LIS NC",
+                "RET"i hspace0 "." hspace0 "LIS"i hspace1 "NC"i   [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIS_C,   "RET.LIS C",
+                "RET"i hspace0 "." hspace0 "LIS"i hspace1 "C"i    [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIS_PO,  "RET.LIS PO",
+                "RET"i hspace0 "." hspace0 "LIS"i hspace1 "PO"i   [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIS_PE,  "RET.LIS PE",
+                "RET"i hspace0 "." hspace0 "LIS"i hspace1 "PE"i   [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIS_P,   "RET.LIS P",
+                "RET"i hspace0 "." hspace0 "LIS"i hspace1 "P"i    [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIS_M,   "RET.LIS M",
+                "RET"i hspace0 "." hspace0 "LIS"i hspace1 "M"i    [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIS_LZ,  "RET.LIS LZ",
+                "RET"i hspace0 "." hspace0 "LIS"i hspace1 "LZ"i   [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIS_LO,  "RET.LIS LO",
+                "RET"i hspace0 "." hspace0 "LIS"i hspace1 "LO"i   [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIS_NV,  "RET.LIS NV",
+                "RET"i hspace0 "." hspace0 "LIS"i hspace1 "NV"i   [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIS_V,   "RET.LIS V",
+                "RET"i hspace0 "." hspace0 "LIS"i hspace1 "V"i    [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIS_X5,  "RET.LIS X5",
+                "RET"i hspace0 "." hspace0 "LIS"i hspace1 "X5"i   [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIS_NX5, "RET.LIS NX5",
+                "RET"i hspace0 "." hspace0 "LIS"i hspace1 "NX5"i  [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIS_K,   "RET.LIS K",
+                "RET"i hspace0 "." hspace0 "LIS"i hspace1 "K"i    [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIS_NK,  "RET.LIS NK",
+                "RET"i hspace0 "." hspace0 "LIS"i hspace1 "NK"i   [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIS_NE,  "RET.LIS NE",
+                "RET"i hspace0 "." hspace0 "LIS"i hspace1 "NE"i   [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIS_EQ,  "RET.LIS EQ",
+                "RET"i hspace0 "." hspace0 "LIS"i hspace1 "EQ"i   [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIS_LTU, "RET.LIS LTU",
+                "RET"i hspace0 "." hspace0 "LIS"i hspace1 "LTU"i  [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIS_LEU, "RET.LIS LEU",
+                "RET"i hspace0 "." hspace0 "LIS"i hspace1 "LEU"i  [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIS_GTU, "RET.LIS GTU",
+                "RET"i hspace0 "." hspace0 "LIS"i hspace1 "GTU"i  [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIS_GEU, "RET.LIS GEU",
+                "RET"i hspace0 "." hspace0 "LIS"i hspace1 "GEU"i  [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIS_LT,  "RET.LIS LT",
+                "RET"i hspace0 "." hspace0 "LIS"i hspace1 "LT"i   [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIS_LE,  "RET.LIS LE",
+                "RET"i hspace0 "." hspace0 "LIS"i hspace1 "LE"i   [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIS_GT,  "RET.LIS GT",
+                "RET"i hspace0 "." hspace0 "LIS"i hspace1 "GT"i   [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIS_GE,  "RET.LIS GE",
+                "RET"i hspace0 "." hspace0 "LIS"i hspace1 "GE"i   [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIS_OF,  "RET.LIS OF",
+                "RET"i hspace0 "." hspace0 "LIS"i hspace1 "OF"i   [^a - zA - Z_0 - 9], p--;
+                te--; )
 
-TOKEN_OPCODE_RE(TK_RET_LIL_NZ,  "RET.LIL NZ",  "RET"i hspace0 "." hspace0 "LIL"i hspace1 "NZ"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIL_Z,   "RET.LIL Z",   "RET"i hspace0 "." hspace0 "LIL"i hspace1 "Z"i    [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIL_NC,  "RET.LIL NC",  "RET"i hspace0 "." hspace0 "LIL"i hspace1 "NC"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIL_C,   "RET.LIL C",   "RET"i hspace0 "." hspace0 "LIL"i hspace1 "C"i    [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIL_PO,  "RET.LIL PO",  "RET"i hspace0 "." hspace0 "LIL"i hspace1 "PO"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIL_PE,  "RET.LIL PE",  "RET"i hspace0 "." hspace0 "LIL"i hspace1 "PE"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIL_P,   "RET.LIL P",   "RET"i hspace0 "." hspace0 "LIL"i hspace1 "P"i    [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIL_M,   "RET.LIL M",   "RET"i hspace0 "." hspace0 "LIL"i hspace1 "M"i    [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIL_LZ,  "RET.LIL LZ",  "RET"i hspace0 "." hspace0 "LIL"i hspace1 "LZ"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIL_LO,  "RET.LIL LO",  "RET"i hspace0 "." hspace0 "LIL"i hspace1 "LO"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIL_NV,  "RET.LIL NV",  "RET"i hspace0 "." hspace0 "LIL"i hspace1 "NV"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIL_V,   "RET.LIL V",   "RET"i hspace0 "." hspace0 "LIL"i hspace1 "V"i    [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIL_X5,  "RET.LIL X5",  "RET"i hspace0 "." hspace0 "LIL"i hspace1 "X5"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIL_NX5, "RET.LIL NX5", "RET"i hspace0 "." hspace0 "LIL"i hspace1 "NX5"i  [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIL_K,   "RET.LIL K",   "RET"i hspace0 "." hspace0 "LIL"i hspace1 "K"i    [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIL_NK,  "RET.LIL NK",  "RET"i hspace0 "." hspace0 "LIL"i hspace1 "NK"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIL_NE,  "RET.LIL NE",  "RET"i hspace0 "." hspace0 "LIL"i hspace1 "NE"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIL_EQ,  "RET.LIL EQ",  "RET"i hspace0 "." hspace0 "LIL"i hspace1 "EQ"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIL_LTU, "RET.LIL LTU", "RET"i hspace0 "." hspace0 "LIL"i hspace1 "LTU"i  [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIL_LEU, "RET.LIL LEU", "RET"i hspace0 "." hspace0 "LIL"i hspace1 "LEU"i  [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIL_GTU, "RET.LIL GTU", "RET"i hspace0 "." hspace0 "LIL"i hspace1 "GTU"i  [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIL_GEU, "RET.LIL GEU", "RET"i hspace0 "." hspace0 "LIL"i hspace1 "GEU"i  [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIL_LT,  "RET.LIL LT",  "RET"i hspace0 "." hspace0 "LIL"i hspace1 "LT"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIL_LE,  "RET.LIL LE",  "RET"i hspace0 "." hspace0 "LIL"i hspace1 "LE"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIL_GT,  "RET.LIL GT",  "RET"i hspace0 "." hspace0 "LIL"i hspace1 "GT"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIL_GE,  "RET.LIL GE",  "RET"i hspace0 "." hspace0 "LIL"i hspace1 "GE"i   [^a-zA-Z_0-9], p--; te--; )
-TOKEN_OPCODE_RE(TK_RET_LIL_OF,  "RET.LIL OF",  "RET"i hspace0 "." hspace0 "LIL"i hspace1 "OF"i   [^a-zA-Z_0-9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RET_LIL_NZ,  "RET.LIL NZ",
+                "RET"i hspace0 "." hspace0 "LIL"i hspace1 "NZ"i   [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIL_Z,   "RET.LIL Z",
+                "RET"i hspace0 "." hspace0 "LIL"i hspace1 "Z"i    [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIL_NC,  "RET.LIL NC",
+                "RET"i hspace0 "." hspace0 "LIL"i hspace1 "NC"i   [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIL_C,   "RET.LIL C",
+                "RET"i hspace0 "." hspace0 "LIL"i hspace1 "C"i    [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIL_PO,  "RET.LIL PO",
+                "RET"i hspace0 "." hspace0 "LIL"i hspace1 "PO"i   [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIL_PE,  "RET.LIL PE",
+                "RET"i hspace0 "." hspace0 "LIL"i hspace1 "PE"i   [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIL_P,   "RET.LIL P",
+                "RET"i hspace0 "." hspace0 "LIL"i hspace1 "P"i    [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIL_M,   "RET.LIL M",
+                "RET"i hspace0 "." hspace0 "LIL"i hspace1 "M"i    [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIL_LZ,  "RET.LIL LZ",
+                "RET"i hspace0 "." hspace0 "LIL"i hspace1 "LZ"i   [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIL_LO,  "RET.LIL LO",
+                "RET"i hspace0 "." hspace0 "LIL"i hspace1 "LO"i   [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIL_NV,  "RET.LIL NV",
+                "RET"i hspace0 "." hspace0 "LIL"i hspace1 "NV"i   [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIL_V,   "RET.LIL V",
+                "RET"i hspace0 "." hspace0 "LIL"i hspace1 "V"i    [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIL_X5,  "RET.LIL X5",
+                "RET"i hspace0 "." hspace0 "LIL"i hspace1 "X5"i   [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIL_NX5, "RET.LIL NX5",
+                "RET"i hspace0 "." hspace0 "LIL"i hspace1 "NX5"i  [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIL_K,   "RET.LIL K",
+                "RET"i hspace0 "." hspace0 "LIL"i hspace1 "K"i    [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIL_NK,  "RET.LIL NK",
+                "RET"i hspace0 "." hspace0 "LIL"i hspace1 "NK"i   [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIL_NE,  "RET.LIL NE",
+                "RET"i hspace0 "." hspace0 "LIL"i hspace1 "NE"i   [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIL_EQ,  "RET.LIL EQ",
+                "RET"i hspace0 "." hspace0 "LIL"i hspace1 "EQ"i   [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIL_LTU, "RET.LIL LTU",
+                "RET"i hspace0 "." hspace0 "LIL"i hspace1 "LTU"i  [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIL_LEU, "RET.LIL LEU",
+                "RET"i hspace0 "." hspace0 "LIL"i hspace1 "LEU"i  [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIL_GTU, "RET.LIL GTU",
+                "RET"i hspace0 "." hspace0 "LIL"i hspace1 "GTU"i  [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIL_GEU, "RET.LIL GEU",
+                "RET"i hspace0 "." hspace0 "LIL"i hspace1 "GEU"i  [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIL_LT,  "RET.LIL LT",
+                "RET"i hspace0 "." hspace0 "LIL"i hspace1 "LT"i   [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIL_LE,  "RET.LIL LE",
+                "RET"i hspace0 "." hspace0 "LIL"i hspace1 "LE"i   [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIL_GT,  "RET.LIL GT",
+                "RET"i hspace0 "." hspace0 "LIL"i hspace1 "GT"i   [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIL_GE,  "RET.LIL GE",
+                "RET"i hspace0 "." hspace0 "LIL"i hspace1 "GE"i   [^a - zA - Z_0 - 9], p--;
+                te--; )
+TOKEN_OPCODE_RE(TK_RET_LIL_OF,  "RET.LIL OF",
+                "RET"i hspace0 "." hspace0 "LIL"i hspace1 "OF"i   [^a - zA - Z_0 - 9], p--;
+                te--; )
 
-TOKEN_OPCODE_RE(TK_RST_V, "RST V", "RST"i hspace1 "V"i [^a-zA-Z_0-9], p--; te--; )
+TOKEN_OPCODE_RE(TK_RST_V, "RST V", "RST"i hspace1 "V"i [^a - zA - Z_0 - 9], p--;
+                te--; )
 
-TOKEN_OPCODE_RE(TK_FLAG_NZ,  "FLAG NZ",  "FLAG"i hspace1 "NZ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_FLAG_Z,   "FLAG Z",   "FLAG"i hspace1 "Z"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_FLAG_NC,  "FLAG NC",  "FLAG"i hspace1 "NC"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_FLAG_C,   "FLAG C",   "FLAG"i hspace1 "C"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_FLAG_PO,  "FLAG PO",  "FLAG"i hspace1 "PO"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_FLAG_PE,  "FLAG PE",  "FLAG"i hspace1 "PE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_FLAG_P,   "FLAG P",   "FLAG"i hspace1 "P"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_FLAG_M,   "FLAG M",   "FLAG"i hspace1 "M"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_FLAG_LZ,  "FLAG LZ",  "FLAG"i hspace1 "LZ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_FLAG_LO,  "FLAG LO",  "FLAG"i hspace1 "LO"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_FLAG_NV,  "FLAG NV",  "FLAG"i hspace1 "NV"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_FLAG_V,   "FLAG V",   "FLAG"i hspace1 "V"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_FLAG_X5,  "FLAG X5",  "FLAG"i hspace1 "X5"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_FLAG_NX5, "FLAG NX5", "FLAG"i hspace1 "NX5"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_FLAG_K,   "FLAG K",   "FLAG"i hspace1 "K"i    hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_FLAG_NK,  "FLAG NK",  "FLAG"i hspace1 "NK"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_FLAG_NE,  "FLAG NE",  "FLAG"i hspace1 "NE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_FLAG_EQ,  "FLAG EQ",  "FLAG"i hspace1 "EQ"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_FLAG_LTU, "FLAG LTU", "FLAG"i hspace1 "LTU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_FLAG_LEU, "FLAG LEU", "FLAG"i hspace1 "LEU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_FLAG_GTU, "FLAG GTU", "FLAG"i hspace1 "GTU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_FLAG_GEU, "FLAG GEU", "FLAG"i hspace1 "GEU"i  hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_FLAG_LT,  "FLAG LT",  "FLAG"i hspace1 "LT"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_FLAG_LE,  "FLAG LE",  "FLAG"i hspace1 "LE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_FLAG_GT,  "FLAG GT",  "FLAG"i hspace1 "GT"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_FLAG_GE,  "FLAG GE",  "FLAG"i hspace1 "GE"i   hspace0 ",", p--; te--; )
-TOKEN_OPCODE_RE(TK_FLAG_OF,  "FLAG OF",  "FLAG"i hspace1 "OF"i   hspace0 ",", p--; te--; )
+TOKEN_OPCODE_RE(TK_FLAG_NZ,  "FLAG NZ",  "FLAG"i hspace1 "NZ"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_FLAG_Z,   "FLAG Z",   "FLAG"i hspace1 "Z"i    hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_FLAG_NC,  "FLAG NC",  "FLAG"i hspace1 "NC"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_FLAG_C,   "FLAG C",   "FLAG"i hspace1 "C"i    hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_FLAG_PO,  "FLAG PO",  "FLAG"i hspace1 "PO"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_FLAG_PE,  "FLAG PE",  "FLAG"i hspace1 "PE"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_FLAG_P,   "FLAG P",   "FLAG"i hspace1 "P"i    hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_FLAG_M,   "FLAG M",   "FLAG"i hspace1 "M"i    hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_FLAG_LZ,  "FLAG LZ",  "FLAG"i hspace1 "LZ"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_FLAG_LO,  "FLAG LO",  "FLAG"i hspace1 "LO"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_FLAG_NV,  "FLAG NV",  "FLAG"i hspace1 "NV"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_FLAG_V,   "FLAG V",   "FLAG"i hspace1 "V"i    hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_FLAG_X5,  "FLAG X5",  "FLAG"i hspace1 "X5"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_FLAG_NX5, "FLAG NX5", "FLAG"i hspace1 "NX5"i  hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_FLAG_K,   "FLAG K",   "FLAG"i hspace1 "K"i    hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_FLAG_NK,  "FLAG NK",  "FLAG"i hspace1 "NK"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_FLAG_NE,  "FLAG NE",  "FLAG"i hspace1 "NE"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_FLAG_EQ,  "FLAG EQ",  "FLAG"i hspace1 "EQ"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_FLAG_LTU, "FLAG LTU", "FLAG"i hspace1 "LTU"i  hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_FLAG_LEU, "FLAG LEU", "FLAG"i hspace1 "LEU"i  hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_FLAG_GTU, "FLAG GTU", "FLAG"i hspace1 "GTU"i  hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_FLAG_GEU, "FLAG GEU", "FLAG"i hspace1 "GEU"i  hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_FLAG_LT,  "FLAG LT",  "FLAG"i hspace1 "LT"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_FLAG_LE,  "FLAG LE",  "FLAG"i hspace1 "LE"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_FLAG_GT,  "FLAG GT",  "FLAG"i hspace1 "GT"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_FLAG_GE,  "FLAG GE",  "FLAG"i hspace1 "GE"i   hspace0 ",",
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_FLAG_OF,  "FLAG OF",  "FLAG"i hspace1 "OF"i   hspace0 ",",
+                p--; te--; )
 
 /* 8-bit registers */
 TOKEN_KW(B, )
@@ -935,13 +1665,13 @@ TOKEN_RE(TK_IND_C,   "(C",   "(" hspace0 "C"i   index_reg_suffix, p--; te--)
 TOKEN_RE(TK_IND_HLI, "(HLI", "(" hspace0 "HLI"i index_reg_suffix, p--; te--)
 TOKEN_RE(TK_IND_HLD, "(HLD", "(" hspace0 "HLD"i index_reg_suffix, p--; te--)
 
-TOKEN_RE(TK_IND_A,   "(A",   "(" hspace0 "A"i  hspace0 ":", p--; te--) 
-TOKEN_RE(TK_IND_XP,  "(XP",  "(" hspace0 "XP"i hspace0 ":", p--; te--) 
-TOKEN_RE(TK_IND_YP,  "(YP",  "(" hspace0 "YP"i hspace0 ":", p--; te--) 
-TOKEN_RE(TK_IND_PP,  "(PP",  "(" hspace0 "PP"i hspace0 ":", p--; te--) 
+TOKEN_RE(TK_IND_A,   "(A",   "(" hspace0 "A"i  hspace0 ":", p--; te--)
+TOKEN_RE(TK_IND_XP,  "(XP",  "(" hspace0 "XP"i hspace0 ":", p--; te--)
+TOKEN_RE(TK_IND_YP,  "(YP",  "(" hspace0 "YP"i hspace0 ":", p--; te--)
+TOKEN_RE(TK_IND_PP,  "(PP",  "(" hspace0 "PP"i hspace0 ":", p--; te--)
 TOKEN_RE(TK_IND_ZP,  "(ZP",  "(" hspace0 "ZP"i hspace0 ":", p--; te--)
 
-TOKEN_RE(TK_IND_HTR,"(HTR","(" hspace0 "HTR"i index_reg_suffix, p--; te--)
+TOKEN_RE(TK_IND_HTR, "(HTR", "(" hspace0 "HTR"i index_reg_suffix, p--; te--)
 
 /* Indirect 24-bit registers */
 TOKEN_RE(TK_IND_XBC, "(IND_XBC", "(" hspace0 "XBC"i index_reg_suffix, p--; te--)
@@ -1168,19 +1898,19 @@ TOKEN_OPCODE(BSRA)
 TOKEN_OPCODE(BSRL)
 TOKEN_OPCODE(BSRF)
 TOKEN_OPCODE(BRLC)
-TOKEN_OPCODE(BSLA) 
-TOKEN_OPCODE(BSRA) 
-TOKEN_OPCODE(BSRL) 
-TOKEN_OPCODE(BSRF) 
-TOKEN_OPCODE(BRLC) 
-TOKEN_OPCODE(LDRX) 
-TOKEN_OPCODE(LIRX) 
-TOKEN_OPCODE(LPRX) 
-TOKEN_OPCODE(MIRR) 
-TOKEN_OPCODE(NREG) 
-TOKEN_OPCODE(OTIB) 
-TOKEN_OPCODE(PXAD) 
-TOKEN_OPCODE(PXDN) 
+TOKEN_OPCODE(BSLA)
+TOKEN_OPCODE(BSRA)
+TOKEN_OPCODE(BSRL)
+TOKEN_OPCODE(BSRF)
+TOKEN_OPCODE(BRLC)
+TOKEN_OPCODE(LDRX)
+TOKEN_OPCODE(LIRX)
+TOKEN_OPCODE(LPRX)
+TOKEN_OPCODE(MIRR)
+TOKEN_OPCODE(NREG)
+TOKEN_OPCODE(OTIB)
+TOKEN_OPCODE(PXAD)
+TOKEN_OPCODE(PXDN)
 TOKEN_OPCODE(STAE)
 
 /* Z180 opcodes */
@@ -1352,13 +2082,13 @@ TOKEN_OPCODE(CEQ)
 TOKEN_OPCODE(CGE)
 TOKEN_OPCODE(CGEU)
 TOKEN_OPCODE(CGT)
-TOKEN_OPCODE(CGTU) 
+TOKEN_OPCODE(CGTU)
 TOKEN_OPCODE(CLE)
-TOKEN_OPCODE(CLEU) 
+TOKEN_OPCODE(CLEU)
 TOKEN_OPCODE(CLO)
 TOKEN_OPCODE(CLR)
 TOKEN_OPCODE(CLT)
-TOKEN_OPCODE(CLTU) 
+TOKEN_OPCODE(CLTU)
 TOKEN_OPCODE(CLZ)
 TOKEN_OPCODE(CM)
 TOKEN_OPCODE(CMA)
@@ -1376,15 +2106,15 @@ TOKEN_OPCODE(C_C)
 TOKEN_OPCODE(C_EQ)
 TOKEN_OPCODE(C_GE)
 TOKEN_OPCODE(C_GEU)
-TOKEN_OPCODE(C_GEU) 
+TOKEN_OPCODE(C_GEU)
 TOKEN_OPCODE(C_GT)
-TOKEN_OPCODE(C_GTU) 
+TOKEN_OPCODE(C_GTU)
 TOKEN_OPCODE(C_LE)
-TOKEN_OPCODE(C_LEU) 
+TOKEN_OPCODE(C_LEU)
 TOKEN_OPCODE(C_LO)
 TOKEN_OPCODE(C_LT)
 TOKEN_OPCODE(C_LTU)
-TOKEN_OPCODE(C_LTU) 
+TOKEN_OPCODE(C_LTU)
 TOKEN_OPCODE(C_LZ)
 TOKEN_OPCODE(C_M)
 TOKEN_OPCODE(C_NC)
@@ -1408,13 +2138,13 @@ TOKEN_OPCODE(JEQ)
 TOKEN_OPCODE(JGE)
 TOKEN_OPCODE(JGEU)
 TOKEN_OPCODE(JGT)
-TOKEN_OPCODE(JGTU) 
+TOKEN_OPCODE(JGTU)
 TOKEN_OPCODE(JK)
 TOKEN_OPCODE(JLE)
-TOKEN_OPCODE(JLEU) 
+TOKEN_OPCODE(JLEU)
 TOKEN_OPCODE(JLO)
 TOKEN_OPCODE(JLT)
-TOKEN_OPCODE(JLTU) 
+TOKEN_OPCODE(JLTU)
 TOKEN_OPCODE(JLZ)
 TOKEN_OPCODE(JM)
 TOKEN_OPCODE(JMP)
@@ -1433,16 +2163,16 @@ TOKEN_OPCODE(J_C)
 TOKEN_OPCODE(J_EQ)
 TOKEN_OPCODE(J_GE)
 TOKEN_OPCODE(J_GEU)
-TOKEN_OPCODE(J_GEU) 
+TOKEN_OPCODE(J_GEU)
 TOKEN_OPCODE(J_GT)
-TOKEN_OPCODE(J_GTU) 
+TOKEN_OPCODE(J_GTU)
 TOKEN_OPCODE(J_K)
 TOKEN_OPCODE(J_LE)
-TOKEN_OPCODE(J_LEU) 
+TOKEN_OPCODE(J_LEU)
 TOKEN_OPCODE(J_LO)
 TOKEN_OPCODE(J_LT)
 TOKEN_OPCODE(J_LTU)
-TOKEN_OPCODE(J_LTU) 
+TOKEN_OPCODE(J_LTU)
 TOKEN_OPCODE(J_LZ)
 TOKEN_OPCODE(J_M)
 TOKEN_OPCODE(J_NC)
@@ -1479,15 +2209,15 @@ TOKEN_OPCODE(REQ)
 TOKEN_OPCODE(RGE)
 TOKEN_OPCODE(RGEU)
 TOKEN_OPCODE(RGT)
-TOKEN_OPCODE(RGTU) 
+TOKEN_OPCODE(RGTU)
 TOKEN_OPCODE(RIM)
 TOKEN_OPCODE(RLB)
 TOKEN_OPCODE(RLDE)
 TOKEN_OPCODE(RLE)
-TOKEN_OPCODE(RLEU) 
+TOKEN_OPCODE(RLEU)
 TOKEN_OPCODE(RLO)
 TOKEN_OPCODE(RLT)
-TOKEN_OPCODE(RLTU) 
+TOKEN_OPCODE(RLTU)
 TOKEN_OPCODE(RLZ)
 TOKEN_OPCODE(RM)
 TOKEN_OPCODE(RNC)
@@ -1506,15 +2236,15 @@ TOKEN_OPCODE(R_C)
 TOKEN_OPCODE(R_EQ)
 TOKEN_OPCODE(R_GE)
 TOKEN_OPCODE(R_GEU)
-TOKEN_OPCODE(R_GEU) 
+TOKEN_OPCODE(R_GEU)
 TOKEN_OPCODE(R_GT)
-TOKEN_OPCODE(R_GTU) 
+TOKEN_OPCODE(R_GTU)
 TOKEN_OPCODE(R_LE)
-TOKEN_OPCODE(R_LEU) 
+TOKEN_OPCODE(R_LEU)
 TOKEN_OPCODE(R_LO)
 TOKEN_OPCODE(R_LT)
 TOKEN_OPCODE(R_LTU)
-TOKEN_OPCODE(R_LTU) 
+TOKEN_OPCODE(R_LTU)
 TOKEN_OPCODE(R_LZ)
 TOKEN_OPCODE(R_M)
 TOKEN_OPCODE(R_NC)
@@ -1543,53 +2273,69 @@ TOKEN_OPCODE(XRI)
 TOKEN_OPCODE(XTHL)
 
 /* KC160 specific opcodes */
-TOKEN_OPCODE(CALL3) 
-TOKEN_OPCODE(DIV) 
-TOKEN_OPCODE(DIVS) 
-TOKEN_OPCODE(JP3) 
-TOKEN_OPCODE(MULS) 
-TOKEN_OPCODE(RET3) 
+TOKEN_OPCODE(CALL3)
+TOKEN_OPCODE(DIV)
+TOKEN_OPCODE(DIVS)
+TOKEN_OPCODE(JP3)
+TOKEN_OPCODE(MULS)
+TOKEN_OPCODE(RET3)
 TOKEN_OPCODE(RETN3)
-TOKEN_OPCODE(TRA) 
-	
-TOKEN_OPCODE_RE(TK_CPD_X,  "CPD X",  "CPD"i  hspace1 "X"i [^a-zA-Z_0-9], p--; te--; )  
-TOKEN_OPCODE_RE(TK_CPDR_X, "CPDR X", "CPDR"i hspace1 "X"i [^a-zA-Z_0-9], p--; te--; ) 
-TOKEN_OPCODE_RE(TK_CPI_X,  "CPI X",  "CPI"i  hspace1 "X"i [^a-zA-Z_0-9], p--; te--; )  
-TOKEN_OPCODE_RE(TK_CPIR_X, "CPIR X", "CPIR"i hspace1 "X"i [^a-zA-Z_0-9], p--; te--; ) 
-TOKEN_OPCODE_RE(TK_IND_X,  "IND X",  "IND"i  hspace1 "X"i [^a-zA-Z_0-9], p--; te--; )  
-TOKEN_OPCODE_RE(TK_INDR_X, "INDR X", "INDR"i hspace1 "X"i [^a-zA-Z_0-9], p--; te--; ) 
-TOKEN_OPCODE_RE(TK_INI_X,  "INI X",  "INI"i  hspace1 "X"i [^a-zA-Z_0-9], p--; te--; )  
-TOKEN_OPCODE_RE(TK_INIR_X, "INIR X", "INIR"i hspace1 "X"i [^a-zA-Z_0-9], p--; te--; ) 
-TOKEN_OPCODE_RE(TK_OTDR_X, "OTDR X", "OTDR"i hspace1 "X"i [^a-zA-Z_0-9], p--; te--; ) 
-TOKEN_OPCODE_RE(TK_OTIR_X, "OTIR X", "OTIR"i hspace1 "X"i [^a-zA-Z_0-9], p--; te--; ) 
-TOKEN_OPCODE_RE(TK_OUTD_X, "OUTD X", "OUTD"i hspace1 "X"i [^a-zA-Z_0-9], p--; te--; ) 
-TOKEN_OPCODE_RE(TK_OUTI_X, "OUTI X", "OUTI"i hspace1 "X"i [^a-zA-Z_0-9], p--; te--; )	
+TOKEN_OPCODE(TRA)
 
-TOKEN_OPCODE_RE(TK_LDD_XY,  "LDD XY",  "LDD"i  hspace1 "XY"i [^a-zA-Z_0-9], p--; te--; )  
-TOKEN_OPCODE_RE(TK_LDDR_XY, "LDDR XY", "LDDR"i hspace1 "XY"i [^a-zA-Z_0-9], p--; te--; ) 
-TOKEN_OPCODE_RE(TK_LDI_XY,  "LDI XY",  "LDI"i  hspace1 "XY"i [^a-zA-Z_0-9], p--; te--; )  
-TOKEN_OPCODE_RE(TK_LDIR_XY, "LDIR XY", "LDIR"i hspace1 "XY"i [^a-zA-Z_0-9], p--; te--; ) 
+TOKEN_OPCODE_RE(TK_CPD_X,  "CPD X",  "CPD"i  hspace1 "X"i [^a - zA - Z_0 - 9],
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CPDR_X, "CPDR X", "CPDR"i hspace1 "X"i [^a - zA - Z_0 - 9],
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CPI_X,  "CPI X",  "CPI"i  hspace1 "X"i [^a - zA - Z_0 - 9],
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_CPIR_X, "CPIR X", "CPIR"i hspace1 "X"i [^a - zA - Z_0 - 9],
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_IND_X,  "IND X",  "IND"i  hspace1 "X"i [^a - zA - Z_0 - 9],
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_INDR_X, "INDR X", "INDR"i hspace1 "X"i [^a - zA - Z_0 - 9],
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_INI_X,  "INI X",  "INI"i  hspace1 "X"i [^a - zA - Z_0 - 9],
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_INIR_X, "INIR X", "INIR"i hspace1 "X"i [^a - zA - Z_0 - 9],
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_OTDR_X, "OTDR X", "OTDR"i hspace1 "X"i [^a - zA - Z_0 - 9],
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_OTIR_X, "OTIR X", "OTIR"i hspace1 "X"i [^a - zA - Z_0 - 9],
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_OUTD_X, "OUTD X", "OUTD"i hspace1 "X"i [^a - zA - Z_0 - 9],
+                p--; te--; )
+TOKEN_OPCODE_RE(TK_OUTI_X, "OUTI X", "OUTI"i hspace1 "X"i [^a - zA - Z_0 - 9],
+                p--; te--; )
+
+TOKEN_OPCODE_RE(TK_LDD_XY,  "LDD XY",
+                "LDD"i  hspace1 "XY"i [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_LDDR_XY, "LDDR XY",
+                "LDDR"i hspace1 "XY"i [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_LDI_XY,  "LDI XY",
+                "LDI"i  hspace1 "XY"i [^a - zA - Z_0 - 9], p--; te--; )
+TOKEN_OPCODE_RE(TK_LDIR_XY, "LDIR XY",
+                "LDIR"i hspace1 "XY"i [^a - zA - Z_0 - 9], p--; te--; )
 
 /* vm1 specific opcodes */
-TOKEN_OPCODE(ANX) 
-TOKEN_OPCODE(ANDL) 
-TOKEN_OPCODE(ANDM) 
-TOKEN_OPCODE(ORX) 
-TOKEN_OPCODE(ORL) 
-TOKEN_OPCODE(ORM) 
-TOKEN_OPCODE(XRX) 
-TOKEN_OPCODE(XORL) 
-TOKEN_OPCODE(XORM) 
-TOKEN_OPCODE(DCMP) 
-TOKEN_OPCODE(CPC) 
-TOKEN_OPCODE(JOF) 
-TOKEN_OPCODE(J_OF) 
-TOKEN_OPCODE(JP_OF) 
+TOKEN_OPCODE(ANX)
+TOKEN_OPCODE(ANDL)
+TOKEN_OPCODE(ANDM)
+TOKEN_OPCODE(ORX)
+TOKEN_OPCODE(ORL)
+TOKEN_OPCODE(ORM)
+TOKEN_OPCODE(XRX)
+TOKEN_OPCODE(XORL)
+TOKEN_OPCODE(XORM)
+TOKEN_OPCODE(DCMP)
+TOKEN_OPCODE(CPC)
+TOKEN_OPCODE(JOF)
+TOKEN_OPCODE(J_OF)
+TOKEN_OPCODE(JP_OF)
 TOKEN_OPCODE(JMP_OF)
 TOKEN_OPCODE(SMF0)
 TOKEN_OPCODE(SMF1)
-TOKEN_OPCODE1(PCHL1, "PCHL'") 
-TOKEN_OPCODE1(SPHL1, "SPHL'") 
+TOKEN_OPCODE1(PCHL1, "PCHL'")
+TOKEN_OPCODE1(SPHL1, "SPHL'")
 TOKEN_OPCODE1(XTHL1, "XTHL'")
 
 /* MB is a prefix in vm1 and a register in ez80 */

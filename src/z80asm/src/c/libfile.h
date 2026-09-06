@@ -12,7 +12,7 @@
 #include "utstring.h"
 
 /* make library from source files; convert each source to object file name */
-extern void make_library(const char *lib_filename);
+extern void make_library(const char* lib_filename);
 
 // check if the given filename exists and is a library file of the correct version
-extern bool check_library_file(const char *src_filename);
+extern bool check_library_file(const char* src_filename);

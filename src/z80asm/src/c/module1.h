@@ -25,30 +25,31 @@ Assembled module, i.e. result of assembling a .asm file
 *   Assembly module
 *----------------------------------------------------------------------------*/
 CLASS( Module1 )
-	const char	*modname;			/* module name, kept in strpool */
-	const char	*filename;			/* source file name, kept in strpool */
-	int			 module_id;			/* sequence number of linked modules in sections */
-    Expr1List	*exprs;				/* list of expressions */
-	Symbol1Hash	*local_symtab;		/* module local symbols */
+const char*	modname;			/* module name, kept in strpool */
+const char*	filename;			/* source file name, kept in strpool */
+int			 module_id;			/* sequence number of linked modules in sections */
+Expr1List*	exprs;				/* list of expressions */
+Symbol1Hash*	local_symtab;		/* module local symbols */
 
-	objfile_t	*objfile;
+objfile_t*	objfile;
 END_CLASS;
 
 CLASS_LIST( Module1 );
 
 /* new modules set codearea module_id and default (=first) section */
-extern Module1 *new_module( void );
+extern Module1* new_module( void );
 
 extern void delete_modules( void );
 
 /* set current module, set codearea module_id and default (=first) section */
-extern Module1 *set_cur_module( Module1 *module ); /* return input to allow chaining */
+extern Module1* set_cur_module( Module1*
+                                module ); /* return input to allow chaining */
 
-extern Module1 *get_cur_module( void );
+extern Module1* get_cur_module( void );
 
 #define CURRENTMODULE	(get_cur_module())
 
 /* list of modules iterator, pointer to iterator may be NULL if no need to iterate */
-extern Module1 *get_first_module( Module1ListElem **piter );
-extern Module1 *get_last_module(  Module1ListElem **piter );
-extern Module1 *get_next_module(  Module1ListElem **piter );
+extern Module1* get_first_module( Module1ListElem** piter );
+extern Module1* get_last_module(  Module1ListElem** piter );
+extern Module1* get_next_module(  Module1ListElem** piter );

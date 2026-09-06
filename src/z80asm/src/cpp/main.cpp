@@ -13,13 +13,13 @@
 #include <vector>
 using namespace std;
 
-int main(int argc, char *argv[]) {
-	dump_stack_on_sigsegv();
+int main(int argc, char* argv[]) {
+    dump_stack_on_sigsegv();
     xassert_init(argv[0]);
     xmalloc_init(argv[0]);
 
-	vector<string> args{ argv + 1, argv + argc };
-	g_options.parse_args(args);
+    vector<string> args{ argv + 1, argv + argc };
+    g_options.parse_args(args);
 
-	return z80asm_main();
+    return z80asm_main();
 }

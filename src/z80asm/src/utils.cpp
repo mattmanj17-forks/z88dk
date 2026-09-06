@@ -11,14 +11,17 @@
 using namespace std;
 
 bool is_ident(const string& ident) {
-    if (ident.empty())
+    if (ident.empty()) {
         return false;
-    else if (!is_ident_start(ident[0]))
+    }
+    else if (!is_ident_start(ident[0])) {
         return false;
+    }
     else {
         for (auto c : ident) {
-            if (!is_ident(c))
+            if (!is_ident(c)) {
                 return false;
+            }
         }
         return true;
     }
@@ -29,53 +32,65 @@ int char_digit(char c) {
 }
 
 bool str_ends_with(const string& str, const string& ending) {
-    if (str.length() >= ending.length())
-        return (0 == str.compare(str.length() - ending.length(), ending.length(), ending));
-    else
+    if (str.length() >= ending.length()) {
+        return (0 == str.compare(str.length() - ending.length(), ending.length(),
+                                 ending));
+    }
+    else {
         return false;
+    }
 }
 
 string str_tolower(string str) {
-    transform(str.begin(), str.end(), str.begin(), [](char c) {return tolower(c); });
+    transform(str.begin(), str.end(), str.begin(), [](char c) {
+        return tolower(c);
+    });
     return str;
 }
 
 string str_toupper(string str) {
-    transform(str.begin(), str.end(), str.begin(), [](char c) {return toupper(c); });
+    transform(str.begin(), str.end(), str.begin(), [](char c) {
+        return toupper(c);
+    });
     return str;
 }
 
 string str_strip(const string& str) {
     const char* p = str.c_str();
-    while (*p && isspace(*p))
+    while (*p && isspace(*p)) {
         p++;
+    }
     return str_chomp(p);
 }
 
 string str_chomp(const string& str_) {
     string str = str_;
-    while (!str.empty() && isspace(str.back()))
+    while (!str.empty() && isspace(str.back())) {
         str.pop_back();
+    }
     return str;
 }
 
 string str_remove_all_blanks(const string& str) {
     string out;
     for (auto c : str)
-        if (!isspace(c))
+        if (!isspace(c)) {
             out.push_back(c);
+        }
     return out;
 }
 
 string str_remove_extra_blanks(const string& str) {
     string out;
     for (const char* p = str.c_str(); *p != '\0'; p++) {
-        if (!isspace(*p))
+        if (!isspace(*p)) {
             out.push_back(*p);
+        }
         else {
             out.push_back(' ');
-            while (isspace(p[1]))
+            while (isspace(p[1])) {
                 p++;
+            }
         }
     }
     return str_strip(out);
@@ -93,7 +108,7 @@ string str_replace_all(string text, const string& find, const string& replace) {
 static void expand_glob_1(set<fs::path>& result, const string& pattern);
 
 static void expand_wildcards(set<fs::path>& result,
-    const vector<string>& elems, size_t cur_elem) {
+                             const vector<string>& elems, size_t cur_elem) {
     // build prefix and suffix
     fs::path prefix;
     for (size_t i = 0; i < cur_elem; i++) {
@@ -111,15 +126,17 @@ static void expand_wildcards(set<fs::path>& result,
     // expand current element
     if (elems[cur_elem] == "**") {
         fs::path new_path{ prefix };
-        if (!suffix.empty())
+        if (!suffix.empty()) {
             new_path /= suffix;
+        }
         expand_glob_1(result, new_path.generic_string());		// recurse
 
         for (auto& entry : fs::recursive_directory_iterator(prefix)) {
             if (fs::is_directory(entry)) {
                 fs::path new_path{ entry };
-                if (!suffix.empty())
+                if (!suffix.empty()) {
                     new_path /= suffix;
+                }
                 expand_glob_1(result, new_path.generic_string());		// recurse
             }
             else if (suffix.empty() && fs::is_regular_file(entry)) {
@@ -141,8 +158,9 @@ static void expand_wildcards(set<fs::path>& result,
                 string entry_basename_str = entry.path().filename().generic_string();
                 if (regex_match(entry_basename_str, re)) {
                     fs::path new_path{ entry };
-                    if (!suffix.empty())
+                    if (!suffix.empty()) {
                         new_path /= suffix;
+                    }
                     expand_glob_1(result, new_path.generic_string());		// recurse
                 }
             }
@@ -170,8 +188,9 @@ static void expand_glob_1(set<fs::path>& result, const string& pattern) {
 
     // if we reached here, there are no wildcards
     fs::path path{ pattern };
-    if (fs::is_directory(path) || fs::is_regular_file(path))
+    if (fs::is_directory(path) || fs::is_regular_file(path)) {
         result.insert(path);
+    }
 }
 
 // use set in recursion to eliminate duplicates
@@ -211,13 +230,15 @@ istream& safe_getline(istream& is, string& t) {
         case '\n':
             return is;
         case '\r':
-            if (sb->sgetc() == '\n')
+            if (sb->sgetc() == '\n') {
                 sb->sbumpc();
+            }
             return is;
         case streambuf::traits_type::eof():
             // Also handle the case when the last line has no line ending
-            if (t.empty())
+            if (t.empty()) {
                 is.setstate(ios::eofbit);
+            }
             return is;
         default:
             t += (char)c;
@@ -226,8 +247,9 @@ istream& safe_getline(istream& is, string& t) {
 }
 
 std::string pop_end_slash(std::string path) {
-    while (!path.empty() && (path.back() == '/' || path.back() == '\\'))
+    while (!path.empty() && (path.back() == '/' || path.back() == '\\')) {
         path.pop_back();
+    }
     return path;
 }
 
@@ -236,17 +258,21 @@ std::string join_dir(const std::string& a, const std::string& b) {
     std::string right = b;
 
     // Remove trailing slashes from left
-    while (!left.empty() && (left.back() == '/' || left.back() == '\\'))
+    while (!left.empty() && (left.back() == '/' || left.back() == '\\')) {
         left.pop_back();
+    }
 
     // Remove leading slashes from right
-    while (!right.empty() && (right.front() == '/' || right.front() == '\\'))
+    while (!right.empty() && (right.front() == '/' || right.front() == '\\')) {
         right.erase(right.begin());
+    }
 
-    if (left.empty())
+    if (left.empty()) {
         return right;
-    if (right.empty())
+    }
+    if (right.empty()) {
         return left;
+    }
 
     return left + "/" + right;
 }

@@ -20,15 +20,14 @@
 /*-----------------------------------------------------------------------------
 *	define a library file name from the command line
 *----------------------------------------------------------------------------*/
-static const char *search_libfile(const char *filename )
-{
-	if ( filename != NULL && *filename != '\0' )	/* not empty */
-		return get_lib_filename( filename );		/* add '.lib' extension */
-	else
-	{
-		error_invalid_library_file(filename);
+static const char* search_libfile(const char* filename ) {
+    if ( filename != NULL && *filename != '\0' ) {	/* not empty */
+        return get_lib_filename( filename );    /* add '.lib' extension */
+    }
+    else {
+        error_invalid_library_file(filename);
         return NULL;
-	}
+    }
 }
 
 /*-----------------------------------------------------------------------------
@@ -39,17 +38,19 @@ static bool add_object_modules(FILE* lib_fp, strtable_t* st) {
     char* obj_file_data = NULL;
 
     for (size_t i = 0; i < option_files_size(); i++) {
-		const char* filename = option_file(i);
+        const char* filename = option_file(i);
         size_t fptr = ftell(lib_fp);
 
         // read object file blob
         // if the file is already an object file, use it directly;
         // otherwise get the corresponding object file name
         const char* obj_filename = NULL;
-        if (strcmp(filename + strlen(filename) - strlen(EXT_O), EXT_O) == 0)
+        if (strcmp(filename + strlen(filename) - strlen(EXT_O), EXT_O) == 0) {
             obj_filename = filename;
-        else
+        }
+        else {
             obj_filename = get_o_filename(filename);
+        }
 
         int obj_size = file_size(obj_filename);
         if (obj_size < 0) {
@@ -72,14 +73,18 @@ static bool add_object_modules(FILE* lib_fp, strtable_t* st) {
 
         bool include = true;
         if (option_lib_for_all_cpus()) {
-            if (file->objs->cpu_id == option_cpu() && file->objs->swap_ixiy == option_swap_ixiy())
+            if (file->objs->cpu_id == option_cpu()
+                    && file->objs->swap_ixiy == option_swap_ixiy()) {
                 include = true;
-            else
+            }
+            else {
                 include = false;
+            }
         }
         if (include) {
-            if (option_verbose())
+            if (option_verbose()) {
                 printf("Adding %s to library\n", obj_filename);
+            }
 
             obj_file_data = xrealloc(obj_file_data, obj_size);
             xfread_bytes(obj_file_data, obj_size, obj_fp);
@@ -97,8 +102,9 @@ static bool add_object_modules(FILE* lib_fp, strtable_t* st) {
             objfile_get_defined_symbols(file->objs, st);
         }
         else {
-            if (option_verbose())
+            if (option_verbose()) {
                 printf("Skipping %s - different CPU-IXIY combination\n", obj_filename);
+            }
         }
 
         fclose(obj_fp);
@@ -109,10 +115,11 @@ static bool add_object_modules(FILE* lib_fp, strtable_t* st) {
     return true;
 }
 
-void make_library(const char *lib_filename) {
-	lib_filename = search_libfile(lib_filename);
-	if ( lib_filename == NULL )
-		return;					            // ERROR
+void make_library(const char* lib_filename) {
+    lib_filename = search_libfile(lib_filename);
+    if ( lib_filename == NULL ) {
+        return;    // ERROR
+    }
 
     strtable_t* st = strtable_new();          // list of all defined symbols
 
@@ -121,8 +128,9 @@ void make_library(const char *lib_filename) {
     utstring_new(temp_filename);
     utstring_printf(temp_filename, "%s~", lib_filename);
 
-    if (option_verbose())
-		printf("Creating library '%s'\n", path_canon(lib_filename));
+    if (option_verbose()) {
+        printf("Creating library '%s'\n", path_canon(lib_filename));
+    }
 
     // save current cpu-ixiy options to restore after library is built
     int current_cpu = option_cpu();
@@ -130,7 +138,7 @@ void make_library(const char *lib_filename) {
 
     // write library header
     FILE* fp = xfopen(utstring_body(temp_filename), "wb");
-	xfwrite_cstr(libfile_header(), fp);
+    xfwrite_cstr(libfile_header(), fp);
 
     long st_ptr = ftell(fp);
     xfwrite_dword(-1, fp);              // placeholder for string table address
@@ -139,20 +147,22 @@ void make_library(const char *lib_filename) {
         // assemble or include object for each cpu-ixiy combination and append to library
         for (const int* cpu = cpu_ids(); *cpu > 0; cpu++) {
             // only include non-strict cpus in library
-            if (cpu_is_strict(*cpu))
+            if (cpu_is_strict(*cpu)) {
                 continue;
+            }
 
             option_set_cpu(*cpu);
 
-			for (int ixiy_count = 0; ixiy_count < 2; ixiy_count++) {
-				bool ixiy = ixiy_count==1;
+            for (int ixiy_count = 0; ixiy_count < 2; ixiy_count++) {
+                bool ixiy = ixiy_count == 1;
                 option_set_swap_ixiy(ixiy);
 
                 for (size_t i = 0; i < option_files_size(); i++) {
                     const char* filename = option_file(i);
                     bool got_asm = strcmp(filename + strlen(filename) - strlen(EXT_O), EXT_O) != 0;
-                    if (got_asm)
+                    if (got_asm) {
                         assemble_file(filename);
+                    }
 
                     if (get_error_count()) {
                         xfclose(fp);			/* error */
@@ -167,8 +177,9 @@ void make_library(const char *lib_filename) {
                     goto cleanup_and_return;
                 }
 
-                if (option_verbose())
+                if (option_verbose()) {
                     printf("\n");
+                }
             }
         }
     }
@@ -193,7 +204,7 @@ void make_library(const char *lib_filename) {
     xfwrite_dword(st_pos, fp);
     fseek(fp, fpos, SEEK_SET);
 
-	/* close and write lib file */
+    /* close and write lib file */
     xfclose(fp);
 
     // #2254 - rename temp file
@@ -216,16 +227,15 @@ cleanup_and_return:
     utstring_free(temp_filename);
 }
 
-bool check_library_file(const char *src_filename)
-{
-	return check_obj_lib_file(
-        true,
-		get_lib_filename(src_filename),
-        libfile_header(),
-        error_file_not_found,
-        error_file_open,
-		error_invalid_library_file,
-		error_invalid_library_file_version,
-        error_incompatible_cpu,
-        error_incompatible_ixiy);
+bool check_library_file(const char* src_filename) {
+    return check_obj_lib_file(
+               true,
+               get_lib_filename(src_filename),
+               libfile_header(),
+               error_file_not_found,
+               error_file_open,
+               error_invalid_library_file,
+               error_invalid_library_file_version,
+               error_incompatible_cpu,
+               error_incompatible_ixiy);
 }

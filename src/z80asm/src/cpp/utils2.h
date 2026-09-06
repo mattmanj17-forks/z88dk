@@ -10,7 +10,7 @@
 #include "if.h"
 #include "utils.h"
 #include <iostream>
-#include <iomanip> 
+#include <iomanip>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -29,12 +29,14 @@ int ipow(int base, int exp);
 // convert vector of integers to string of comma-separated values
 template<typename T>
 string vector_to_csv(vector<T> items) {
-	string out;
-	for (auto item : items)
-		out += std::to_string(item) + ",";
-	if (!out.empty())
-		out.pop_back();		// remove end comma
-	return out;
+    string out;
+    for (auto item : items) {
+        out += std::to_string(item) + ",";
+    }
+    if (!out.empty()) {
+        out.pop_back();    // remove end comma
+    }
+    return out;
 }
 
 // read/write binary data from/to streams

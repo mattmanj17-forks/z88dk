@@ -19,10 +19,10 @@ Manage the code area in memory
 
 /*-----------------------------------------------------------------------------
 *   Handle Sections
-*	Each section has a name (default = ""), a start address, an ASMPC, 
+*	Each section has a name (default = ""), a start address, an ASMPC,
 *	and a contiguous block of memory where opcodes are added.
-*	Each module allocates a set of 0..N section blocks, each with it's 
-*	start address in each section. Modules are identified with unique 
+*	Each module allocates a set of 0..N section blocks, each with it's
+*	start address in each section. Modules are identified with unique
 *	sequence IDs, and these IDs can be used to find out start of module
 *	data in each section.
 *	The alloc_addresses() call defines the start addresses of each section
@@ -34,30 +34,30 @@ Manage the code area in memory
 *   Named Section1 of code, introduced by "SECTION" keyword
 *----------------------------------------------------------------------------*/
 CLASS( Section1 )
-	const char	*name;				// name of section, kept in strpool
-	int			 addr;				// start address of this section,
-									// computed by sections_alloc_addr()
-    int			 origin;			// ORG address of section, -1 if not defined
-	int			 align;				// if align>1, section is aligned at align-boundaries
-	bool		 origin_found : 1;	// ORG already found in code
-	bool		 origin_opts : 1;	// ORG was defined from command line options,
-									// override asm code
-	bool		 section_split : 1;	// ORG -1 was given, signal that this section
-									// should be output to a new binary file
-	bool		 max_codesize_issued : 1;
-									// ErrSegmentOverflow issued, ignore next calls
-	bool		 align_found : 1;	// ALIGN already found in this section
-	int			 asmpc;				// address of current opcode relative to start
-									// of the current module, reset to 0 at start
-									// of each module
-	int			 asmpc_phase;		// asmpc within a PHASE/DEPHASE block, -1 otherwise
-	int			 opcode_size;		// number of bytes added after last
-									// set_PC() or next_PC()
-	ByteArray	*bytes;				// binary code of section, used to compute 
-									// current size
-	intArray	*reloc;				// list of addresses in module containg relocable addreses
-	intArray	*module_start;		// at module_addr[ID] is the start offset from
-									// addr of module ID
+const char*	name;				// name of section, kept in strpool
+int			 addr;				// start address of this section,
+// computed by sections_alloc_addr()
+int			 origin;			// ORG address of section, -1 if not defined
+int			 align;				// if align>1, section is aligned at align-boundaries
+bool		 origin_found : 1;	// ORG already found in code
+bool		 origin_opts : 1;	// ORG was defined from command line options,
+// override asm code
+bool		 section_split : 1;	// ORG -1 was given, signal that this section
+// should be output to a new binary file
+bool		 max_codesize_issued : 1;
+// ErrSegmentOverflow issued, ignore next calls
+bool		 align_found : 1;	// ALIGN already found in this section
+int			 asmpc;				// address of current opcode relative to start
+// of the current module, reset to 0 at start
+// of each module
+int			 asmpc_phase;		// asmpc within a PHASE/DEPHASE block, -1 otherwise
+int			 opcode_size;		// number of bytes added after last
+// set_PC() or next_PC()
+ByteArray*	bytes;				// binary code of section, used to compute
+// current size
+intArray*	reloc;				// list of addresses in module containg relocable addreses
+intArray*	module_start;		// at module_addr[ID] is the start offset from
+// addr of module ID
 END_CLASS;
 
 CLASS_HASH( Section1 );
@@ -66,9 +66,9 @@ CLASS_HASH( Section1 );
 *   FILE* and filename or current code area
 *----------------------------------------------------------------------------*/
 typedef struct CodeareaFile {
-	const char* filename;			// kept in strpool
-	FILE*		fp;					// open file handle
-	const char* initial_filename;	// kept in strpool
+    const char* filename;			// kept in strpool
+    FILE*		fp;					// open file handle
+    const char* initial_filename;	// kept in strpool
 } CodeareaFile;
 
 /*-----------------------------------------------------------------------------
@@ -79,7 +79,7 @@ typedef struct CodeareaFile {
 extern void reset_codearea( void );
 
 /* return size of current section */
-extern int get_section_size( Section1 *section );
+extern int get_section_size( Section1* section );
 
 /* return size of current opcode */
 extern int get_cur_opcode_size(void);
@@ -88,20 +88,20 @@ extern int get_cur_opcode_size(void);
 extern int get_sections_size( void );
 
 /* get section by name, creates a new section if new name; make it the current section */
-extern Section1 *new_section(const char *name );
+extern Section1* new_section(const char* name );
 
 /* get/set current section */
-extern Section1 *get_cur_section( void );
-extern Section1 *set_cur_section( Section1 *section );
+extern Section1* get_cur_section( void );
+extern Section1* set_cur_section( Section1* section );
 extern const char* get_cur_section_name(void);
 
 #define CURRENTSECTION	(get_cur_section())
 
-/* iterate through sections, 
+/* iterate through sections,
    pointer to iterator may be NULL if no need to iterate */
-extern Section1 *get_first_section( Section1HashElem **piter );
-extern Section1 *get_last_section( void );
-extern Section1 *get_next_section( Section1HashElem **piter );
+extern Section1* get_first_section( Section1HashElem** piter );
+extern Section1* get_last_section( void );
+extern Section1* get_next_section( Section1HashElem** piter );
 
 /*-----------------------------------------------------------------------------
 *   allocate the addr of each of the sections, concatenating the sections in
@@ -113,7 +113,7 @@ extern void sections_alloc_addr(void);
 *   Handle current module
 *----------------------------------------------------------------------------*/
 
-/* allocate a new module, setup module_start[] and reset ASMPC of all sections, 
+/* allocate a new module, setup module_start[] and reset ASMPC of all sections,
    return new unique ID; make it the current module */
 extern int new_module_id( void );
 
@@ -159,7 +159,7 @@ extern void append_long( long dword );
 extern void append_defs(int num_bytes, byte_t fill);
 
 /* advance code pointer reserving space, return address of start of buffer */
-extern byte_t *append_reserve( int num_bytes );	
+extern byte_t* append_reserve( int num_bytes );
 
 extern void patch_from_memory(byte_t* data, int addr, long num_bytes);
 
@@ -167,7 +167,8 @@ extern void patch_from_memory(byte_t* data, int addr, long num_bytes);
 *   write whole code area to an open file
 *----------------------------------------------------------------------------*/
 extern void fwrite_codearea(CodeareaFile* binfile, CodeareaFile* relocfile);
-extern void codearea_close_remove(CodeareaFile* binfile, CodeareaFile* relocfile);
+extern void codearea_close_remove(CodeareaFile* binfile,
+                                  CodeareaFile* relocfile);
 
 /*-----------------------------------------------------------------------------
 *   Assembly directives
@@ -182,11 +183,11 @@ extern void set_origin_option(int origin);
 
 /* read/write origin to/from input file, for these cases:
    origin = 0..0xFFFF - origin defined;
-   origin = -1 - origin not defined 
+   origin = -1 - origin not defined
    origin = -1 and section_split - origin not defined, but section split */
-extern void read_origin(FILE* file, Section1 *section);
-extern void set_origin(int origin, Section1 *section);
-extern void write_origin(FILE* file, Section1 *section);
+extern void read_origin(FILE* file, Section1* section);
+extern void set_origin(int origin, Section1* section);
+extern void write_origin(FILE* file, Section1* section);
 
 // set/clear the new asmpc_phase
 extern void set_phase_directive(int address);

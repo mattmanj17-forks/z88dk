@@ -18,10 +18,10 @@ Assembly directives.
 struct Expr1;
 
 enum {
-	DEFVARS_SIZE_B = 1,
-	DEFVARS_SIZE_W = 2,
-	DEFVARS_SIZE_P = 3,
-	DEFVARS_SIZE_Q = 4,
+    DEFVARS_SIZE_B = 1,
+    DEFVARS_SIZE_W = 2,
+    DEFVARS_SIZE_P = 3,
+    DEFVARS_SIZE_Q = 4,
 };
 
 /* define a label at the current location, or current location + offset */
@@ -33,7 +33,8 @@ extern void asm_cond_LABEL(Str* label);		// define label if not empty
 extern void asm_DEFVARS_start(int start_addr);
 
 /* define one constant in the current context */
-extern void asm_DEFVARS_define_const(const char* name, int elem_size, int count);
+extern void asm_DEFVARS_define_const(const char* name, int elem_size,
+                                     int count);
 
 /* start a new DEFGROUP context, give the value of the next defined constant */
 extern void asm_DEFGROUP_start(int next_value);
@@ -99,4 +100,5 @@ extern void asm_DQ(struct Expr1* expr);
 extern void asm_ALIGN(int align, int filler);
 
 /* Z80 DMA commands */
-extern void asm_DMA_command(int cmd, UT_array* exprs);	// stack of exprs, top is last
+extern void asm_DMA_command(int cmd,
+                            UT_array* exprs);	// stack of exprs, top is last

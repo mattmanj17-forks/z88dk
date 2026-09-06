@@ -38,8 +38,9 @@ void Location::set_filename(const string& filename_) {
 
 void Location::set_prev_line_num(int prev_line_num) {
     line_num = prev_line_num;
-    if (!is_c_source)
+    if (!is_c_source) {
         line_num--;
+    }
     source_line.clear();
     expanded_line.clear();
 }
@@ -64,8 +65,9 @@ bool Location::empty() const {
 }
 
 void Location::inc_line_num() {
-    if (!is_c_source)
+    if (!is_c_source) {
         line_num++;
+    }
 }
 
 //-----------------------------------------------------------------------------
@@ -84,19 +86,22 @@ void Errors::warning(ErrCode err_code, const string& arg) {
     show_error("warning", err_code, arg);
 }
 
-void Errors::show_error(const string& prefix, ErrCode err_code, const string& arg_) {
+void Errors::show_error(const string& prefix, ErrCode err_code,
+                        const string& arg_) {
     string arg = str_chomp(arg_);
 
     // error message
     if (!location.filename.empty()) {
         cerr << location.filename << ":";
-        if (location.line_num)
+        if (location.line_num) {
             cerr << location.line_num << ":";
+        }
         cerr << " ";
     }
     cerr << prefix << ": " << err_messages[err_code];
-    if (!arg.empty())
+    if (!arg.empty()) {
         cerr << ": " << arg;
+    }
     cerr << endl;
 
     // source line - remove extra spaces
@@ -109,8 +114,9 @@ void Errors::show_error(const string& prefix, ErrCode err_code, const string& ar
         // only show expanded line if it differs from source, ignoring blanks
         if (!striped_expanded_line.empty())
             if (str_remove_all_blanks(striped_source_line)
-                != str_remove_all_blanks(striped_expanded_line))
+                    != str_remove_all_blanks(striped_expanded_line)) {
                 cerr << "      ^---- " << striped_expanded_line << endl;
+            }
     }
 }
 
@@ -171,9 +177,10 @@ void error_file_open(const char* filename) {
     perror(filename);
 }
 
-void error_duplicate_definition_module(const char* modulename, const char* name) {
+void error_duplicate_definition_module(const char* modulename,
+                                       const char* name) {
     g_errors.error(ErrDuplicateDefinition,
-        string(modulename) + "::" + string(name));
+                   string(modulename) + "::" + string(name));
 }
 
 void error_invalid_object_file(const char* filename) {
@@ -186,31 +193,34 @@ void error_invalid_library_file(const char* filename) {
 
 void error_org_not_aligned(int origin, int align) {
     g_errors.error(ErrOrgNotAligned,
-        "origin=" + int_to_hex(origin, 4) + ", align=" + int_to_hex(align, 2));
+                   "origin=" + int_to_hex(origin, 4) + ", align=" + int_to_hex(align, 2));
 }
 
-void error_invalid_object_file_version(const char* filename, int found_version, int expected_version) {
+void error_invalid_object_file_version(const char* filename, int found_version,
+                                       int expected_version) {
     g_errors.error(ErrObjFileVersion,
-        "file=" + string(filename) +
-        ", found=" + to_string(found_version) +
-        ", expected=" + to_string(expected_version));
+                   "file=" + string(filename) +
+                   ", found=" + to_string(found_version) +
+                   ", expected=" + to_string(expected_version));
 }
 
-void error_invalid_library_file_version(const char* filename, int found_version, int expected_version) {
+void error_invalid_library_file_version(const char* filename, int found_version,
+                                        int expected_version) {
     g_errors.error(ErrLibFileVersion,
-        "file=" + string(filename) +
-        ", found=" + to_string(found_version) +
-        ", expected=" + to_string(expected_version));
+                   "file=" + string(filename) +
+                   ", found=" + to_string(found_version) +
+                   ", expected=" + to_string(expected_version));
 }
 
 void error_incompatible_cpu(const char* filename, cpu_t got_cpu_id) {
     ostringstream error;
     const char* cpu_str = cpu_name(got_cpu_id);
-    if (cpu_str == NULL)
+    if (cpu_str == NULL) {
         error_illegal_cpu(filename, got_cpu_id);
+    }
     else {
         error << "file " << filename << " compiled for " << cpu_str
-            << ", incompatible with " << cpu_name(option_cpu());
+              << ", incompatible with " << cpu_name(option_cpu());
         g_errors.error(ErrCPUIncompatible, error.str());
     }
 }
@@ -223,17 +233,17 @@ void error_illegal_cpu(const char* filename, cpu_t got_cpu_id) {
 
 static const char* ixiy_to_string(bool swap_ixiy) {
     if (swap_ixiy) {
-		return "-IXIY";
-	}
-	else {
-		return "(no option)";
-	}
+        return "-IXIY";
+    }
+    else {
+        return "(no option)";
+    }
 }
 
 void error_incompatible_ixiy(const char* filename, bool swap_ixiy) {
     ostringstream error;
     error << "file " << filename << " compiled with " << ixiy_to_string(swap_ixiy)
-        << ", incompatible with " << ixiy_to_string(g_options.get_swap_ixiy());
+          << ", incompatible with " << ixiy_to_string(g_options.get_swap_ixiy());
     g_errors.error(ErrIXIYIncompatible, error.str());
 }
 
@@ -247,5 +257,5 @@ void warning_hex2(int err_code, int hex_value) {
 
 void warning_org_ignored(const char* filename, const char* section) {
     g_errors.warning(ErrOrgIgnored,
-        string("file ") + string(filename) + ", section " + string(section));
+                     string("file ") + string(filename) + ", section " + string(section));
 }

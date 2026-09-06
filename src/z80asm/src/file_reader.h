@@ -29,7 +29,8 @@ struct FileReader {
 protected:
     bool recursive_include(const string& filename);
     virtual bool getline1(string& line);    // read one line from input
-    virtual bool stop_at_eof();             // return true to stop reading, false to continue
+    virtual bool
+    stop_at_eof();             // return true to stop reading, false to continue
 };
 
 extern FileReader g_file_reader;

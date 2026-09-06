@@ -15,47 +15,55 @@ using namespace std;
 // expression parser
 class FloatExpr {
 public:
-	bool parse(ScannedLine& line);
-	bool eval_error() const { return m_eval_error; }
-	double value() const { return m_value; }
+    bool parse(ScannedLine& line);
+    bool eval_error() const {
+        return m_eval_error;
+    }
+    double value() const {
+        return m_value;
+    }
 
 private:
     ScannedLine* m_line{ nullptr };
-	double m_value{ 0.0 };
-	bool   m_parse_error{ false };	// expression could not be parsed
-	bool   m_eval_error{ false };	// expression could not be evaluated
+    double m_value{ 0.0 };
+    bool   m_parse_error{ false };	// expression could not be parsed
+    bool   m_eval_error{ false };	// expression could not be evaluated
 
-	double parse_expr();
-	double parse_addition();
-	double parse_multiplication();
-	double parse_power();
-	double parse_unary();
-	double parse_primary();
-	double parse_func(double(*f)(double));
-	double parse_func2(double(*f)(double, double));
+    double parse_expr();
+    double parse_addition();
+    double parse_multiplication();
+    double parse_power();
+    double parse_unary();
+    double parse_primary();
+    double parse_func(double(*f)(double));
+    double parse_func2(double(*f)(double, double));
 };
 
 // current Float format
 class FloatFormat {
 public:
-	enum class Format {
+    enum class Format {
 #define X(type)		type,
 #include "zfloat.def"
-	};
+    };
 
-	Format get() const { return m_format; }
-	string get_type() const;
-	string get_define() const;
-	void set(Format format) { m_format = format; }
-	bool set_text(const string& text);
+    Format get() const {
+        return m_format;
+    }
+    string get_type() const;
+    string get_define() const;
+    void set(Format format) {
+        m_format = format;
+    }
+    bool set_text(const string& text);
 
-	vector<uint8_t> float_to_bytes(double value);
+    vector<uint8_t> float_to_bytes(double value);
 
     static string get_all_formats();
     static vector<string> get_all_defines();
 
 private:
-	Format m_format{ Format::genmath };
+    Format m_format{ Format::genmath };
 };
 
 extern FloatFormat g_float_format;

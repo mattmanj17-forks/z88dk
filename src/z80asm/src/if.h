@@ -27,14 +27,14 @@ extern "C" {
 #define Z80ASM_LIB_BASE	Z80ASM_PROG
 
 // default file name extensions
-#define EXT_ASM     ".asm"    
-#define EXT_LIS		".lis"    
-#define EXT_O		".o"	  
-#define EXT_DEF     ".def"    
-#define EXT_BIN     ".bin"    
-#define EXT_LIB     ".lib"    
-#define EXT_SYM     ".sym"    
-#define EXT_MAP     ".map"    
+#define EXT_ASM     ".asm"
+#define EXT_LIS		".lis"
+#define EXT_O		".o"
+#define EXT_DEF     ".def"
+#define EXT_BIN     ".bin"
+#define EXT_LIB     ".lib"
+#define EXT_SYM     ".sym"
+#define EXT_MAP     ".map"
 #define EXT_RELOC   ".reloc"
 #define EXT_M4      ".m4"
 
@@ -94,8 +94,9 @@ struct Symbol1* find_local_symbol(const char* name);
 
 // expressions
 void parse_const_expr_eval(const char* expr_text,
-    int* result, bool* error, bool silent);
-void parse_expr_eval_if_condition(const char *expr_text, bool* condition, bool* error);
+                           int* result, bool* error, bool silent);
+void parse_expr_eval_if_condition(const char* expr_text, bool* condition,
+                                  bool* error);
 bool check_ifdef_condition(const char* name);
 
 // source file input
@@ -115,8 +116,10 @@ const char* get_cur_section_name(void);
 // list file
 void list_open(const char* list_file);
 void list_close();
-void list_source_line(const char* filename, int line_num, const char* section, int asmpc, int phased_pc, const char* text);
-void list_expanded_line(const char* section, int asmpc, int phased_pc, const char* text);
+void list_source_line(const char* filename, int line_num, const char* section,
+                      int asmpc, int phased_pc, const char* text);
+void list_expanded_line(const char* section, int asmpc, int phased_pc,
+                        const char* text);
 void list_append_bytes(int value, int num_bytes);
 void list_patch_bytes(const char* section, int asmpc, int value, int num_bytes);
 void list_end_line();

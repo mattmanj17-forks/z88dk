@@ -18,13 +18,12 @@ Scanner. Scanning engine is built by ragel from scan_rules.rl.
 /*-----------------------------------------------------------------------------
 * 	Keep last symbol retrieved
 *----------------------------------------------------------------------------*/
-typedef struct sym_t 
-{
-	tokid_t  tok;		    /* token */
-	tokid_t	 tok_opcode;	/* e.g. TK_IX, when tok = TK_NAME and token is "ix" */
-	char*	 tstart;		/* start of recognized token with input buffer */
-	size_t   tlen;		    /* length of recognized token with input buffer */
-	int		 number;		/* number to return with TK_NUMBER */
+typedef struct sym_t {
+    tokid_t  tok;		    /* token */
+    tokid_t	 tok_opcode;	/* e.g. TK_IX, when tok = TK_NAME and token is "ix" */
+    char*	 tstart;		/* start of recognized token with input buffer */
+    size_t   tlen;		    /* length of recognized token with input buffer */
+    int		 number;		/* number to return with TK_NUMBER */
 } Sym;
 
 /*-----------------------------------------------------------------------------
@@ -43,7 +42,8 @@ extern void scan_expect_opcode(void);		/* GetSym() returns NOP as TK_NOP */
 extern void scan_expect_operands(void);		/* GetSym() returns NOP as TK_NAME */
 
 /* save the current scan position and back-track to a saved position */
-extern void save_scan_state(void);		/* needs to be balanced with restore_.../drop_... */
+extern void save_scan_state(
+    void);		/* needs to be balanced with restore_.../drop_... */
 extern void restore_scan_state(void);
 extern void drop_scan_state(void);
 
@@ -52,7 +52,7 @@ extern void CurSymExpect(tokid_t expected_tok);
 extern void GetSymExpect(tokid_t expected_tok);
 
 /* insert the given text at the current scan position */
-extern void SetTemporaryLine(const char *line );
+extern void SetTemporaryLine(const char* line );
 
 /* skip line past the newline, set found_EOL */
 extern void  Skipline( void );
@@ -60,4 +60,4 @@ extern bool found_EOL;
 
 /* return static string with current token text
 *  non-reentrant, string needs to be saved by caller */
-extern char *sym_text(Sym *sym);
+extern char* sym_text(Sym* sym);

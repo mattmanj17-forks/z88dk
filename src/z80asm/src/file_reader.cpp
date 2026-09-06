@@ -25,8 +25,9 @@ bool OpenFile::open(const string& filename_) {
         perror(filename.c_str());
         return false;
     }
-    else
+    else {
         return true;
+    }
 }
 
 bool FileReader::open(const string& filename_) {
@@ -50,27 +51,33 @@ bool FileReader::open(const string& filename_) {
 bool FileReader::getline(string& line) {
     line.clear();
     while (true) {
-        if (open_files.empty())
+        if (open_files.empty()) {
             return false;
-        else if (getline1(line))
+        }
+        else if (getline1(line)) {
             return true;
-        else if (stop_at_eof())
+        }
+        else if (stop_at_eof()) {
             return false;
+        }
         else {
             open_files.pop_back();
             g_errors.location.clear();
-            if (!open_files.empty())
+            if (!open_files.empty()) {
                 g_errors.location = open_files.back().location;
-            else
+            }
+            else {
                 g_errors.location = Location();
+            }
         }
     }
 }
 
 bool FileReader::recursive_include(const string& filename) {
     for (auto& file : open_files) {
-        if (file.filename == filename)
+        if (file.filename == filename) {
             return true;
+        }
     }
     return false;
 }
@@ -83,8 +90,9 @@ bool FileReader::getline1(string& line) {
         g_errors.location.set_source_line(line);
         return true;
     }
-    else
+    else {
         return false;
+    }
 }
 
 bool FileReader::stop_at_eof() {
@@ -95,8 +103,9 @@ bool FileReader::stop_at_eof() {
 
 bool SourceReader::getline1(string& line) {
     bool ok = FileReader::getline1(line);
-    if (!ok)
+    if (!ok) {
         return false;
+    }
     else {
         while (ok && !line.empty() && line.back() == '\\') {
             line.pop_back();        // remove backslash
