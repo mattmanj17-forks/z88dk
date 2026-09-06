@@ -14,7 +14,7 @@ use Modern::Perl;
 
 my $ticks = Ticks->new;
 
-$ticks->add(<<END, HL=>0x1234, DE=>0x5678);
+$ticks->add( <<END, HL => 0x1234, DE => 0x5678 );
 			jp start
 	data:	defw 0, 0
 	start:	ld hl, 0x1234

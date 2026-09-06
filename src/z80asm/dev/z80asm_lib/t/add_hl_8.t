@@ -15,21 +15,21 @@ use Modern::Perl;
 my $ticks = Ticks->new;
 
 for my $reg (qw( BC DE HL )) {
-	for my $base (0, 255, 65534) {
-		for my $add (1, 2) {
-			note "reg:$reg base:$base add:$add";
+    for my $base ( 0, 255, 65534 ) {
+        for my $add ( 1, 2 ) {
+            note "reg:$reg base:$base add:$add";
 
-			my $sum = $base + $add;
-			
-			# z80n does not update carry, neither does emulation
-			$ticks->add(<<END, $reg=>$sum);
+            my $sum = $base + $add;
+
+            # z80n does not update carry, neither does emulation
+            $ticks->add( <<END, $reg => $sum );
 					ld		$reg, $base
 					ld		a, $add
 					
 					add 	$reg, a
 END
-		}
-	}
+        }
+    }
 }
 
 $ticks->run;

@@ -8,7 +8,7 @@ use Modern::Perl;
 # Test computed DEFC 1
 unlink_testfiles;
 
-spew("${test}.asm", <<'END');
+spew( "${test}.asm", <<'END' );
 			org 0x100
 		start:
 			defw start,end1,end2,end3
@@ -17,19 +17,19 @@ spew("${test}.asm", <<'END');
 			defc end3 = end1
 END
 
-my $bin = words(0x100, 0x108, 0x108, 0x108);
+my $bin = words( 0x100, 0x108, 0x108, 0x108 );
 
 # assemble and link
 unlink("${test}.bin");
-capture_ok("z88dk-z80asm -b ${test}.asm", "");
-check_bin_file("${test}.bin", $bin);
+capture_ok( "z88dk-z80asm -b ${test}.asm", "" );
+check_bin_file( "${test}.bin", $bin );
 
 # link only
 unlink("${test}.bin");
-capture_ok("z88dk-z80asm -b ${test}.o", "");
-check_bin_file("${test}.bin", $bin);
+capture_ok( "z88dk-z80asm -b ${test}.o", "" );
+check_bin_file( "${test}.bin", $bin );
 
-capture_ok("z88dk-z80nm -a ${test}.o", <<'END');
+capture_ok( "z88dk-z80nm -a ${test}.o", <<'END' );
 Object  file test_t_modlink_defc_t.o at $0000: Z80RMF18
   Name: test_t_modlink_defc_t
   CPU:  z80 
@@ -58,7 +58,7 @@ END
 # Test computed DEFC 2
 unlink_testfiles;
 
-spew("${test}.asm", <<'END');
+spew( "${test}.asm", <<'END' );
 		section code
 		section lib
 
@@ -70,7 +70,7 @@ spew("${test}.asm", <<'END');
 		jp   computed_end
 END
 
-spew("${test}1.asm", <<'END');
+spew( "${test}1.asm", <<'END' );
 		section code
 		section lib
 
@@ -83,7 +83,7 @@ func1:	ret
 func2:	ret z
 END
 
-spew("${test}2.asm", <<'END');
+spew( "${test}2.asm", <<'END' );
 		section code
 		section lib
 
@@ -98,27 +98,28 @@ spew("${test}2.asm", <<'END');
 		defc chain2 = ASMPC
 END
 
-$bin = bytes(		# section code		# @ 0x1000
-					0xCD, 0x0A, 0x10,	# @ 0x1000 : main
-					0xCD, 0x09, 0x10,	# @ 0x1003
-					0xC3, 0x0B, 0x10,	# @ 0x1006
-					0xC8,				# @ 0x1009 : func2
-					# section lib		# @ 0x100A
-					0xC9,				# @ 0x100A : func1
-										# @ 0x100B : computed_end
+$bin = bytes(    # section code		# @ 0x1000
+    0xCD, 0x0A, 0x10,    # @ 0x1000 : main
+    0xCD, 0x09, 0x10,    # @ 0x1003
+    0xC3, 0x0B, 0x10,    # @ 0x1006
+    0xC8,                # @ 0x1009 : func2
+                         # section lib		# @ 0x100A
+    0xC9,                # @ 0x100A : func1
+                         # @ 0x100B : computed_end
 );
 
 # assemble and link
 unlink("${test}.bin");
-capture_ok("z88dk-z80asm -r0x1000 -b ${test}.asm ${test}1.asm ${test}2.asm", "");
-check_bin_file("${test}.bin", $bin);
+capture_ok( "z88dk-z80asm -r0x1000 -b ${test}.asm ${test}1.asm ${test}2.asm",
+    "" );
+check_bin_file( "${test}.bin", $bin );
 
 # link only
 unlink("${test}.bin");
-capture_ok("z88dk-z80asm -b ${test}.o ${test}1.o ${test}2.o", "");
-check_bin_file("${test}.bin", $bin);
+capture_ok( "z88dk-z80asm -b ${test}.o ${test}1.o ${test}2.o", "" );
+check_bin_file( "${test}.bin", $bin );
 
-capture_ok("z88dk-z80nm -a ${test}.o ${test}1.o ${test}2.o", <<'END');
+capture_ok( "z88dk-z80nm -a ${test}.o ${test}1.o ${test}2.o", <<'END' );
 Object  file test_t_modlink_defc_t.o at $0000: Z80RMF18
   Name: test_t_modlink_defc_t
   CPU:  z80 
@@ -196,19 +197,18 @@ Object  file test_t_modlink_defc_t2.o at $0000: Z80RMF18
     S  13 = "code"
 END
 
-
 #------------------------------------------------------------------------------
 # DEFC use case for library entry points
 unlink_testfiles;
 
-spew("${test}.asm", <<'END');
+spew( "${test}.asm", <<'END' );
 		PUBLIC asm_b_vector_at
 		EXTERN asm_b_array_at
 
 		DEFC asm_b_vector_at = asm_b_array_at
 END
 
-spew("${test}1.asm", <<'END');
+spew( "${test}1.asm", <<'END' );
 		PUBLIC asm_b_array_at
 
 	asm_b_array_at:				; 1000
@@ -216,7 +216,7 @@ spew("${test}1.asm", <<'END');
 								; 1001
 END
 
-spew("${test}2.asm", <<'END');
+spew( "${test}2.asm", <<'END' );
 		EXTERN asm_b_vector_at
 		EXTERN asm_b_array_at
 
@@ -226,22 +226,20 @@ spew("${test}2.asm", <<'END');
 		ret						; 1007 ;; C9
 END
 
-$bin = bytes(0xC9,
-			 0xCD, 0x00, 0x10,
-			 0xCD, 0x00, 0x10,
-			 0xC9);
+$bin = bytes( 0xC9, 0xCD, 0x00, 0x10, 0xCD, 0x00, 0x10, 0xC9 );
 
 # assemble and link
 unlink("${test}.bin");
-capture_ok("z88dk-z80asm -r0x1000 -b ${test}.asm ${test}1.asm ${test}2.asm", "");
-check_bin_file("${test}.bin", $bin);
+capture_ok( "z88dk-z80asm -r0x1000 -b ${test}.asm ${test}1.asm ${test}2.asm",
+    "" );
+check_bin_file( "${test}.bin", $bin );
 
 # link only
 unlink("${test}.bin");
-capture_ok("z88dk-z80asm -b ${test}.o ${test}1.o ${test}2.o", "");
-check_bin_file("${test}.bin", $bin);
+capture_ok( "z88dk-z80asm -b ${test}.o ${test}1.o ${test}2.o", "" );
+check_bin_file( "${test}.bin", $bin );
 
-capture_ok("z88dk-z80nm -a ${test}.o ${test}1.o ${test}2.o", <<'END');
+capture_ok( "z88dk-z80nm -a ${test}.o ${test}1.o ${test}2.o", <<'END' );
 Object  file test_t_modlink_defc_t.o at $0000: Z80RMF18
   Name: test_t_modlink_defc_t
   CPU:  z80 
@@ -288,7 +286,6 @@ Object  file test_t_modlink_defc_t2.o at $0000: Z80RMF18
     S   4 = "start"
     S   5 = "test_t_modlink_defc_t2"
 END
-
 
 unlink_testfiles;
 done_testing;

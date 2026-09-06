@@ -16,40 +16,46 @@ my $ticks = Ticks->new;
 
 # ld de, sp+%n
 for my $base (0x1000) {
-	for my $add (0, 127, 255) {
-		my $add_text = $add == 0 ? "" :
-								   "+$add";
-		my $sum = $base + $add;
-		
-		$ticks->add(<<END, DE=>$sum);
+    for my $add ( 0, 127, 255 ) {
+        my $add_text =
+            $add == 0
+            ? ""
+            : "+$add";
+        my $sum = $base + $add;
+
+        $ticks->add( <<END, DE => $sum );
 				ld		sp, $base
 				ld      de, sp $add_text
 END
-	}
+    }
 }
 
 # ld hl, sp+%s
 for my $base (0x1000) {
-	for my $add (-128, 0, 127) {
-		my $add_text = $add <  0 ? $add :
-					   $add == 0 ? "" :
-								   "+$add";
-		
-		$ticks->add(<<END, 
+    for my $add ( -128, 0, 127 ) {
+        my $add_text =
+              $add < 0  ? $add
+            : $add == 0 ? ""
+            :             "+$add";
+
+        $ticks->add(
+            <<END,
 				ld		sp, $base
 				ld      hl, sp $add_text
 END
-			HL => sub { my($t) = @_;
-						my $sum;
-						if ($t->{cpu} eq '8085') {
-							$sum = $base + ($add & 0xff);		# unsigned
-						}
-						else {
-							$sum = $base + $add;				# signed
-						}
-						return $sum;
-			});
-	}
+            HL => sub {
+                my ($t) = @_;
+                my $sum;
+                if ( $t->{cpu} eq '8085' ) {
+                    $sum = $base + ( $add & 0xff );    # unsigned
+                }
+                else {
+                    $sum = $base + $add;               # signed
+                }
+                return $sum;
+            }
+        );
+    }
 }
 
 $ticks->run;

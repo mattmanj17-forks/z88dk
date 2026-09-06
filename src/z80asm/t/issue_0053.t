@@ -7,7 +7,7 @@ use Modern::Perl;
 # Test https://github.com/z88dk/z88dk/issues/53
 # z80asm: public constants not being listed in global .def file
 
-z80asm_ok("-b -s -g -m -Ddummy", "", "", <<'END', bytes(0xC9));
+z80asm_ok( "-b -s -g -m -Ddummy", "", "", <<'END', bytes(0xC9) );
 	org 65000
 
 	PUBLIC program
@@ -29,13 +29,13 @@ z80asm_ok("-b -s -g -m -Ddummy", "", "", <<'END', bytes(0xC9));
 	ret
 END
 
-check_text_file("${test}.sym", <<END);
+check_text_file( "${test}.sym", <<END );
 asm_BIFROST2_start              = \$C9A9 ; const, public, , , , ${test}.asm:8
 asm_BIFROST2_stop               = \$C9B2 ; const, public, , , , ${test}.asm:9
 program                         = \$0000 ; addr, public, , , , ${test}.asm:18
 END
 
-check_text_file("${test}.map", <<END);
+check_text_file( "${test}.map", <<END );
 __head                          = \$FDE8 ; const, public, def, , ,
 __size                          = \$0001 ; const, public, def, , ,
 __tail                          = \$FDE9 ; const, public, def, , ,
@@ -44,13 +44,13 @@ asm_BIFROST2_stop               = \$C9B2 ; const, public, , ${test}, , ${test}.a
 program                         = \$FDE8 ; addr, public, , ${test}, , ${test}.asm:18
 END
 
-check_text_file("${test}.def", <<'END');
+check_text_file( "${test}.def", <<'END' );
 DEFC asm_BIFROST2_start              = $C9A9
 DEFC asm_BIFROST2_stop               = $C9B2
 DEFC program                         = $FDE8
 END
 
-capture_ok("z88dk-z80nm -a ${test}.o", <<'END');
+capture_ok( "z88dk-z80nm -a ${test}.o", <<'END' );
 Object  file test_t_issue_0053_t.o at $0000: Z80RMF18
   Name: test_t_issue_0053_t
   CPU:  z80 
@@ -67,7 +67,6 @@ Object  file test_t_issue_0053_t.o at $0000: Z80RMF18
     S   4 = "program"
     S   5 = "test_t_issue_0053_t"
 END
-
 
 unlink_testfiles;
 done_testing;

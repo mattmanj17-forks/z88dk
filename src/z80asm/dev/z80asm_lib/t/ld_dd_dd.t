@@ -15,20 +15,21 @@ use Modern::Perl;
 my $ticks = Ticks->new;
 
 for my $s (qw( BC DE HL BC_ DE_ HL_ IX IY )) {
-	for my $d (qw( BC DE HL BC_ DE_ HL_ IX IY )) {
-		if ($s ne $d) {
-			for my $v (32767, 65535) {
-				my $cond_s = ($s =~ /IX|IY/i) ? 
-							"!__CPU_INTEL__ && !__CPU_GBZ80__" : 
-							($s =~ /_/) ? 
-							"__CPU_RABBIT__" : "1";
-				my $s_ = $s =~ s/_/'/r;
-				my $cond_d = ($d =~ /IX|IY/i) ? 
-							"!__CPU_INTEL__ && !__CPU_GBZ80__" : 
-							($d =~ /_/) ? 
-							"__CPU_RABBIT__" : "1";
-				my $d_ = $d =~ s/_/'/r;
-				$ticks->add(<<END, 
+    for my $d (qw( BC DE HL BC_ DE_ HL_ IX IY )) {
+        if ( $s ne $d ) {
+            for my $v ( 32767, 65535 ) {
+                my $cond_s =
+                      ( $s =~ /IX|IY/i ) ? "!__CPU_INTEL__ && !__CPU_GBZ80__"
+                    : ( $s =~ /_/ )      ? "__CPU_RABBIT__"
+                    :                      "1";
+                my $s_ = $s =~ s/_/'/r;
+                my $cond_d =
+                      ( $d =~ /IX|IY/i ) ? "!__CPU_INTEL__ && !__CPU_GBZ80__"
+                    : ( $d =~ /_/ )      ? "__CPU_RABBIT__"
+                    :                      "1";
+                my $d_ = $d =~ s/_/'/r;
+                $ticks->add(
+                    <<END,
 					IF $cond_d
 							ld $d_, 0
 					ENDIF
@@ -41,19 +42,32 @@ for my $s (qw( BC DE HL BC_ DE_ HL_ IX IY )) {
 							ld $d_, $v
 					ENDIF
 END
-				$s	=>	sub { my($t) = @_;
-							  return $v if $t->{cpu} =~ /^80|^gbz80|^vm1/ && substr($s,0,2) eq substr($d,0,2);
-							  return 0 if ($s =~ /IX|IY/i && $t->{cpu} =~ /^80|^gbz80|^vm1/);
-							  return 0 if ($s =~ /_/ && $t->{cpu} !~ /^r.k/);
-							  return $v; },
-				$d	=>	sub { my($t) = @_;
-							  return $v if $t->{cpu} =~ /^80|^gbz80|^vm1/ && substr($s,0,2) eq substr($d,0,2);
-							  return 0 if ($d =~ /IX|IY/i && $t->{cpu} =~ /^80|^gbz80|^vm1/);
-							  return 0 if ($d =~ /_/ && $t->{cpu} !~ /^r.k/);
-							  return $v; });
-			}
-		}
-	}
+                    $s => sub {
+                        my ($t) = @_;
+                        return $v
+                            if $t->{cpu} =~ /^80|^gbz80|^vm1/
+                            && substr( $s, 0, 2 ) eq substr( $d, 0, 2 );
+                        return 0
+                            if ( $s =~ /IX|IY/i
+                            && $t->{cpu} =~ /^80|^gbz80|^vm1/ );
+                        return 0 if ( $s =~ /_/ && $t->{cpu} !~ /^r.k/ );
+                        return $v;
+                    },
+                    $d => sub {
+                        my ($t) = @_;
+                        return $v
+                            if $t->{cpu} =~ /^80|^gbz80|^vm1/
+                            && substr( $s, 0, 2 ) eq substr( $d, 0, 2 );
+                        return 0
+                            if ( $d =~ /IX|IY/i
+                            && $t->{cpu} =~ /^80|^gbz80|^vm1/ );
+                        return 0 if ( $d =~ /_/ && $t->{cpu} !~ /^r.k/ );
+                        return $v;
+                    }
+                );
+            }
+        }
+    }
 }
 
 $ticks->run;

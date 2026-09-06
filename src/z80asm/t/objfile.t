@@ -10,14 +10,19 @@ my $obj;
 
 # simplest object file
 unlink_testfiles;
-spew("${test}.asm", "");
+spew( "${test}.asm", "" );
 
-capture_ok("z88dk-z80asm ${test}.asm", "");
+capture_ok( "z88dk-z80asm ${test}.asm", "" );
 
-check_bin_file("${test}.o", objfile(NAME => $test,
-									CODE => [["", -1, 1, ""]]));
+check_bin_file(
+    "${test}.o",
+    objfile(
+        NAME => $test,
+        CODE => [ [ "", -1, 1, "" ] ]
+    )
+);
 
-capture_ok("z88dk-z80nm -a ${test}.o", <<'END');
+capture_ok( "z88dk-z80nm -a ${test}.o", <<'END' );
 Object  file test_t_objfile_t.o at $0000: Z80RMF18
   Name: test_t_objfile_t
   CPU:  z80 
@@ -26,17 +31,21 @@ Object  file test_t_objfile_t.o at $0000: Z80RMF18
     S   1 = "test_t_objfile_t"
 END
 
-
 # add 1 byte of code
 unlink_testfiles;
-spew("${test}.asm", "nop");
+spew( "${test}.asm", "nop" );
 
-capture_ok("z88dk-z80asm ${test}.asm", "");
+capture_ok( "z88dk-z80asm ${test}.asm", "" );
 
-check_bin_file("${test}.o", objfile(NAME => $test,
-									CODE => [["", -1, 1, bytes(0)]]));
+check_bin_file(
+    "${test}.o",
+    objfile(
+        NAME => $test,
+        CODE => [ [ "", -1, 1, bytes(0) ] ]
+    )
+);
 
-capture_ok("z88dk-z80nm -a ${test}.o", <<'END');
+capture_ok( "z88dk-z80nm -a ${test}.o", <<'END' );
 Object  file test_t_objfile_t.o at $0000: Z80RMF18
   Name: test_t_objfile_t
   CPU:  z80 
@@ -46,17 +55,21 @@ Object  file test_t_objfile_t.o at $0000: Z80RMF18
     S   1 = "test_t_objfile_t"
 END
 
-
 # add 65536 byte of code
 unlink_testfiles;
-spew("${test}.asm", "nop\n" x 0x10000);
+spew( "${test}.asm", "nop\n" x 0x10000 );
 
-capture_ok("z88dk-z80asm ${test}.asm", "");
+capture_ok( "z88dk-z80asm ${test}.asm", "" );
 
-check_bin_file("${test}.o", objfile(NAME => $test,
-									CODE => [["", -1, 1, bytes(0) x 0x10000]]));
+check_bin_file(
+    "${test}.o",
+    objfile(
+        NAME => $test,
+        CODE => [ [ "", -1, 1, bytes(0) x 0x10000 ] ]
+    )
+);
 
-capture_ok("z88dk-z80nm -a ${test}.o", <<'END');
+capture_ok( "z88dk-z80nm -a ${test}.o", <<'END' );
 Object  file test_t_objfile_t.o at $0000: Z80RMF18
   Name: test_t_objfile_t
   CPU:  z80 
@@ -4161,17 +4174,21 @@ Object  file test_t_objfile_t.o at $0000: Z80RMF18
     S   1 = "test_t_objfile_t"
 END
 
-
 # define org 0
 unlink_testfiles;
-spew("${test}.asm", "org 0 \n nop");
+spew( "${test}.asm", "org 0 \n nop" );
 
-capture_ok("z88dk-z80asm ${test}.asm", "");
+capture_ok( "z88dk-z80asm ${test}.asm", "" );
 
-check_bin_file("${test}.o", objfile(NAME => $test,
-									CODE => [["", 0, 1, bytes(0)]]));
+check_bin_file(
+    "${test}.o",
+    objfile(
+        NAME => $test,
+        CODE => [ [ "", 0, 1, bytes(0) ] ]
+    )
+);
 
-capture_ok("z88dk-z80nm -a ${test}.o", <<'END');
+capture_ok( "z88dk-z80nm -a ${test}.o", <<'END' );
 Object  file test_t_objfile_t.o at $0000: Z80RMF18
   Name: test_t_objfile_t
   CPU:  z80 
@@ -4181,17 +4198,21 @@ Object  file test_t_objfile_t.o at $0000: Z80RMF18
     S   1 = "test_t_objfile_t"
 END
 
-
 # define org 0xFFFF
 unlink_testfiles;
-spew("${test}.asm", "org 0xFFFF \n nop");
+spew( "${test}.asm", "org 0xFFFF \n nop" );
 
-capture_ok("z88dk-z80asm ${test}.asm", "");
+capture_ok( "z88dk-z80asm ${test}.asm", "" );
 
-check_bin_file("${test}.o", objfile(NAME => $test,
-									CODE => [["", 0xFFFF, 1, bytes(0)]]));
+check_bin_file(
+    "${test}.o",
+    objfile(
+        NAME => $test,
+        CODE => [ [ "", 0xFFFF, 1, bytes(0) ] ]
+    )
+);
 
-capture_ok("z88dk-z80nm -a ${test}.o", <<'END');
+capture_ok( "z88dk-z80nm -a ${test}.o", <<'END' );
 Object  file test_t_objfile_t.o at $0000: Z80RMF18
   Name: test_t_objfile_t
   CPU:  z80 
@@ -4201,10 +4222,9 @@ Object  file test_t_objfile_t.o at $0000: Z80RMF18
     S   1 = "test_t_objfile_t"
 END
 
-
 # add expressions, one of each type
 unlink_testfiles;
-spew("${test}.asm", <<END);
+spew( "${test}.asm", <<END );
     ld a,  3*4
     ld b,  (ix + 3*4)
     ld de, 3*4
@@ -4217,22 +4237,29 @@ spew("${test}.asm", <<END);
     ld hl, sp+127
 END
 
-capture_ok("z88dk-z80asm ${test}.asm", "");
+capture_ok( "z88dk-z80asm ${test}.asm", "" );
 
-check_bin_file("${test}.o", objfile(NAME => $test,
-									CODE => [["", -1, 1,
-											bytes(0x3E,0x0C,
-												  0xDD,0x46,0x0C,
-												  0x11,0x0C,0x00,
-												  0x0C,0x00,0x00,0x00,
-												  0xEB,0x21,0x80,0x00,0x39,0xEB,
-												  0xEB,0x21,0x00,0x00,0x39,0xEB,
-												  0xEB,0x21,0x7F,0x00,0x39,0xEB,
-												  0x21,0x80,0xFF,0x39,
-												  0x21,0x00,0x00,0x39,
-												  0x21,0x7F,0x00,0x39)]]));
+check_bin_file(
+    "${test}.o",
+    objfile(
+        NAME => $test,
+        CODE => [
+            [
+                "", -1, 1,
+                bytes(
+                    0x3E, 0x0C, 0xDD, 0x46, 0x0C, 0x11, 0x0C, 0x00,
+                    0x0C, 0x00, 0x00, 0x00, 0xEB, 0x21, 0x80, 0x00,
+                    0x39, 0xEB, 0xEB, 0x21, 0x00, 0x00, 0x39, 0xEB,
+                    0xEB, 0x21, 0x7F, 0x00, 0x39, 0xEB, 0x21, 0x80,
+                    0xFF, 0x39, 0x21, 0x00, 0x00, 0x39, 0x21, 0x7F,
+                    0x00, 0x39
+                )
+            ]
+        ]
+    )
+);
 
-capture_ok("z88dk-z80nm -a ${test}.o", <<'END');
+capture_ok( "z88dk-z80nm -a ${test}.o", <<'END' );
 Object  file test_t_objfile_t.o at $0000: Z80RMF18
   Name: test_t_objfile_t
   CPU:  z80 
@@ -4244,10 +4271,9 @@ Object  file test_t_objfile_t.o at $0000: Z80RMF18
     S   1 = "test_t_objfile_t"
 END
 
-
 # add expressions in defc, one of each type
 unlink_testfiles;
-spew("${test}.asm", <<END);
+spew( "${test}.asm", <<END );
 	defc   value8  = 3
 	defc   value16 = 3
     defc   value127 = 127
@@ -4265,28 +4291,35 @@ spew("${test}.asm", <<END);
     ld hl, sp+value127
 END
 
-capture_ok("z88dk-z80asm ${test}.asm", "");
+capture_ok( "z88dk-z80asm ${test}.asm", "" );
 
-check_bin_file("${test}.o", objfile(NAME => $test,
-		       SYMBOLS => [
-					["L", "C", "", 127, "value127", "${test}.asm", 3],
-					["L", "C", "", 128, "value128", "${test}.asm", 4],
-					["L", "C", "", 3, "value16", "${test}.asm", 2],
-					["L", "C", "", 3, "value8", "${test}.asm", 1],
-				],
-		       CODE => [["", -1, 1,
-					bytes(0x3E,0x0C,
-						  0xDD,0x46,0x0C,
-						  0x11,0x0C,0x00,
-						  0x0C,0x00,0x00,0x00,
-						  0xEB,0x21,0x80,0x00,0x39,0xEB,
-						  0xEB,0x21,0x00,0x00,0x39,0xEB,
-						  0xEB,0x21,0x7F,0x00,0x39,0xEB,
-						  0x21,0x80,0xFF,0x39,
-						  0x21,0x00,0x00,0x39,
-						  0x21,0x7F,0x00,0x39)]]));
+check_bin_file(
+    "${test}.o",
+    objfile(
+        NAME    => $test,
+        SYMBOLS => [
+            [ "L", "C", "", 127, "value127", "${test}.asm", 3 ],
+            [ "L", "C", "", 128, "value128", "${test}.asm", 4 ],
+            [ "L", "C", "", 3,   "value16",  "${test}.asm", 2 ],
+            [ "L", "C", "", 3,   "value8",   "${test}.asm", 1 ],
+        ],
+        CODE => [
+            [
+                "", -1, 1,
+                bytes(
+                    0x3E, 0x0C, 0xDD, 0x46, 0x0C, 0x11, 0x0C, 0x00,
+                    0x0C, 0x00, 0x00, 0x00, 0xEB, 0x21, 0x80, 0x00,
+                    0x39, 0xEB, 0xEB, 0x21, 0x00, 0x00, 0x39, 0xEB,
+                    0xEB, 0x21, 0x7F, 0x00, 0x39, 0xEB, 0x21, 0x80,
+                    0xFF, 0x39, 0x21, 0x00, 0x00, 0x39, 0x21, 0x7F,
+                    0x00, 0x39
+                )
+            ]
+        ]
+    )
+);
 
-capture_ok("z88dk-z80nm -a ${test}.o", <<'END');
+capture_ok( "z88dk-z80nm -a ${test}.o", <<'END' );
 Object  file test_t_objfile_t.o at $0000: Z80RMF18
   Name: test_t_objfile_t
   CPU:  z80 
@@ -4308,10 +4341,9 @@ Object  file test_t_objfile_t.o at $0000: Z80RMF18
     S   6 = "test_t_objfile_t"
 END
 
-
 # add expressions in defc, defines after usage, one of each type
 unlink_testfiles;
-spew("${test}.asm", <<END);
+spew( "${test}.asm", <<END );
 	ld a,  value8 *4
 	ld b,  (ix + value8 * 4)
 	ld de, value16 * 4
@@ -4329,28 +4361,35 @@ spew("${test}.asm", <<END);
     defc   value128 = 128
 END
 
-capture_ok("z88dk-z80asm ${test}.asm", "");
+capture_ok( "z88dk-z80asm ${test}.asm", "" );
 
-check_bin_file("${test}.o", objfile(NAME => $test,
-		       SYMBOLS => [
-					["L", "C", "", 127, "value127", "${test}.asm", 14],
-					["L", "C", "", 128, "value128", "${test}.asm", 15],
-					["L", "C", "", 3, "value16", "${test}.asm", 13],
-					["L", "C", "", 3, "value8", "${test}.asm", 12],
-				],
-		       CODE => [["", -1, 1,
-					bytes(0x3E,0x0C,
-						  0xDD,0x46,0x0C,
-						  0x11,0x0C,0x00,
-						  0x0C,0x00,0x00,0x00,
-						  0xEB,0x21,0x80,0x00,0x39,0xEB,
-						  0xEB,0x21,0x00,0x00,0x39,0xEB,
-						  0xEB,0x21,0x7F,0x00,0x39,0xEB,
-						  0x21,0x80,0xFF,0x39,
-						  0x21,0x00,0x00,0x39,
-						  0x21,0x7F,0x00,0x39)]]));
+check_bin_file(
+    "${test}.o",
+    objfile(
+        NAME    => $test,
+        SYMBOLS => [
+            [ "L", "C", "", 127, "value127", "${test}.asm", 14 ],
+            [ "L", "C", "", 128, "value128", "${test}.asm", 15 ],
+            [ "L", "C", "", 3,   "value16",  "${test}.asm", 13 ],
+            [ "L", "C", "", 3,   "value8",   "${test}.asm", 12 ],
+        ],
+        CODE => [
+            [
+                "", -1, 1,
+                bytes(
+                    0x3E, 0x0C, 0xDD, 0x46, 0x0C, 0x11, 0x0C, 0x00,
+                    0x0C, 0x00, 0x00, 0x00, 0xEB, 0x21, 0x80, 0x00,
+                    0x39, 0xEB, 0xEB, 0x21, 0x00, 0x00, 0x39, 0xEB,
+                    0xEB, 0x21, 0x7F, 0x00, 0x39, 0xEB, 0x21, 0x80,
+                    0xFF, 0x39, 0x21, 0x00, 0x00, 0x39, 0x21, 0x7F,
+                    0x00, 0x39
+                )
+            ]
+        ]
+    )
+);
 
-capture_ok("z88dk-z80nm -a ${test}.o", <<'END');
+capture_ok( "z88dk-z80nm -a ${test}.o", <<'END' );
 Object  file test_t_objfile_t.o at $0000: Z80RMF18
   Name: test_t_objfile_t
   CPU:  z80 
@@ -4372,14 +4411,13 @@ Object  file test_t_objfile_t.o at $0000: Z80RMF18
     S   6 = "test_t_objfile_t"
 END
 
-
 unlink_testfiles;
 
-spew("${test}.inc", <<END);
+spew( "${test}.inc", <<END );
 	ld bc, label * 2
 END
 
-spew("${test}.asm", <<END);
+spew( "${test}.asm", <<END );
 	org 3
 label:	ld a,  label * 4
 	ld b,  (ix + label * 5)
@@ -4389,28 +4427,41 @@ label2:	ld de, label2 * 4
 	defq   label2 * 6
 END
 
-capture_ok("z88dk-z80asm ${test}.asm", "");
+capture_ok( "z88dk-z80asm ${test}.asm", "" );
 
-check_bin_file("${test}.o", objfile(NAME => $test,
-		       EXPRS => [
-				["U", "${test}.asm",2,  "", 0,  1, 2, "", "label*4"],
-				["S", "${test}.asm",3,  "", 2,  4, 3, "", "label*5"],
-				["C", "${test}.inc",1,  "", 5,  6, 3, "", "label*2"],
-				["C", "${test}.asm",5,  "", 8,  9, 3, "", "label2*4"],
-				["C", "${test}.inc",1,  "",11, 12, 3, "", "label*2"],
-				["L", "${test}.asm",7,  "",14, 14, 4, "", "label2*6"]],
-		       SYMBOLS => [
-					["L", "A", "", 0, "label", "${test}.asm", 2],
-					["L", "A", "", 8, "label2", "${test}.asm", 5]],
-		       CODE => [["", 3, 1,
-					bytes(0x3E,0x00,				# addr  0
-						  0xDD,0x46,0x00,			# addr  2
-						  0x01,0x00,0x00,			# addr  5
-						  0x11,0x00,0x00,			# addr  8
-						  0x01,0x00,0x00,			# addr  11
-						  0x00,0x00,0x00,0x00)]]));	# addr  14
+check_bin_file(
+    "${test}.o",
+    objfile(
+        NAME  => $test,
+        EXPRS => [
+            [ "U", "${test}.asm", 2, "", 0,  1,  2, "", "label*4" ],
+            [ "S", "${test}.asm", 3, "", 2,  4,  3, "", "label*5" ],
+            [ "C", "${test}.inc", 1, "", 5,  6,  3, "", "label*2" ],
+            [ "C", "${test}.asm", 5, "", 8,  9,  3, "", "label2*4" ],
+            [ "C", "${test}.inc", 1, "", 11, 12, 3, "", "label*2" ],
+            [ "L", "${test}.asm", 7, "", 14, 14, 4, "", "label2*6" ]
+        ],
+        SYMBOLS => [
+            [ "L", "A", "", 0, "label",  "${test}.asm", 2 ],
+            [ "L", "A", "", 8, "label2", "${test}.asm", 5 ]
+        ],
+        CODE => [
+            [
+                "", 3, 1,
+                bytes(
+                    0x3E, 0x00,          # addr  0
+                    0xDD, 0x46, 0x00,    # addr  2
+                    0x01, 0x00, 0x00,    # addr  5
+                    0x11, 0x00, 0x00,    # addr  8
+                    0x01, 0x00, 0x00,    # addr  11
+                    0x00, 0x00, 0x00, 0x00
+                )
+            ]
+        ]
+    )
+);    # addr  14
 
-capture_ok("z88dk-z80nm -a ${test}.o", <<'END');
+capture_ok( "z88dk-z80nm -a ${test}.o", <<'END' );
 Object  file test_t_objfile_t.o at $0000: Z80RMF18
   Name: test_t_objfile_t
   CPU:  z80 
@@ -4440,11 +4491,10 @@ Object  file test_t_objfile_t.o at $0000: Z80RMF18
     S  10 = "test_t_objfile_t"
 END
 
-
 # local and global symbols
 unlink_testfiles;
 
-spew("${test}.asm", <<END);
+spew( "${test}.asm", <<END );
 	PUBLIC global
 	EXTERN extobj
 	EXTERN extlib
@@ -4454,22 +4504,28 @@ global:	call extobj
 	call extlib
 END
 
-capture_ok("z88dk-z80asm ${test}.asm", "");
+capture_ok( "z88dk-z80asm ${test}.asm", "" );
 
-check_bin_file("${test}.o", objfile(NAME => $test,
-		       EXPRS => [
-				["C", "${test}.asm",6, "", 1, 2, 3, "", "extobj"],
-				["C", "${test}.asm",7, "", 4, 5, 3, "", "extlib"]],
-		       SYMBOLS => [
-					  ["L", "A", "", 0, "local", "${test}.asm", 5],
-				    ["G", "A", "", 1, "global", "${test}.asm", 6]],
-		       EXTERNS => ["extlib","extobj"],
-		       CODE => [["", -1, 1,
-						bytes(0x00,
-							  0xCD,0x00,0x00,
-							  0xCD,0x00,0x00)]]));
+check_bin_file(
+    "${test}.o",
+    objfile(
+        NAME  => $test,
+        EXPRS => [
+            [ "C", "${test}.asm", 6, "", 1, 2, 3, "", "extobj" ],
+            [ "C", "${test}.asm", 7, "", 4, 5, 3, "", "extlib" ]
+        ],
+        SYMBOLS => [
+            [ "L", "A", "", 0, "local",  "${test}.asm", 5 ],
+            [ "G", "A", "", 1, "global", "${test}.asm", 6 ]
+        ],
+        EXTERNS => [ "extlib", "extobj" ],
+        CODE    => [
+            [ "", -1, 1, bytes( 0x00, 0xCD, 0x00, 0x00, 0xCD, 0x00, 0x00 ) ]
+        ]
+    )
+);
 
-capture_ok("z88dk-z80nm -a ${test}.o", <<'END');
+capture_ok( "z88dk-z80nm -a ${test}.o", <<'END' );
 Object  file test_t_objfile_t.o at $0000: Z80RMF18
   Name: test_t_objfile_t
   CPU:  z80 
@@ -4493,28 +4549,27 @@ Object  file test_t_objfile_t.o at $0000: Z80RMF18
     S   6 = "test_t_objfile_t"
 END
 
-
 # library
 unlink_testfiles;
 
-spew("${test}1.asm", <<END);
+spew( "${test}1.asm", <<END );
 	PUBLIC mult
 mult:	ret
 END
 
-spew("${test}2.asm", <<END);
+spew( "${test}2.asm", <<END );
 	PUBLIC div
 div:	ret
 END
 
-capture_ok("z88dk-z80asm -x${test}.lib ${test}1.asm ${test}2.asm", "");
+capture_ok( "z88dk-z80asm -x${test}.lib ${test}1.asm ${test}2.asm", "" );
 
 my $obj1 = slurp("${test}1.o");
 my $obj2 = slurp("${test}2.o");
 
-check_bin_file("${test}.lib", libfile([$obj1, $obj2], ["mult", "div"]));
+check_bin_file( "${test}.lib", libfile( [ $obj1, $obj2 ], [ "mult", "div" ] ) );
 
-capture_ok("z88dk-z80nm -a ${test}.lib", <<'END');
+capture_ok( "z88dk-z80nm -a ${test}.lib", <<'END' );
 Library file test_t_objfile_t.lib at $0000: Z80LMF18
 Object  file test_t_objfile_t.lib at $0014: Z80RMF18
   Name: test_t_objfile_t1
@@ -4545,38 +4600,50 @@ Library public symbols:
   P   2 = "div"
 END
 
-
 # link modules
 unlink_testfiles;
 
-spew("${test}.asm", "");
+spew( "${test}.asm", "" );
 
-capture_ok("z88dk-z80asm ${test}.asm", "");
+capture_ok( "z88dk-z80asm ${test}.asm", "" );
 
-check_bin_file("${test}.o", objfile(NAME => $test, 
-                                    CODE => [["", -1, 1, ""]]));
+check_bin_file(
+    "${test}.o",
+    objfile(
+        NAME => $test,
+        CODE => [ [ "", -1, 1, "" ] ]
+    )
+);
 
-spew("${test}1.asm", "PUBLIC main \n main:");
+spew( "${test}1.asm", "PUBLIC main \n main:" );
 
-capture_ok("z88dk-z80asm ${test}1.asm", "");
+capture_ok( "z88dk-z80asm ${test}1.asm", "" );
 
-check_bin_file("${test}1.o", objfile(NAME => "${test}1",
-				CODE => [["", -1, 1, ""]],
-				SYMBOLS => [["G", "A", "", 0, "main", "${test}1.asm", 2]]));
+check_bin_file(
+    "${test}1.o",
+    objfile(
+        NAME    => "${test}1",
+        CODE    => [ [ "",  -1,  1,  "" ] ],
+        SYMBOLS => [ [ "G", "A", "", 0, "main", "${test}1.asm", 2 ] ]
+    )
+);
 
-spew("${test}2.asm", "EXTERN main \n jp main");
+spew( "${test}2.asm", "EXTERN main \n jp main" );
 
-capture_ok("z88dk-z80asm ${test}2.asm", "");
+capture_ok( "z88dk-z80asm ${test}2.asm", "" );
 
-check_bin_file("${test}2.o", objfile(NAME => "${test}2",
-				EXPRS => [["C", "${test}2.asm",2, "", 0, 1, 3, "", "main"]],
-				EXTERNS => ["main"],
-				CODE => [["", -1, 1, bytes(0xC3,0,0)]]));
+check_bin_file(
+    "${test}2.o",
+    objfile(
+        NAME    => "${test}2",
+        EXPRS   => [ [ "C", "${test}2.asm", 2, "", 0, 1, 3, "", "main" ] ],
+        EXTERNS => ["main"],
+        CODE    => [ [ "", -1, 1, bytes( 0xC3, 0, 0 ) ] ]
+    )
+);
 
-capture_ok("z88dk-z80asm -b ${test}.o ${test}1.o ${test}2.o", "");
-check_bin_file("${test}.bin", bytes(0xC3,0,0));
-
-
+capture_ok( "z88dk-z80asm -b ${test}.o ${test}1.o ${test}2.o", "" );
+check_bin_file( "${test}.bin", bytes( 0xC3, 0, 0 ) );
 
 unlink_testfiles;
 done_testing;

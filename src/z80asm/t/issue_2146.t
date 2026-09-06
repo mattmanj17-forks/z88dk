@@ -7,7 +7,7 @@ use Modern::Perl;
 # https://github.com/z88dk/z88dk/issues/2146
 # z80asm pseudo instruction defs, defw, defb does not produce binary data for calculated values
 
-spew("$test.asm", <<'END');
+spew( "$test.asm", <<'END' );
 .PLY1TBL	defw 0					; Player 1 x coord y coord
 .PLY1FLG	defb 0
 .PLY1CFLG	defb 0
@@ -34,12 +34,15 @@ PLAYERARRAY2END:
 END
 
 # assemble
-capture_ok("z88dk-z80asm +zx -s -l -m -g -r0x6100 $test.asm", "");
-check_bin_file("$test.bin",
-			words(0).bytes(0, 0).
-			words(4, 4*16).(bytes(0) x (4*16)).
-			words(4*16).(bytes(0) x (4*16)));
-check_text_file("$test.map", <<END);
+capture_ok( "z88dk-z80asm +zx -s -l -m -g -r0x6100 $test.asm", "" );
+check_bin_file( "$test.bin",
+          words(0)
+        . bytes( 0, 0 )
+        . words( 4, 4 * 16 )
+        . ( bytes(0) x ( 4 * 16 ) )
+        . words( 4 * 16 )
+        . ( bytes(0) x ( 4 * 16 ) ) );
+check_text_file( "$test.map", <<END );
 MAXPLAYERS                      = \$0010 ; const, local, , $test, , $test.asm:8
 PLAYERARRAY2                    = \$6148 ; addr, local, , $test, , $test.asm:18
 PLAYERARRAY2END                 = \$618A ; addr, local, , $test, , $test.asm:21
@@ -56,7 +59,7 @@ __tail                          = \$618A ; const, public, def, , ,
 END
 
 # different sections
-spew("$test.asm", <<'END');
+spew( "$test.asm", <<'END' );
 	section aa
 aa_start:	defb 1
 aa_end:
@@ -76,10 +79,9 @@ IF ERROR
 ENDIF
 END
 
-capture_ok("z88dk-z80asm -b -m $test.asm", "");
-check_bin_file("$test.bin",
-			bytes(1, 2, 3, 4));
-check_text_file("$test.map", <<END);
+capture_ok( "z88dk-z80asm -b -m $test.asm", "" );
+check_bin_file( "$test.bin", bytes( 1, 2, 3, 4 ) );
+check_text_file( "$test.map", <<END );
 __aa_head                       = \$0000 ; const, public, def, , ,
 __aa_size                       = \$0001 ; const, public, def, , ,
 __aa_tail                       = \$0001 ; const, public, def, , ,
@@ -98,13 +100,13 @@ bb_start                        = \$0001 ; addr, local, , $test, bb, $test.asm:6
 nonsence                        = \$0001 ; comput, local, , $test, bb, $test.asm:11
 END
 
-capture_nok("z88dk-z80asm -DERROR -b $test.asm", <<END);
+capture_nok( "z88dk-z80asm -DERROR -b $test.asm", <<END );
 $test.asm:16: error: constant expression expected
   ^---- defs nonsence, 5
 END
 
 # no DEFC
-spew("$test.asm", <<'END');
+spew( "$test.asm", <<'END' );
 aa_start:	defb 1
 aa_end:
 bb_start:	defb 2, 2
@@ -117,16 +119,16 @@ bb_end:
 	defs bb_end-bb_start+aa_end-aa_start, 7
 END
 
-capture_ok("z88dk-z80asm -b -m $test.asm", "");
-check_bin_file("$test.bin",
-			bytes(1).
-			bytes(2,2).
-			bytes(3).
-			bytes(4,4).
-			bytes(5).
-			bytes(6,6,6).
-			bytes(7,7,7));
-check_text_file("$test.map", <<END);
+capture_ok( "z88dk-z80asm -b -m $test.asm", "" );
+check_bin_file( "$test.bin",
+          bytes(1)
+        . bytes( 2, 2 )
+        . bytes(3)
+        . bytes( 4, 4 )
+        . bytes(5)
+        . bytes( 6, 6, 6 )
+        . bytes( 7, 7, 7 ) );
+check_text_file( "$test.map", <<END );
 __head                          = \$0000 ; const, public, def, , ,
 __size                          = \$000D ; const, public, def, , ,
 __tail                          = \$000D ; const, public, def, , ,
@@ -137,7 +139,7 @@ bb_start                        = \$0001 ; addr, local, , $test, , $test.asm:3
 END
 
 # different expressions
-spew("$test.asm", <<'END');
+spew( "$test.asm", <<'END' );
 aa_start:	defb 1
 aa_end:
 bb_start:	defb 2, 2
@@ -156,16 +158,16 @@ bb_end:
 	defs s5,7
 END
 
-capture_ok("z88dk-z80asm -b -m $test.asm", "");
-check_bin_file("$test.bin",
-			bytes(1).
-			bytes(2,2).
-			bytes(3).
-			bytes(4,4).
-			bytes(5).
-			bytes(6,6,6).
-			bytes(7,7,7));
-check_text_file("$test.map", <<END);
+capture_ok( "z88dk-z80asm -b -m $test.asm", "" );
+check_bin_file( "$test.bin",
+          bytes(1)
+        . bytes( 2, 2 )
+        . bytes(3)
+        . bytes( 4, 4 )
+        . bytes(5)
+        . bytes( 6, 6, 6 )
+        . bytes( 7, 7, 7 ) );
+check_text_file( "$test.map", <<END );
 __head                          = \$0000 ; const, public, def, , ,
 __size                          = \$000D ; const, public, def, , ,
 __tail                          = \$000D ; const, public, def, , ,

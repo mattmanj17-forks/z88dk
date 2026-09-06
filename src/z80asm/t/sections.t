@@ -5,24 +5,23 @@ BEGIN { use lib 't'; require 'testlib.pl'; }
 use Modern::Perl;
 
 # Empty sections do not appear in the map file, except "" section
-z80asm_ok("-r4 -b -m -g -Dminus_d_var", "", "", <<END, bytes());
+z80asm_ok( "-r4 -b -m -g -Dminus_d_var", "", "", <<END, bytes() );
 				; empty			;; 
 END
 
-check_text_file("$test.map", <<END);
+check_text_file( "$test.map", <<END );
 __head                          = \$0004 ; const, public, def, , ,
 __size                          = \$0000 ; const, public, def, , ,
 __tail                          = \$0004 ; const, public, def, , ,
 END
 
-
-z80asm_ok("-b -m", "", "", <<END, bytes(0));
+z80asm_ok( "-b -m", "", "", <<END, bytes(0) );
 				section empty
 				section code
 				nop				;; 00
 END
 
-check_text_file("$test.map", <<END);
+check_text_file( "$test.map", <<END );
 __code_head                     = \$0000 ; const, public, def, , ,
 __code_size                     = \$0001 ; const, public, def, , ,
 __code_tail                     = \$0001 ; const, public, def, , ,

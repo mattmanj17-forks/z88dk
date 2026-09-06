@@ -12,12 +12,12 @@ use Modern::Perl;
 #------------------------------------------------------------------------------
 
 unlink_testfiles;
-spew("$test.a.asm", <<'END');
+spew( "$test.a.asm", <<'END' );
 SECTION code2
 a:	ld      hl,16384
 END
 
-spew("$test.b.asm", <<'END');
+spew( "$test.b.asm", <<'END' );
 MODULE b
 SECTION code
 b:	ld      hl,32768
@@ -27,9 +27,10 @@ END
 # building -m* library - give .asm
 #------------------------------------------------------------------------------
 
-capture_ok("z88dk-z80asm -mz80 $test.a.asm", "");
-capture_ok("z88dk-z80asm -mr3k $test.b.asm", "");
-capture_ok("z88dk-z80asm -v -x$test.lib -m* ".quote_os("$test.*.asm"), <<END);
+capture_ok( "z88dk-z80asm -mz80 $test.a.asm", "" );
+capture_ok( "z88dk-z80asm -mr3k $test.b.asm", "" );
+capture_ok( "z88dk-z80asm -v -x$test.lib -m* " . quote_os("$test.*.asm"),
+    <<END );
 % z88dk-z80asm -v -xtest_t_issue_2320_b_t.lib -m* ${\os_quoted("test_t_issue_2320_b_t.*.asm")}
 Predefined constant: __CPU_Z80__ = 1
 Predefined constant: __CPU_ZILOG__ = 1
@@ -437,7 +438,7 @@ Predefined constant: __CPU_Z80__ = 1
 Predefined constant: __CPU_ZILOG__ = 1
 END
 
-capture_ok("z88dk-z80nm -a $test.lib", <<'END');
+capture_ok( "z88dk-z80nm -a $test.lib", <<'END' );
 Library file test_t_issue_2320_b_t.lib at $0000: Z80LMF18
 Object  file test_t_issue_2320_b_t.lib at $0014: Z80RMF18
   Name: test_t_issue_2320_b_t.a

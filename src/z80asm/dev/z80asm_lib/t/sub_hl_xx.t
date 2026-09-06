@@ -17,27 +17,29 @@ my $ticks = Ticks->new;
 my $test_nr = 0;
 
 for my $reg (qw( BC DE HL SP )) {
-	for my $carry (0, 1) {
-		for my $base (0x1000, 32768, 32769) {
-			for my $sub (0x1000, 32768, 32769) {
-				$test_nr++;
-				note "Test $test_nr reg=$reg F_C=$carry base=$base sub=$sub";
-				
-				my $init_carry = $carry ? "scf" : "and a";
-				my $base1 = ($reg eq 'HL') ? $sub : $base;
-				my $sum = $base1 - $sub;
-								
-				$ticks->add(<<END, 
+    for my $carry ( 0, 1 ) {
+        for my $base ( 0x1000, 32768, 32769 ) {
+            for my $sub ( 0x1000, 32768, 32769 ) {
+                $test_nr++;
+                note "Test $test_nr reg=$reg F_C=$carry base=$base sub=$sub";
+
+                my $init_carry = $carry           ? "scf" : "and a";
+                my $base1      = ( $reg eq 'HL' ) ? $sub  : $base;
+                my $sum        = $base1 - $sub;
+
+                $ticks->add(
+                    <<END,
 						$init_carry 
 						ld		hl, $base
 						ld		$reg, $sub
 						sub 	hl, $reg
 END
-				F_C => $sum < 0 ? 1 : 0,
-				HL  => $sum < 0 ? $sum + 65536 : $sum);
-			}
-		}
-	}
+                    F_C => $sum < 0 ? 1            : 0,
+                    HL  => $sum < 0 ? $sum + 65536 : $sum
+                );
+            }
+        }
+    }
 }
 
 $ticks->run;

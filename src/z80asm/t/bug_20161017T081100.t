@@ -7,21 +7,21 @@ use Modern::Perl;
 #------------------------------------------------------------------------------
 # Bug report: alvin (alvin_albrecht@hotmail.com) <lists@suborbital.org.uk> via lists.sourceforge.net
 # date:	Mon, Oct 17, 2016 at 8:11 AM
-# For some reason, in pietro_loader.asm, the symbols 
+# For some reason, in pietro_loader.asm, the symbols
 # "__LOADER_head" and "__LOADER_CODE_tail" are
-# being made public when a consolidated object is built. 
-# It is only those two symbols despite other section symbols being used in 
+# being made public when a consolidated object is built.
+# It is only those two symbols despite other section symbols being used in
 # the same file.
 
-spew("${test}1.asm", <<'END');
+spew( "${test}1.asm", <<'END' );
 	SECTION LOADER
 	EXTERN __LOADER_head, __LOADER_tail
 	ld hl, __LOADER_tail -__LOADER_head
 END
 
-capture_ok("z88dk-z80asm ${test}1.asm", "");
+capture_ok( "z88dk-z80asm ${test}1.asm", "" );
 
-capture_ok("z88dk-z80nm -a ${test}1.o", <<END);
+capture_ok( "z88dk-z80nm -a ${test}1.o", <<END );
 Object  file ${test}1.o at \$0000: Z80RMF18
   Name: ${test}1
   CPU:  z80 
@@ -42,10 +42,9 @@ Object  file ${test}1.o at \$0000: Z80RMF18
     S   6 = "${test}1"
 END
 
+capture_ok( "z88dk-z80asm -o${test}1.o ${test}1.asm", "" );
 
-capture_ok("z88dk-z80asm -o${test}1.o ${test}1.asm", "");
-
-capture_ok("z88dk-z80nm -a ${test}1.o", <<END);
+capture_ok( "z88dk-z80nm -a ${test}1.o", <<END );
 Object  file ${test}1.o at \$0000: Z80RMF18
   Name: ${test}1
   CPU:  z80 
@@ -65,7 +64,6 @@ Object  file ${test}1.o at \$0000: Z80RMF18
     S   5 = "__LOADER_tail"
     S   6 = "test_t_bug_20161017T081100_t1"
 END
-
 
 unlink_testfiles;
 done_testing;

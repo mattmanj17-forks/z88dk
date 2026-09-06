@@ -8,7 +8,7 @@ use Modern::Perl;
 # z80asm: superfluous section generated in compile
 # caused by expressions DEFC aaa = aaa
 
-z80asm_nok("", "", <<ASM, <<ERR);
+z80asm_nok( "", "", <<ASM, <<ERR );
 	defc aaa = aaa
 ASM
 ${test}.asm:1: error: recursive expression: aaa

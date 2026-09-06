@@ -4,7 +4,7 @@ BEGIN { use lib 't'; require 'testlib.pl'; }
 
 use Modern::Perl;
 
-spew("$test.asm", <<'END');
+spew( "$test.asm", <<'END' );
 	SECTION	code
 	ld de,hl+1
 	ld de,sp+2
@@ -13,8 +13,8 @@ spew("$test.asm", <<'END');
 	defs 2
 END
 
-capture_ok("z88dk-z80asm -m8085 -l $test.asm", "");
-check_text_file("$test.lis", <<'END');
+capture_ok( "z88dk-z80asm -m8085 -l $test.asm", "" );
+check_text_file( "$test.lis", <<'END' );
 test_t_issue_2632_t.asm:
      1                          	SECTION	code
      2  0000  2801              	ld de,hl+1

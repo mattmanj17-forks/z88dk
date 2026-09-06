@@ -18,14 +18,15 @@ my $test_nr = 0;
 
 # ld (hl), ixy
 for my $x (qw( IX IY )) {
-	for my $inc (0, 1, 2) {
-		$test_nr++;
-		
-		my $var_label = "L${test_nr}_var";
-		my $ldihl = ("ld (hl)", "ld (hl+)", "ldi (hl)")[$inc];
-		my $exp_incr = $inc==0 ? 0 : 2;
-		
-		$ticks->add(<<END, 
+    for my $inc ( 0, 1, 2 ) {
+        $test_nr++;
+
+        my $var_label = "L${test_nr}_var";
+        my $ldihl     = ( "ld (hl)", "ld (hl+)", "ldi (hl)" )[$inc];
+        my $exp_incr  = $inc == 0 ? 0 : 2;
+
+        $ticks->add(
+            <<END,
 					jr start
 			var:	defw 0
 			start:
@@ -45,23 +46,28 @@ for my $x (qw( IX IY )) {
 					ld bc, 0x1234
 			ENDIF
 END
-			HL 	=> sub { my($t) = @_; return $t->{labels}{$var_label}+$exp_incr; },
-			DE 	=> 0x5678,
-			BC  => 0x1234);
-	}
+            HL => sub {
+                my ($t) = @_;
+                return $t->{labels}{$var_label} + $exp_incr;
+            },
+            DE => 0x5678,
+            BC => 0x1234
+        );
+    }
 }
 
 # ld ixy, (hl)
 for my $x (qw( IX IY )) {
-	for my $inc (0, 1, 2) {
-		$test_nr++;
-		
-		my $var_label = "L${test_nr}_var";
-		my $ld =  ("ld",   "ld",    "ldi" )[$inc];
-		my $ihl = ("(hl)", "(hl+)", "(hl)")[$inc];
-		my $exp_incr = $inc==0 ? 0 : 2;
+    for my $inc ( 0, 1, 2 ) {
+        $test_nr++;
 
-		$ticks->add(<<END, 
+        my $var_label = "L${test_nr}_var";
+        my $ld        = ( "ld",   "ld",    "ldi" )[$inc];
+        my $ihl       = ( "(hl)", "(hl+)", "(hl)" )[$inc];
+        my $exp_incr  = $inc == 0 ? 0 : 2;
+
+        $ticks->add(
+            <<END,
 					jr start
 			var:	defw 0x1234
 			start:
@@ -81,12 +87,15 @@ for my $x (qw( IX IY )) {
 					ld bc, 0x1234
 			ENDIF
 END
-			HL 	=> sub { my($t) = @_; return $t->{labels}{$var_label}+$exp_incr; },
-			DE 	=> 0x5678,
-			BC	=> 0x1234);
-	}
+            HL => sub {
+                my ($t) = @_;
+                return $t->{labels}{$var_label} + $exp_incr;
+            },
+            DE => 0x5678,
+            BC => 0x1234
+        );
+    }
 }
-
 
 $ticks->run;
 

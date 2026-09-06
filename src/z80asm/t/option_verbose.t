@@ -14,18 +14,18 @@ END
 
 # no -v
 unlink_testfiles;
-spew("${test}.asm", $asm);
+spew( "${test}.asm", $asm );
 
-capture_ok("z88dk-z80asm -b -s -l -g ${test}.asm", <<END);
+capture_ok( "z88dk-z80asm -b -s -l -g ${test}.asm", <<END );
 END
 
-check_bin_file("${test}.bin", bytes(0,0,0));
+check_bin_file( "${test}.bin", bytes( 0, 0, 0 ) );
 
 # -v
 unlink_testfiles;
-spew("${test}.asm", $asm);
+spew( "${test}.asm", $asm );
 
-capture_ok("z88dk-z80asm -b -s -l -g -v ${test}.asm", <<END);
+capture_ok( "z88dk-z80asm -b -s -l -g -v ${test}.asm", <<END );
 % z88dk-z80asm -b -s -l -g -v ${test}.asm
 Predefined constant: __CPU_Z80__ = 1
 Predefined constant: __CPU_ZILOG__ = 1
@@ -40,8 +40,8 @@ Creating file '${test}.def'
 Creating binary '${test}.bin'
 END
 
-check_bin_file("${test}.bin", bytes(0,0,0));
-check_text_file("${test}.lis", <<END);
+check_bin_file( "${test}.bin", bytes( 0, 0, 0 ) );
+check_text_file( "${test}.lis", <<END );
 ${test}.asm:
      1  0000  00                	nop
      2  0001  00                	nop
@@ -49,11 +49,11 @@ ${test}.asm:
      4                          
 END
 
-check_text_file("${test}.def", <<END);
+check_text_file( "${test}.def", <<END );
 END
 
-unlink("${test}.bin", "${test}.def");
-capture_ok("z88dk-z80asm -b -s -l -g -v ${test}.o", <<END);
+unlink( "${test}.bin", "${test}.def" );
+capture_ok( "z88dk-z80asm -b -s -l -g -v ${test}.o", <<END );
 % z88dk-z80asm -b -s -l -g -v ${test}.o
 Predefined constant: __CPU_Z80__ = 1
 Predefined constant: __CPU_ZILOG__ = 1
@@ -65,8 +65,8 @@ Creating file '${test}.def'
 Creating binary '${test}.bin'
 END
 
-check_bin_file("${test}.bin", bytes(0,0,0));
-check_text_file("${test}.lis", <<END);
+check_bin_file( "${test}.bin", bytes( 0, 0, 0 ) );
+check_text_file( "${test}.lis", <<END );
 ${test}.asm:
      1  0000  00                	nop
      2  0001  00                	nop
@@ -74,14 +74,14 @@ ${test}.asm:
      4                          
 END
 
-check_text_file("${test}.def", <<END);
+check_text_file( "${test}.def", <<END );
 END
 
 # -v in Z80ASM env
 unlink_testfiles;
-spew("${test}.asm", $asm);
+spew( "${test}.asm", $asm );
 local $ENV{Z80ASM} = "-v";
-capture_ok("z88dk-z80asm -b -s -l -g ${test}.asm", <<END);
+capture_ok( "z88dk-z80asm -b -s -l -g ${test}.asm", <<END );
 Z80ASM=-v
 % z88dk-z80asm -b -s -l -g ${test}.asm
 Predefined constant: __CPU_Z80__ = 1
@@ -97,8 +97,8 @@ Creating file '${test}.def'
 Creating binary '${test}.bin'
 END
 
-check_bin_file("${test}.bin", bytes(0,0,0));
-check_text_file("${test}.lis", <<END);
+check_bin_file( "${test}.bin", bytes( 0, 0, 0 ) );
+check_text_file( "${test}.lis", <<END );
 ${test}.asm:
      1  0000  00                	nop
      2  0001  00                	nop
@@ -106,9 +106,8 @@ ${test}.asm:
      4                          
 END
 
-check_text_file("${test}.def", <<END);
+check_text_file( "${test}.def", <<END );
 END
-
 
 unlink_testfiles;
 done_testing;

@@ -5,7 +5,8 @@ BEGIN { use lib 't'; require 'testlib.pl'; }
 use Modern::Perl;
 
 # maximum forward and backward relative jumps
-z80asm_ok("", "", "", <<END,
+z80asm_ok(
+    "", "", "", <<END,
 	jr	 jr2
 	jr	 jr2
 	jr	 jr2
@@ -33,31 +34,34 @@ jr2:
 	jr	 jr2
 	jr	 jr2							;;	defb 18h, 80h
 END
-	bytes(0x18, 0x7f,
-		  0x18, 0x7d, 
-		  0x18, 0x7b,
-		  
-		  0x10, 0xfe,
-		  0x10, 0x7f,
-		  0x18, 0xfe,
-		  0x18, 0x80,
-		  
-		  0x10, 0,
-		  0x18, 0xfe,
-		  0x10, 0xfc,
-		  0x30, 0xfa, 
-		  0x38, 0xf8,
-		  0x20, 0xf6,
-		  0x28, 0xf4,
-		  
-		  (0) x 101,
-		  (0) x 122,
-		  
-		  0x18, 0x84,
-		  0x18, 0x82,
-		  0x18, 0x80));
-		  
-z80asm_nok("", "", <<END, <<END);
+    bytes(
+        0x18, 0x7f,
+        0x18, 0x7d,
+        0x18, 0x7b,
+
+        0x10, 0xfe,
+        0x10, 0x7f,
+        0x18, 0xfe,
+        0x18, 0x80,
+
+        0x10, 0,
+        0x18, 0xfe,
+        0x10, 0xfc,
+        0x30, 0xfa,
+        0x38, 0xf8,
+        0x20, 0xf6,
+        0x28, 0xf4,
+
+        (0) x 101,
+        (0) x 122,
+
+        0x18, 0x84,
+        0x18, 0x82,
+        0x18, 0x80
+    )
+);
+
+z80asm_nok( "", "", <<END, <<END );
 	djnz ASMPC-0x7F	
 	djnz ASMPC+0x82	
 	jr ASMPC-0x7F	
@@ -98,7 +102,8 @@ $test.asm:12: error: integer range: \$80
 END
 
 # chek JRE jumps
-z80asm_ok("-b -mr4k", "", "", <<END,
+z80asm_ok(
+    "-b -mr4k", "", "", <<END,
 		jre nz, j1
 		jre z,  j1
 		jre nc, j1
@@ -107,34 +112,43 @@ z80asm_ok("-b -mr4k", "", "", <<END,
 		defs 32755, 0
 j1:
 END
-		bytes(0xED, 0xC3).words(0x7FFF).
-		bytes(0xED, 0xCB).words(0x7FFB).
-		bytes(0xED, 0xD3).words(0x7FF7).
-		bytes(0xED, 0xDB).words(0x7FF3).
-		bytes((0) x 32755));
+    bytes( 0xED, 0xC3 )
+        . words(0x7FFF)
+        . bytes( 0xED, 0xCB )
+        . words(0x7FFB)
+        . bytes( 0xED, 0xD3 )
+        . words(0x7FF7)
+        . bytes( 0xED, 0xDB )
+        . words(0x7FF3)
+        . bytes( (0) x 32755 )
+);
 
-spew("$test.asm", <<END);
+spew( "$test.asm", <<END );
 		extern j1
 		jre nz, j1
 		jre z,  j1
 		jre nc, j1
 		jre c,  j1
 END
-spew("$test.1.asm", <<END);
+spew( "$test.1.asm", <<END );
 		public j1
 		defs 32755, 0
 j1:
 END
 
-capture_ok("z88dk-z80asm -b -mr4k $test.asm $test.1.asm", "");
-check_bin_file("$test.bin", 
-		bytes(0xED, 0xC3).words(0x7FFF).
-		bytes(0xED, 0xCB).words(0x7FFB).
-		bytes(0xED, 0xD3).words(0x7FF7).
-		bytes(0xED, 0xDB).words(0x7FF3).
-		bytes((0) x 32755));
+capture_ok( "z88dk-z80asm -b -mr4k $test.asm $test.1.asm", "" );
+check_bin_file( "$test.bin",
+          bytes( 0xED, 0xC3 )
+        . words(0x7FFF)
+        . bytes( 0xED, 0xCB )
+        . words(0x7FFB)
+        . bytes( 0xED, 0xD3 )
+        . words(0x7FF7)
+        . bytes( 0xED, 0xDB )
+        . words(0x7FF3)
+        . bytes( (0) x 32755 ) );
 
-capture_ok("z88dk-z80nm -a $test.o $test.1.o", <<'END');
+capture_ok( "z88dk-z80nm -a $test.o $test.1.o", <<'END' );
 Object  file test_t_jumps_t.o at $0000: Z80RMF18
   Name: test_t_jumps_t
   CPU:  r4k 
@@ -2211,7 +2225,7 @@ Object  file test_t_jumps_t.1.o at $0000: Z80RMF18
     S   3 = "test_t_jumps_t.1"
 END
 
-z80asm_nok("-b -mr4k", "", <<END, <<END);
+z80asm_nok( "-b -mr4k", "", <<END, <<END );
 		jre nz, j1
 		jre z,  j1
 		jre nc, j1
@@ -2224,7 +2238,8 @@ $test.asm:1: error: integer range: \$8000
   ^---- j1
 END
 
-z80asm_ok("-b -mr4k", "", "", <<END,
+z80asm_ok(
+    "-b -mr4k", "", "", <<END,
 j1:
 		defs 32752, 0
 		
@@ -2233,13 +2248,18 @@ j1:
 		jre nc, j1
 		jre c,  j1
 END
-		bytes((0) x 32752).
-		bytes(0xED, 0xC3).words(-0x7FF4).
-		bytes(0xED, 0xCB).words(-0x7FF8).
-		bytes(0xED, 0xD3).words(-0x7FFC).
-		bytes(0xED, 0xDB).words(-0x8000));
+    bytes( (0) x 32752 )
+        . bytes( 0xED, 0xC3 )
+        . words(-0x7FF4)
+        . bytes( 0xED, 0xCB )
+        . words(-0x7FF8)
+        . bytes( 0xED, 0xD3 )
+        . words(-0x7FFC)
+        . bytes( 0xED, 0xDB )
+        . words(-0x8000)
+);
 
-z80asm_nok("-b -mr4k", "", <<END, <<END);
+z80asm_nok( "-b -mr4k", "", <<END, <<END );
 j1:
 		defs 32753, 0
 		
@@ -2252,9 +2272,8 @@ $test.asm:7: error: integer range: -\$8001
   ^---- j1
 END
 
-
 # Allow labels with names of opcodes
-z80asm_ok("", "", "", <<END, bytes(0x18, 0xfe));
+z80asm_ok( "", "", "", <<END, bytes( 0x18, 0xfe ) );
 	jr: jr jr
 END
 

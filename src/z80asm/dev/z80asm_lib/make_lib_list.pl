@@ -6,7 +6,7 @@
 
 use Modern::Perl;
 
-for (sort @ARGV) {
-	next if /^test/;
-	say;
+for ( sort @ARGV ) {
+    next if /^test/;
+    say;
 }

@@ -8,7 +8,7 @@ use Modern::Perl;
 # The PHASE directive adds to the org, but only sometimes
 
 # Bug case
-z80asm_ok( "", "", "", <<'END', bytes(0x21,0x00,0x03, 0xC3,0x00,0x03) );
+z80asm_ok( "", "", "", <<'END', bytes( 0x21, 0x00, 0x03, 0xC3, 0x00, 0x03 ) );
     ORG $0100
 
     PHASE $0300
@@ -17,7 +17,7 @@ z80asm_ok( "", "", "", <<'END', bytes(0x21,0x00,0x03, 0xC3,0x00,0x03) );
         jp foo      ;[0003] c3 00 03
     DEPHASE
 END
-capture_ok("z88dk-z80nm -a $test.o", <<'END');
+capture_ok( "z88dk-z80nm -a $test.o", <<'END' );
 Object  file test_t_issue_3024_t.o at $0000: Z80RMF18
   Name: test_t_issue_3024_t
   CPU:  z80 
@@ -32,13 +32,13 @@ Object  file test_t_issue_3024_t.o at $0000: Z80RMF18
 END
 
 # non-PHASE case
-z80asm_ok( "", "", "", <<'END', bytes(0x21,0x00,0x01, 0xC3,0x00,0x01) );
+z80asm_ok( "", "", "", <<'END', bytes( 0x21, 0x00, 0x01, 0xC3, 0x00, 0x01 ) );
     ORG $0100
     foo:
         ld hl, $    ;[0000] 21 00 01
         jp foo      ;[0003] c3 00 01
 END
-capture_ok("z88dk-z80nm -a $test.o", <<'END');
+capture_ok( "z88dk-z80nm -a $test.o", <<'END' );
 Object  file test_t_issue_3024_t.o at $0000: Z80RMF18
   Name: test_t_issue_3024_t
   CPU:  z80 

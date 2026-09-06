@@ -9,7 +9,7 @@ use Modern::Perl;
 
 unlink_testfiles;
 
-spew("${test}1.asm", <<'END');
+spew( "${test}1.asm", <<'END' );
 		global main, main1, print, lib_start, lib_end
 
 		section code
@@ -26,7 +26,7 @@ spew("${test}1.asm", <<'END');
 		defc main1 = main
 END
 
-spew("${test}2.asm", <<'END');
+spew( "${test}2.asm", <<'END' );
 		global print, print1, printa
 
 		defc print = print1
@@ -53,7 +53,7 @@ spew("${test}2.asm", <<'END');
 	mess: defb "world"
 END
 
-spew("${test}3.asm", <<'END');
+spew( "${test}3.asm", <<'END' );
 		global print1, printa
 
 		section code
@@ -68,14 +68,14 @@ spew("${test}3.asm", <<'END');
 	dollar:	defw ASMPC
 END
 
-spew("${test}4.asm", <<'END');
+spew( "${test}4.asm", <<'END' );
 		global code_end
 
 		section code
 	code_end:
 END
 
-spew("${test}lib.asm", <<'END');
+spew( "${test}lib.asm", <<'END' );
 		global lib_start, lib_end
 
 		defc lib_start = 0
@@ -83,78 +83,80 @@ spew("${test}lib.asm", <<'END');
 END
 
 sub bincode {
-	my($addr) = @_;
-	my $code;
-	my $data;
-	my $l_main = 0;
-	my $l_print = 0;
-	my $l_print1 = 0;
-	my $l_printa = 0;
-	my $l_mess = 0;
-	my $l_dollar = 0;
-	my $l_delay = 0;
-	my $l_delay1 = 0;
+    my ($addr) = @_;
+    my $code;
+    my $data;
+    my $l_main   = 0;
+    my $l_print  = 0;
+    my $l_print1 = 0;
+    my $l_printa = 0;
+    my $l_mess   = 0;
+    my $l_dollar = 0;
+    my $l_delay  = 0;
+    my $l_delay1 = 0;
 
-	for my $pass (1..2) {
-		$code = "";
-		$data = "";
+    for my $pass ( 1 .. 2 ) {
+        $code = "";
+        $data = "";
 
-		# test1.asm
-		$l_main = $addr + length($code);
-		$code .= pack("Cv", 0xCD, 0).
-				 pack("Cv", 0x21, $l_mess).
-				 pack("Cv", 0xCD, $l_print).
-				 pack("Cv", 0xCD, 0).
-				 pack("C",  0xC9);
+        # test1.asm
+        $l_main = $addr + length($code);
+        $code .=
+              pack( "Cv", 0xCD, 0 )
+            . pack( "Cv", 0x21, $l_mess )
+            . pack( "Cv", 0xCD, $l_print )
+            . pack( "Cv", 0xCD, 0 )
+            . pack( "C",  0xC9 );
 
-		$data .= "hello ";
+        $data .= "hello ";
 
-		# test2.asm
-		$l_printa = $addr + length($code);
-		$code .= pack("C*",	0x7E,
-							0xA7,
-							0xC8,
-							0xD7,
-							0x23).
-				 pack("Cv",	0xCD, $l_delay).
-				 pack("Cv",	0xC3, $l_printa);
+        # test2.asm
+        $l_printa = $addr + length($code);
+        $code .=
+              pack( "C*", 0x7E, 0xA7, 0xC8, 0xD7, 0x23 )
+            . pack( "Cv", 0xCD, $l_delay )
+            . pack( "Cv", 0xC3, $l_printa );
 
-		$l_delay = $addr + length($code);
-		$code .= pack("C*",	0x06, 0x00);
+        $l_delay = $addr + length($code);
+        $code .= pack( "C*", 0x06, 0x00 );
 
-		$l_delay1 = $addr + length($code);
-		$code .= pack("C*",	0x05).
-				 pack("Cv",	0xC2, $l_delay1).
-				 pack("C*",	0xC9);
+        $l_delay1 = $addr + length($code);
+        $code .=
+              pack( "C*", 0x05 )
+            . pack( "Cv", 0xC2, $l_delay1 )
+            . pack( "C*", 0xC9 );
 
-		$data .= "world";
+        $data .= "world";
 
-		# test3.asm
-		$l_print1 = $addr + length($code);
-		$code .= pack("C*",	0xE5).
-				 pack("Cv",	0xCD, $l_printa).
-				 pack("C*",	0xE1,
-							0xC9);
+        # test3.asm
+        $l_print1 = $addr + length($code);
+        $code .=
+              pack( "C*", 0xE5 )
+            . pack( "Cv", 0xCD, $l_printa )
+            . pack( "C*", 0xE1, 0xC9 );
 
-		$data .= "!\0";
-		$data .= pack("v", $l_dollar);
+        $data .= "!\0";
+        $data .= pack( "v", $l_dollar );
 
-		if ($pass == 1) {
-			$l_mess = $addr + length($code);
-			$l_dollar = $addr + length($code) + length($data) - 2;
-			$l_print = $l_print1;
-		}
-	}
+        if ( $pass == 1 ) {
+            $l_mess   = $addr + length($code);
+            $l_dollar = $addr + length($code) + length($data) - 2;
+            $l_print  = $l_print1;
+        }
+    }
 
-	my $bin = $code.$data;
-	return $bin;
-};
+    my $bin = $code . $data;
+    return $bin;
+}
 
 # build consolidated object file
-capture_ok("z88dk-z80asm -s -o${test}.o ".
-		   "${test}1.asm ${test}2.asm ${test}3.asm ${test}4.asm", "");
+capture_ok(
+    "z88dk-z80asm -s -o${test}.o "
+        . "${test}1.asm ${test}2.asm ${test}3.asm ${test}4.asm",
+    ""
+);
 
-capture_ok("z88dk-z80nm -a ${test}.o", <<'END');
+capture_ok( "z88dk-z80nm -a ${test}.o", <<'END' );
 Object  file test_t_modlink_consolobj_t.o at $0000: Z80RMF18
   Name: test_t_modlink_consolobj_t
   CPU:  z80 
@@ -221,7 +223,7 @@ Object  file test_t_modlink_consolobj_t.o at $0000: Z80RMF18
     S  23 = "test_t_modlink_consolobj_t"
 END
 
-check_text_file("${test}.sym", <<'END');
+check_text_file( "${test}.sym", <<'END' );
 code_end                        = $0025 ; addr, public, , , code, test_t_modlink_consolobj_t4.asm:4
 main1                           = $0000 ; comput, public, , , code, test_t_modlink_consolobj_t1.asm:14
 main                            = $0000 ; addr, public, , , code, test_t_modlink_consolobj_t1.asm:4
@@ -237,13 +239,12 @@ test_t_modlink_consolobj_t3_dollar = $000D ; addr, local, , , data, test_t_modli
 test_t_modlink_consolobj_t3_mess = $000B ; addr, local, , , data, test_t_modlink_consolobj_t3.asm:11
 END
 
-
 # build at address 0
-unlink("${test}.asm", "${test}.bin");
-capture_ok("z88dk-z80asm -b -m ${test}.o ${test}lib.asm", "");
-check_bin_file("${test}.bin", bincode(0));
+unlink( "${test}.asm", "${test}.bin" );
+capture_ok( "z88dk-z80asm -b -m ${test}.o ${test}lib.asm", "" );
+check_bin_file( "${test}.bin", bincode(0) );
 
-check_text_file("${test}.map", <<'END');
+check_text_file( "${test}.map", <<'END' );
 __code_head                     = $0000 ; const, public, def, , ,
 __code_size                     = $0025 ; const, public, def, , ,
 __code_tail                     = $0025 ; const, public, def, , ,
@@ -270,13 +271,12 @@ test_t_modlink_consolobj_t3_dollar = $0032 ; addr, local, , test_t_modlink_conso
 test_t_modlink_consolobj_t3_mess = $0030 ; addr, local, , test_t_modlink_consolobj_t, data, test_t_modlink_consolobj_t3.asm:11
 END
 
-
 # build at address 0x1234
-unlink("${test}.asm", "${test}.bin");
-capture_ok("z88dk-z80asm -r0x1234 -b -m ${test}.o ${test}lib.asm", "");
-check_bin_file("${test}.bin", bincode(0x1234));
+unlink( "${test}.asm", "${test}.bin" );
+capture_ok( "z88dk-z80asm -r0x1234 -b -m ${test}.o ${test}lib.asm", "" );
+check_bin_file( "${test}.bin", bincode(0x1234) );
 
-check_text_file("${test}.map", <<'END');
+check_text_file( "${test}.map", <<'END' );
 __code_head                     = $1234 ; const, public, def, , ,
 __code_size                     = $0025 ; const, public, def, , ,
 __code_tail                     = $1259 ; const, public, def, , ,
@@ -302,7 +302,6 @@ test_t_modlink_consolobj_t2_printa1 = $1241 ; addr, local, , test_t_modlink_cons
 test_t_modlink_consolobj_t3_dollar = $1266 ; addr, local, , test_t_modlink_consolobj_t, data, test_t_modlink_consolobj_t3.asm:12
 test_t_modlink_consolobj_t3_mess = $1264 ; addr, local, , test_t_modlink_consolobj_t, data, test_t_modlink_consolobj_t3.asm:11
 END
-
 
 unlink_testfiles;
 done_testing;

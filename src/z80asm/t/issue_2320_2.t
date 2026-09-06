@@ -12,11 +12,11 @@ use Modern::Perl;
 #------------------------------------------------------------------------------
 
 unlink_testfiles;
-spew("$test.asm", "nop");
-capture_ok("z88dk-z80asm -mr3k $test.asm", "");
+spew( "$test.asm", "nop" );
+capture_ok( "z88dk-z80asm -mr3k $test.asm", "" );
 sleep(1);
-spew("$test.asm", "nop");
-capture_ok("z88dk-z80asm -d -v -x$test.lib -mz80 $test.o", <<'END');
+spew( "$test.asm", "nop" );
+capture_ok( "z88dk-z80asm -d -v -x$test.lib -mz80 $test.o", <<'END' );
 % z88dk-z80asm -d -v -xtest_t_issue_2320_2_t.lib -mz80 test_t_issue_2320_2_t.o
 Predefined constant: __CPU_Z80__ = 1
 Predefined constant: __CPU_ZILOG__ = 1
@@ -29,7 +29,7 @@ Creating library 'test_t_issue_2320_2_t.lib'
 Adding test_t_issue_2320_2_t.o to library
 END
 
-capture_ok("z88dk-z80nm -a $test.lib", <<'END');
+capture_ok( "z88dk-z80nm -a $test.lib", <<'END' );
 Library file test_t_issue_2320_2_t.lib at $0000: Z80LMF18
 Object  file test_t_issue_2320_2_t.lib at $0014: Z80RMF18
   Name: test_t_issue_2320_2_t
@@ -42,8 +42,8 @@ Object  file test_t_issue_2320_2_t.lib at $0014: Z80RMF18
 END
 
 sleep(1);
-spew("$test.asm", "nop");
-capture_ok("z88dk-z80asm -d -v -x$test.lib -mz80 $test.asm", <<'END');
+spew( "$test.asm", "nop" );
+capture_ok( "z88dk-z80asm -d -v -x$test.lib -mz80 $test.asm", <<'END' );
 % z88dk-z80asm -d -v -xtest_t_issue_2320_2_t.lib -mz80 test_t_issue_2320_2_t.asm
 Predefined constant: __CPU_Z80__ = 1
 Predefined constant: __CPU_ZILOG__ = 1
@@ -56,7 +56,7 @@ Creating library 'test_t_issue_2320_2_t.lib'
 Adding test_t_issue_2320_2_t.o to library
 END
 
-capture_ok("z88dk-z80nm -a $test.lib", <<'END');
+capture_ok( "z88dk-z80nm -a $test.lib", <<'END' );
 Library file test_t_issue_2320_2_t.lib at $0000: Z80LMF18
 Object  file test_t_issue_2320_2_t.lib at $0014: Z80RMF18
   Name: test_t_issue_2320_2_t
@@ -67,7 +67,6 @@ Object  file test_t_issue_2320_2_t.lib at $0014: Z80RMF18
     S   1 = "test_t_issue_2320_2_t"
 
 END
-
 
 unlink_testfiles;
 done_testing;

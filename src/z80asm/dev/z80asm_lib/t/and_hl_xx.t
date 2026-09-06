@@ -15,17 +15,17 @@ use Modern::Perl;
 my $ticks = Ticks->new;
 
 for my $reg (qw( de )) {
-	for my $a (0, 0xAAAA) {
-		for my $b (0x5555, 0xFFFF) {
-			note "reg:$reg a:$a b:$b";
+    for my $a ( 0, 0xAAAA ) {
+        for my $b ( 0x5555, 0xFFFF ) {
+            note "reg:$reg a:$a b:$b";
 
-			$ticks->add(<<END, HL=>$a & $b);
+            $ticks->add( <<END, HL => $a & $b );
 						ld		hl, $a
 						ld		$reg, $b
 						and		hl, $reg
 END
-		}
-	}
+        }
+    }
 }
 
 $ticks->run;

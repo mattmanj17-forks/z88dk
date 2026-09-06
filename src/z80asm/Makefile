@@ -66,6 +66,11 @@ LDFLAGS 	+= -rdynamic
 endif
 endif
 
+STYLE_WIDTH = 80
+PERLTIDY = perltidy --indent-columns=4 --continuation-indentation=4 \
+		  --maximum-line-length=$(STYLE_WIDTH) -b
+TIDY_STAMP = .tidy-stamp
+
 #------------------------------------------------------------------------------
 # Object files
 #------------------------------------------------------------------------------
@@ -264,6 +269,16 @@ clean::
 	$(RM) -r $(TARGET_EXE) test*.dir
 	$(RM) $(TARGET_EXE) test*
 	$(RM) t/*.tmp t/dev/*.tmp
+
+#------------------------------------------------------------------------------
+# tidy
+#------------------------------------------------------------------------------
+tidy:
+	@[ -f $(TIDY_STAMP) ] || touch -t 197001010000 $(TIDY_STAMP)
+	find . \( -name '*.pl' -o -name '*.pm' -o -name '*.t' \) \
+		   -newer $(TIDY_STAMP) -exec $(PERLTIDY) {} +
+	touch $(TIDY_STAMP)
+
 
 #------------------------------------------------------------------------------
 # Dependencies

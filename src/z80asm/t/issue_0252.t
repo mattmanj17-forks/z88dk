@@ -7,9 +7,9 @@ use Modern::Perl;
 # Test https://github.com/z88dk/z88dk/issues/252
 # z80asm: z80asm ignores _map file if 0 bytes
 
-for my $one_step (0, 1) {
-	unlink_testfiles;
-	spew("${test}map.asm", <<'END');
+for my $one_step ( 0, 1 ) {
+    unlink_testfiles;
+    spew( "${test}map.asm", <<'END' );
 		section s0
 		org 0
 		section s1
@@ -22,7 +22,7 @@ for my $one_step (0, 1) {
 		org 0x200
 		section b1
 END
-	spew("${test}src.asm", <<'END');
+    spew( "${test}src.asm", <<'END' );
 		section s0
 		defb 0
 
@@ -48,19 +48,22 @@ END
 		defb 21
 END
 
-	if ($one_step) {
-		capture_ok("z88dk-z80asm -b -o${test}.bin -m ${test}map.asm ${test}src.asm", "");
-	}
-	else {
-		capture_ok("z88dk-z80asm ${test}map.asm ${test}src.asm", "");
-		capture_ok("z88dk-z80asm -b -o${test}.bin -m ${test}map.o ${test}src.o", "");
-	}
+    if ($one_step) {
+        capture_ok(
+            "z88dk-z80asm -b -o${test}.bin -m ${test}map.asm ${test}src.asm",
+            "" );
+    }
+    else {
+        capture_ok( "z88dk-z80asm ${test}map.asm ${test}src.asm", "" );
+        capture_ok(
+            "z88dk-z80asm -b -o${test}.bin -m ${test}map.o ${test}src.o", "" );
+    }
 
-	check_bin_file("${test}_s0.bin", bytes(0, 1, 2, 3));
-	check_bin_file("${test}_a0.bin", bytes(10, 11));
-	check_bin_file("${test}_b0.bin", bytes(20, 21));
+    check_bin_file( "${test}_s0.bin", bytes( 0,  1, 2, 3 ) );
+    check_bin_file( "${test}_a0.bin", bytes( 10, 11 ) );
+    check_bin_file( "${test}_b0.bin", bytes( 20, 21 ) );
 
-	check_text_file("${test}.map", <<'END');
+    check_text_file( "${test}.map", <<'END' );
 __a0_head                       = $0100 ; const, public, def, , ,
 __a0_size                       = $0001 ; const, public, def, , ,
 __a0_tail                       = $0101 ; const, public, def, , ,
@@ -90,12 +93,16 @@ __size                          = $0202 ; const, public, def, , ,
 __tail                          = $0202 ; const, public, def, , ,
 END
 
-	run_ok("z88dk-appmake +glue -b ${test} -c ${test} --clean");
-	
-	check_bin_file("${test}__.bin", bytes(
-			0, 1, 2, 3, (0xFF) x (0x100 - 4), 
-			10, 11, (0xFF) x (0x100 - 2), 
-			20, 21));
+    run_ok("z88dk-appmake +glue -b ${test} -c ${test} --clean");
+
+    check_bin_file(
+        "${test}__.bin",
+        bytes(
+            0,  1, 2, 3, (0xFF) x ( 0x100 - 4 ),
+            10, 11, (0xFF) x ( 0x100 - 2 ),
+            20, 21
+        )
+    );
 }
 
 unlink_testfiles;

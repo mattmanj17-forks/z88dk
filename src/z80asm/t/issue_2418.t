@@ -10,8 +10,9 @@ use File::Copy;
 
 # run zcc to force the error
 if (0) {
-	# convert C to assembly
-	spew("$test.c", <<END);
+
+    # convert C to assembly
+    spew( "$test.c", <<END );
 	#define ANSI_STDIO
 
 	#include <fcntl.h>
@@ -24,86 +25,110 @@ if (0) {
 	}
 END
 
-	my $count = 0;
-	my $link;
-	my $list_file;
-	my $temp_dir;
-	run_ok("zcc +test -no-cleanup -v -DAMALLOC -O3 -m --opt-code-speed=inlineints ".
-		   "$test.c ../../libsrc/stdio/_freopen1.c -o$test.bin > $test.out");
-	ok open(my $fh, "<", "$test.out"), "open $test.out";
-	while (<$fh>) {
-		if (/z88dk-ucpp\s+.*"([^"\n]+)"\s+"([^"\n]+)"\s*$/) {
-			my($f1, $f2) = norm_filenames($1, $2);
-			#print "$f1 -> $f2\n";
-			#show_diff($f1, $f2);
-		}
-		elsif (/z88dk-zpragma\s+.*<\s*"([^"\n]+)"\s*>\s*"([^"\n]+)"\s*$/) {
-			my($f1, $f2) = norm_filenames($1, $2);
-			#print "$f1 -> $f2\n";
-			#show_diff($f1, $f2);
-		}
-		elsif (/z88dk-sccz80\s+.*"([^"\n]+)"\s*-o\s*"([^"\n]+)"\s*$/) {
-			my($f1, $f2) = norm_filenames($1, $2);
-			#print "$f1 -> $f2\n";
-			#show_diff($f1, $f2);		
-			#	SECTION	code_crt_exit
-			#	EXTERN	closeall
-			#	call	closeall
-			#; --- Start of Optimiser additions ---
-			#	defc	i_13 = i_11
-			#	defc	i_11 = i_9
-		}
-		elsif (/z88dk-copt\s+.*z80rules.9.*<\s*"([^"\n]+)"\s*>\s*"([^"\n]+)"\s*$/) {
-			my($f1, $f2) = norm_filenames($1, $2);
-			#print "$f1 -> $f2\n";
-			#show_diff($f1, $f2);
-			# no difference in defc
-		}
-		elsif (/z88dk-copt\s+.*z80rules.2.*<\s*"([^"\n]+)"\s*>\s*"([^"\n]+)"\s*$/) {
-			my($f1, $f2) = norm_filenames($1, $2);
-			#print "$f1 -> $f2\n";
-			#show_diff($f1, $f2);
-			# no difference in defc
-		}
-		elsif (/z88dk-copt\s+.*z80rules.1.*<\s*"([^"\n]+)"\s*>\s*"([^"\n]+)"\s*$/) {
-			my($f1, $f2) = norm_filenames($1, $2);
-			#print "$f1 -> $f2\n";
-			#show_diff($f1, $f2);
-			# no difference in defc
-		}
-		elsif (/z88dk-copt\s+.*z80rules.0.*<\s*"([^"\n]+)"\s*>\s*"([^"\n]+)"\s*$/) {
-			my($f1, $f2) = norm_filenames($1, $2);
-			#print "$f1 -> $f2\n";
-			#show_diff($f1, $f2);
-			# no difference in defc
-		}
-		elsif (/z88dk-copt\s+.*z80rules.8.*<\s*"([^"\n]+)"\s*>\s*"([^"\n]+)"\s*$/) {
-			my($f1, $f2) = norm_filenames($1, $2);
-			#print "$f1 -> $f2\n";
-			#show_diff($f1, $f2);
-			# no difference in defc
-		}
-		elsif (/z88dk-z80asm.*"([^"\n\@]+)"\s*$/) {
-			my($f1) = norm_filenames($1);
-			my $f2 = $test.".".(++$count).".asm";
-			print "$f1 -> $f2\n";
-			copy($f1, $f2);
-		}
-		elsif (/z88dk-z80asm\s+-mz80\s+-b.*"\@([^"\n]+)"\s*$/) {
-			$link = $&;
-			$list_file = $1;
-			$link =~ /-I.*?(zcc\w+)/ and $temp_dir = $1;
-		}
-	}
+    my $count = 0;
+    my $link;
+    my $list_file;
+    my $temp_dir;
+    run_ok(
+        "zcc +test -no-cleanup -v -DAMALLOC -O3 -m --opt-code-speed=inlineints "
+            . "$test.c ../../libsrc/stdio/_freopen1.c -o$test.bin > $test.out"
+    );
+    ok open( my $fh, "<", "$test.out" ), "open $test.out";
 
-	# assemble and link
-	run_ok(qq{z88dk-z80asm -b -d  -o"test_t_issue_2418_t.bin" -m -L.  -L"C:/msys64/home/T0071173/git/z88dk/lib/config/../../lib/clibs/z80"   -I"C:/msys64/tmp/$temp_dir" -L"C:/msys64/home/T0071173/git/z88dk/lib/config/../../lib/clibs" -I"C:/msys64/home/T0071173/git/z88dk/lib/config/../../lib" -ltest_clib -l"z80_crt0"     "\@$list_file" });
+    while (<$fh>) {
+        if (/z88dk-ucpp\s+.*"([^"\n]+)"\s+"([^"\n]+)"\s*$/) {
+            my ( $f1, $f2 ) = norm_filenames( $1, $2 );
+
+            #print "$f1 -> $f2\n";
+            #show_diff($f1, $f2);
+        }
+        elsif (/z88dk-zpragma\s+.*<\s*"([^"\n]+)"\s*>\s*"([^"\n]+)"\s*$/) {
+            my ( $f1, $f2 ) = norm_filenames( $1, $2 );
+
+            #print "$f1 -> $f2\n";
+            #show_diff($f1, $f2);
+        }
+        elsif (/z88dk-sccz80\s+.*"([^"\n]+)"\s*-o\s*"([^"\n]+)"\s*$/) {
+            my ( $f1, $f2 ) = norm_filenames( $1, $2 );
+
+            #print "$f1 -> $f2\n";
+            #show_diff($f1, $f2);
+            #	SECTION	code_crt_exit
+            #	EXTERN	closeall
+            #	call	closeall
+            #; --- Start of Optimiser additions ---
+            #	defc	i_13 = i_11
+            #	defc	i_11 = i_9
+        }
+        elsif (
+            /z88dk-copt\s+.*z80rules.9.*<\s*"([^"\n]+)"\s*>\s*"([^"\n]+)"\s*$/)
+        {
+            my ( $f1, $f2 ) = norm_filenames( $1, $2 );
+
+            #print "$f1 -> $f2\n";
+            #show_diff($f1, $f2);
+            # no difference in defc
+        }
+        elsif (
+            /z88dk-copt\s+.*z80rules.2.*<\s*"([^"\n]+)"\s*>\s*"([^"\n]+)"\s*$/)
+        {
+            my ( $f1, $f2 ) = norm_filenames( $1, $2 );
+
+            #print "$f1 -> $f2\n";
+            #show_diff($f1, $f2);
+            # no difference in defc
+        }
+        elsif (
+            /z88dk-copt\s+.*z80rules.1.*<\s*"([^"\n]+)"\s*>\s*"([^"\n]+)"\s*$/)
+        {
+            my ( $f1, $f2 ) = norm_filenames( $1, $2 );
+
+            #print "$f1 -> $f2\n";
+            #show_diff($f1, $f2);
+            # no difference in defc
+        }
+        elsif (
+            /z88dk-copt\s+.*z80rules.0.*<\s*"([^"\n]+)"\s*>\s*"([^"\n]+)"\s*$/)
+        {
+            my ( $f1, $f2 ) = norm_filenames( $1, $2 );
+
+            #print "$f1 -> $f2\n";
+            #show_diff($f1, $f2);
+            # no difference in defc
+        }
+        elsif (
+            /z88dk-copt\s+.*z80rules.8.*<\s*"([^"\n]+)"\s*>\s*"([^"\n]+)"\s*$/)
+        {
+            my ( $f1, $f2 ) = norm_filenames( $1, $2 );
+
+            #print "$f1 -> $f2\n";
+            #show_diff($f1, $f2);
+            # no difference in defc
+        }
+        elsif (/z88dk-z80asm.*"([^"\n\@]+)"\s*$/) {
+            my ($f1) = norm_filenames($1);
+            my $f2 = $test . "." . ( ++$count ) . ".asm";
+            print "$f1 -> $f2\n";
+            copy( $f1, $f2 );
+        }
+        elsif (/z88dk-z80asm\s+-mz80\s+-b.*"\@([^"\n]+)"\s*$/) {
+            $link                                  = $&;
+            $list_file                             = $1;
+            $link =~ /-I.*?(zcc\w+)/ and $temp_dir = $1;
+        }
+    }
+
+    # assemble and link
+    run_ok(
+qq{z88dk-z80asm -b -d  -o"test_t_issue_2418_t.bin" -m -L.  -L"C:/msys64/home/T0071173/git/z88dk/lib/config/../../lib/clibs/z80"   -I"C:/msys64/tmp/$temp_dir" -L"C:/msys64/home/T0071173/git/z88dk/lib/config/../../lib/clibs" -I"C:/msys64/home/T0071173/git/z88dk/lib/config/../../lib" -ltest_clib -l"z80_crt0"     "\@$list_file" }
+    );
 }
+
 # run z80asm to force the error
 else {
-	path("$test.dir/crt/classic")->mkpath;
+    path("$test.dir/crt/classic")->mkpath;
 
-	spew("$test.asm", <<'END');
+    spew( "$test.asm", <<'END' );
 SECTION code_compiler
 SECTION code_crt_exit
 
@@ -118,11 +143,11 @@ SECTION code_crt_exit
 SECTION	code_compiler
 END
 
-	run_ok("z88dk-z80asm -b -m $test.asm");
-	
-	check_bin_file("$test.bin", bytes(0xC3, 6, 0, 0xC3, 6, 0, 0xC9));
+    run_ok("z88dk-z80asm -b -m $test.asm");
 
-	capture_ok("z88dk-z80nm -a $test.o", <<'END');
+    check_bin_file( "$test.bin", bytes( 0xC3, 6, 0, 0xC3, 6, 0, 0xC9 ) );
+
+    capture_ok( "z88dk-z80nm -a $test.o", <<'END' );
 Object  file test_t_issue_2418_t.o at $0000: Z80RMF18
   Name: test_t_issue_2418_t
   CPU:  z80 
@@ -149,23 +174,21 @@ END
 
 # check that DEFC labels are the same
 my %map;
-ok open(my $fh, "<", "$test.map"), "open $test.map";
+ok open( my $fh, "<", "$test.map" ), "open $test.map";
 while (<$fh>) {
-	/^(\w+)\s*=\s*\$([0-9a-fA-F]+)/ and $map{$1} = hex($2);
+    /^(\w+)\s*=\s*\$([0-9a-fA-F]+)/ and $map{$1} = hex($2);
 }
 
 is $map{i_11}, $map{i_9}, "i_11==i_9";
-
 
 path("$test.dir")->remove_tree;
 unlink_testfiles;
 done_testing;
 
-
 sub norm_filenames {
-	my(@files) = @_;
-	for (@files) {
-		s/\\/\//g;
-	}
-	return @files;
+    my (@files) = @_;
+    for (@files) {
+        s/\\/\//g;
+    }
+    return @files;
 }

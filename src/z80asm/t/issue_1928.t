@@ -7,7 +7,7 @@ use Modern::Perl;
 # https://github.com/z88dk/z88dk/issues/1928
 # z80asm: .lis file lists incorrect bytes for REPTC macro directive
 
-spew("$test.asm", <<END);
+spew( "$test.asm", <<END );
 REPTC var, 45
 defb var
 ENDR
@@ -22,10 +22,10 @@ ENDR
 RST 38h
 END
 
-# list 
+# list
 run_ok("z88dk-z80asm -b -l $test.asm");
-check_bin_file("$test.bin", "45".bytes(0xff)."23".bytes(0xff));
-check_text_file("$test.lis", <<END);
+check_bin_file( "$test.bin", "45" . bytes(0xff) . "23" . bytes(0xff) );
+check_text_file( "$test.lis", <<END );
 test_t_issue_1928_t.asm:
      1                          REPTC var, 45
      2                          defb var
@@ -42,11 +42,10 @@ test_t_issue_1928_t.asm:
     13                          
 END
 
-
 # verbose list
 run_ok("z88dk-z80asm -b -l -v $test.asm > $null");
-check_bin_file("$test.bin", "45".bytes(0xff)."23".bytes(0xff));
-check_text_file("$test.lis", <<END);
+check_bin_file( "$test.bin", "45" . bytes(0xff) . "23" . bytes(0xff) );
+check_text_file( "$test.lis", <<END );
 test_t_issue_1928_t.asm:
      1                          REPTC var, 45
      2                          defb var
@@ -68,7 +67,6 @@ test_t_issue_1928_t.asm:
         0005  ff                      + RST 56
     13                          
 END
-
 
 unlink_testfiles;
 done_testing;

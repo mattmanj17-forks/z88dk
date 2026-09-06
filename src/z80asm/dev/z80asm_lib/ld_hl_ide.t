@@ -14,10 +14,10 @@ use Modern::Perl;
 
 my $ticks = Ticks->new;
 
-for my $op ("lhlx", "lhlde", "ld hl, (de)") {
-	for my $addr (0x8000, 0xc000) {
-		for my $value (0, 0x5555, 0xaaaa, 0xffff) {
-			$ticks->add(<<END, HL=>$value);
+for my $op ( "lhlx", "lhlde", "ld hl, (de)" ) {
+    for my $addr ( 0x8000, 0xc000 ) {
+        for my $value ( 0, 0x5555, 0xaaaa, 0xffff ) {
+            $ticks->add( <<END, HL => $value );
 					ld 		a, $value & 0xff
 					ld 		($addr), a
 					ld 		a, $value >> 8
@@ -28,8 +28,8 @@ for my $op ("lhlx", "lhlde", "ld hl, (de)") {
 					
 					$op
 END
-		}
-	}
+        }
+    }
 }
 
 $ticks->run;

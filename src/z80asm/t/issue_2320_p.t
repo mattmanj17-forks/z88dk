@@ -12,12 +12,12 @@ use Modern::Perl;
 #------------------------------------------------------------------------------
 
 unlink_testfiles;
-spew("$test.asm", <<'END');
+spew( "$test.asm", <<'END' );
 		extern the_answer
 		defb the_answer
 END
 
-spew("$test.1.asm", <<'END');
+spew( "$test.1.asm", <<'END' );
 	public the_answer
 the_answer = 42
 	ifdef __CPU_8080__		      : defm "8080 "		  : endif
@@ -42,12 +42,13 @@ the_answer = 42
 	ifdef __SWAP_IX_IY__	      : defm "-IXIY "		  : endif
 END
 
-for my $lib_ixiy ("", "-IXIY") {
-	unlink("$test.1.lib");
-	capture_ok("z88dk-z80asm $lib_ixiy -m\"*\" -x$test.1.lib $test.1.asm", "");
-	ok -f "$test.1.lib", "$test.1.lib created";
-	
-	capture_ok("z88dk-z80nm -a $test.1.lib", <<'END');
+for my $lib_ixiy ( "", "-IXIY" ) {
+    unlink("$test.1.lib");
+    capture_ok( "z88dk-z80asm $lib_ixiy -m\"*\" -x$test.1.lib $test.1.asm",
+        "" );
+    ok -f "$test.1.lib", "$test.1.lib created";
+
+    capture_ok( "z88dk-z80nm -a $test.1.lib", <<'END' );
 Library file test_t_issue_2320_p_t.1.lib at $0000: Z80LMF18
 Object  file test_t_issue_2320_p_t.1.lib at $0014: Z80RMF18
   Name: test_t_issue_2320_p_t.1
@@ -632,18 +633,22 @@ Library public symbols:
   P   1 = "the_answer"
 END
 
-	for my $code_ixiy ("", "-IXIY") {
-		for my $code_cpu (@CPUS) {
-            (my $linked_cpu = $code_cpu) =~ s/_strict$//;
-			$linked_cpu =~ s/ti83/z80 ti83/;
-			unlink("$test.bin");
-			capture_ok("z88dk-z80asm -b -m$code_cpu $code_ixiy ".
-							   "-l$test.1.lib $test.asm", "");
-			ok -f "$test.bin", "$test.bin created";
-			my %CODE_IXIY = (""=>"", "-IXIY"=>"-IXIY ");
-			check_bin_file("$test.bin", bytes(42).$linked_cpu." ".$CODE_IXIY{$code_ixiy});
-		}
-	}
+    for my $code_ixiy ( "", "-IXIY" ) {
+        for my $code_cpu (@CPUS) {
+            ( my $linked_cpu = $code_cpu ) =~ s/_strict$//;
+            $linked_cpu =~ s/ti83/z80 ti83/;
+            unlink("$test.bin");
+            capture_ok(
+                "z88dk-z80asm -b -m$code_cpu $code_ixiy "
+                    . "-l$test.1.lib $test.asm",
+                ""
+            );
+            ok -f "$test.bin", "$test.bin created";
+            my %CODE_IXIY = ( "" => "", "-IXIY" => "-IXIY " );
+            check_bin_file( "$test.bin",
+                bytes(42) . $linked_cpu . " " . $CODE_IXIY{$code_ixiy} );
+        }
+    }
 }
 
 unlink_testfiles;

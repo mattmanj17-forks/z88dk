@@ -7,14 +7,14 @@ use Modern::Perl;
 # Test https://github.com/z88dk/z88dk/issues/999
 # z80asm: unable to build consolidated object file from c source
 
-spew("${test}a.c", <<'END');
+spew( "${test}a.c", <<'END' );
 unsigned char fa(void)
 {
 	return 100;
 }
 END
 
-spew("${test}b.c", <<'END');
+spew( "${test}b.c", <<'END' );
 unsigned char fb(void)
 {
 	return 200;
@@ -23,7 +23,7 @@ END
 
 run_ok("zcc +zx -c -clib=new ${test}a.c ${test}b.c -o ${test}cons.o");
 
-capture_ok("z88dk-z80nm -a ${test}cons.o", <<'END');
+capture_ok( "z88dk-z80nm -a ${test}cons.o", <<'END' );
 Object  file test_t_issue_0999_tcons.o at $0000: Z80RMF18
   Name: test_t_issue_0999_tcons
   CPU:  z80 

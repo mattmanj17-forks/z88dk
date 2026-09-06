@@ -5,16 +5,16 @@ BEGIN { use lib 't'; require 'testlib.pl'; }
 use Modern::Perl;
 
 for my $extern (qw( extern xref lib )) {
-	ok 1, "Test with $extern";
+    ok 1, "Test with $extern";
 
-	z80asm_nok("", "", <<END, <<END);
+    z80asm_nok( "", "", <<END, <<END );
 		$extern
 END
 $test.asm:1: error: syntax error
   ^---- $extern
 END
 
-spew("$test.asm", <<END);
+    spew( "$test.asm", <<END );
 		public p1,p2
 		public p3
 		public p4
@@ -25,7 +25,7 @@ spew("$test.asm", <<END);
 	p4:	defb ASMPC			;; 03
 END
 
-spew("$test.1.asm", <<END);
+    spew( "$test.1.asm", <<END );
 		$extern p1,p2
 		$extern p3
 		$extern p4
@@ -33,13 +33,9 @@ spew("$test.1.asm", <<END);
 		defb p1,p2,p3,p4	;; 00 01 02 03
 END
 
-run_ok("z88dk-z80asm -b $test.asm $test.1.asm");
-check_bin_file("$test.bin", bytes(0x00,
-								  0x01,
-								  0x02,
-								  0x03,
-								  0x00, 0x01, 0x02, 0x03));
-
+    run_ok("z88dk-z80asm -b $test.asm $test.1.asm");
+    check_bin_file( "$test.bin",
+        bytes( 0x00, 0x01, 0x02, 0x03, 0x00, 0x01, 0x02, 0x03 ) );
 
 }
 

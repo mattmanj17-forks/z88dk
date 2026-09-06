@@ -7,7 +7,7 @@ use Modern::Perl;
 # Test https://github.com/z88dk/z88dk/issues/673
 # z80asm: MODULE directive cannot accept names that coincide with register or flag names
 
-z80asm_ok("", "", "", <<END, bytes(1,2));
+z80asm_ok( "", "", "", <<END, bytes( 1, 2 ) );
 	module a
 	section a
 	defb 1
@@ -15,7 +15,7 @@ z80asm_ok("", "", "", <<END, bytes(1,2));
 	defb 2
 END
 
-capture_ok("z88dk-z80nm -a ${test}.o", <<'END');
+capture_ok( "z88dk-z80nm -a ${test}.o", <<'END' );
 Object  file test_t_issue_0673_t.o at $0000: Z80RMF18
   Name: a
   CPU:  z80 

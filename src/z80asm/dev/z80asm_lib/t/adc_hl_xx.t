@@ -15,24 +15,25 @@ use Modern::Perl;
 my $ticks = Ticks->new;
 
 for my $reg (qw( bc de hl sp )) {
-	for my $carry (0, 1) {
-		for my $base (0, 32768, 32769) {
-			for my $add (255, 256, 32767) {
-				note "reg:$reg carry:$carry base:$base add:$add";
+    for my $carry ( 0, 1 ) {
+        for my $base ( 0, 32768, 32769 ) {
+            for my $add ( 255, 256, 32767 ) {
+                note "reg:$reg carry:$carry base:$base add:$add";
 
-				my $init_carry = $carry ? "scf" : "and a";
-				my $base1 = ($reg eq 'hl') ? $add : $base;
-				my $sum = $base1 + $add + $carry;
-				
-				$ticks->add(<<END, F_C=>($sum > 65535 ? 1 : 0), HL=>$sum);
+                my $init_carry = $carry           ? "scf" : "and a";
+                my $base1      = ( $reg eq 'hl' ) ? $add  : $base;
+                my $sum        = $base1 + $add + $carry;
+
+                $ticks->add(
+                    <<END, F_C => ( $sum > 65535 ? 1 : 0 ), HL => $sum );
 						ld		hl, $base1
 						ld		$reg, $add
 						$init_carry 
 						adc 	hl, $reg
 END
-			}
-		}
-	}
+            }
+        }
+    }
 }
 
 $ticks->run;

@@ -12,12 +12,12 @@ use Modern::Perl;
 #------------------------------------------------------------------------------
 
 unlink_testfiles;
-spew("$test.a.asm", <<'END');
+spew( "$test.a.asm", <<'END' );
 SECTION code2
 a:	ld      hl,16384
 END
 
-spew("$test.b.asm", <<'END');
+spew( "$test.b.asm", <<'END' );
 MODULE b
 SECTION code
 b:	ld      hl,32768
@@ -27,10 +27,10 @@ END
 # not-existing object file - give .o
 #------------------------------------------------------------------------------
 
-capture_ok("z88dk-z80asm -mz80 $test.a.asm", "");
-capture_ok("z88dk-z80asm -mr3k $test.b.asm", "");
+capture_ok( "z88dk-z80asm -mz80 $test.a.asm", "" );
+capture_ok( "z88dk-z80asm -mr3k $test.b.asm", "" );
 unlink("$test.b.o");
-capture_nok("z88dk-z80asm -x$test.lib -mz80 $test.a.o $test.b.o", <<'END');
+capture_nok( "z88dk-z80asm -x$test.lib -mz80 $test.a.o $test.b.o", <<'END' );
 error: file not found: test_t_issue_2320_j_t.b.o
 END
 

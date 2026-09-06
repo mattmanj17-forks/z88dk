@@ -14,21 +14,21 @@ use Modern::Perl;
 
 my $ticks = Ticks->new;
 
-for my $op ('rdel', 'rlde', 'rl de') {
-	for my $carry (0, 1) {
-		for my $base (0x5555, 0xaaaa) {
-			note "carry:$carry base:$base";
+for my $op ( 'rdel', 'rlde', 'rl de' ) {
+    for my $carry ( 0, 1 ) {
+        for my $base ( 0x5555, 0xaaaa ) {
+            note "carry:$carry base:$base";
 
-			my $init_carry = $carry ? "scf" : "and a";
-			my $res = ($base << 1) | $carry;
-			
-			$ticks->add(<<END, F_C=>($base & 0x8000) ? 1 : 0, DE=>$res);
+            my $init_carry = $carry ? "scf" : "and a";
+            my $res        = ( $base << 1 ) | $carry;
+
+            $ticks->add( <<END, F_C => ( $base & 0x8000 ) ? 1 : 0, DE => $res );
 					ld		de, $base
 					$init_carry 
 					$op
 END
-		}
-	}
+        }
+    }
 }
 
 $ticks->run;

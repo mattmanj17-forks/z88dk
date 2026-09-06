@@ -14,35 +14,35 @@ use Modern::Perl;
 
 my $ticks = Ticks->new;
 
-$ticks->add(<<END, HL=>42);
+$ticks->add( <<END, HL => 42 );
 			ld 	hl, 0
 			ld 	b, 42
 	loop:	inc hl
 			djnz loop
 END
 
-$ticks->add(<<END, HL=>42);
+$ticks->add( <<END, HL => 42 );
 			ld 	hl, 0
 			ld 	b, 42
 	loop:	inc hl
 			djnz b, loop
 END
 
-$ticks->add(<<END, HL=>1);
+$ticks->add( <<END, HL => 1 );
 			ld 	hl, 0
 			ld 	b, 1
 	loop:	inc hl
 			djnz loop
 END
 
-$ticks->add(<<END, HL=>256);
+$ticks->add( <<END, HL => 256 );
 			ld 	hl, 0
 			ld 	b, 0
 	loop:	inc hl
 			djnz loop
 END
 
-$ticks->add(<<END, HL=>42);
+$ticks->add( <<END, HL => 42 );
 	IF __CPU_RABBIT__
 			ld 	hl, 0
 			exx
@@ -56,7 +56,7 @@ $ticks->add(<<END, HL=>42);
 	ENDIF
 END
 
-$ticks->add(<<END, HL=>42);
+$ticks->add( <<END, HL => 42 );
 	IF __CPU_RABBIT__
 			ld 	hl, 0
 			exx
@@ -70,7 +70,7 @@ $ticks->add(<<END, HL=>42);
 	ENDIF
 END
 
-$ticks->add(<<END, HL=>1042);
+$ticks->add( <<END, HL => 1042 );
 	IF __CPU_R4K__ || __CPU_R5K__ || __CPU_R6K__
 			ld 	hl, 0
 			exx
@@ -84,7 +84,7 @@ $ticks->add(<<END, HL=>1042);
 	ENDIF
 END
 
-$ticks->add(<<END, HL=>1042);
+$ticks->add( <<END, HL => 1042 );
 	IF __CPU_R4K__ || __CPU_R5K__ || __CPU_R6K__
 			ld 	hl, 0
 			exx
@@ -98,7 +98,7 @@ $ticks->add(<<END, HL=>1042);
 	ENDIF
 END
 
-$ticks->add(<<END, HL=>1042);
+$ticks->add( <<END, HL => 1042 );
 	IF __CPU_R4K__ || __CPU_R5K__ || __CPU_R6K__
 			ld 	hl, 0
 			ld 	bc, 1042
@@ -109,7 +109,7 @@ $ticks->add(<<END, HL=>1042);
 	ENDIF
 END
 
-$ticks->add(<<END, HL=>1042);
+$ticks->add( <<END, HL => 1042 );
 	IF __CPU_R4K__ || __CPU_R5K__ || __CPU_R6K__
 			ld 	hl, 0
 			ld 	bc, 1042
@@ -120,8 +120,7 @@ $ticks->add(<<END, HL=>1042);
 	ENDIF
 END
 
-
-$ticks->run("", "-opt-speed");
+$ticks->run( "", "-opt-speed" );
 
 unlink_testfiles();
 done_testing();

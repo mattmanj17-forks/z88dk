@@ -7,7 +7,7 @@ use Modern::Perl;
 #------------------------------------------------------------------------------
 # Test sections
 
-spew("${test}.asm", <<'END');
+spew( "${test}.asm", <<'END' );
 			org $1234
 
 			extern prmes, mes0, mes0end
@@ -40,7 +40,7 @@ mes2end:
 			ret
 END
 
-spew("${test}1.asm", <<'END');
+spew( "${test}1.asm", <<'END' );
 			section data
 mes0:		defm "."
 mes0end:
@@ -66,37 +66,24 @@ prmes:		ld 	a, b
 			public mes0, mes0end
 END
 
-my $bin = bytes(0x21, 0x59, 0x12,
-				0x01, 0x05, 0x00,
-				0xCD, 0x50, 0x12,
-				0x21, 0x5E, 0x12,
-				0x01, 0x06, 0x00,
-				0xCD, 0x50, 0x12,
-				0x21, 0x64, 0x12,
-				0x01, 0x01, 0x00,
-				0xCD, 0x50, 0x12,
-				0xC9,
-				0x78,
-				0xB1,
-				0xC8,
-				0x7E,
-				0x23,
-				0xD7,
-				0x0B,
-				0x18, 0xF7).
-		"hello world.";
+my $bin = bytes(
+    0x21, 0x59, 0x12, 0x01, 0x05, 0x00, 0xCD, 0x50, 0x12, 0x21,
+    0x5E, 0x12, 0x01, 0x06, 0x00, 0xCD, 0x50, 0x12, 0x21, 0x64,
+    0x12, 0x01, 0x01, 0x00, 0xCD, 0x50, 0x12, 0xC9, 0x78, 0xB1,
+    0xC8, 0x7E, 0x23, 0xD7, 0x0B, 0x18, 0xF7
+) . "hello world.";
 
 # assemble and link
 unlink("${test}.bin");
-capture_ok("z88dk-z80asm -b -l -m ${test}.asm ${test}1.asm", "");
-check_bin_file("${test}.bin", $bin);
+capture_ok( "z88dk-z80asm -b -l -m ${test}.asm ${test}1.asm", "" );
+check_bin_file( "${test}.bin", $bin );
 
 # link only
 unlink("${test}.bin");
-capture_ok("z88dk-z80asm -b -l -m ${test}.o ${test}1.o", "");
-check_bin_file("${test}.bin", $bin);
+capture_ok( "z88dk-z80asm -b -l -m ${test}.o ${test}1.o", "" );
+check_bin_file( "${test}.bin", $bin );
 
-capture_ok("z88dk-z80nm -a ${test}.o ${test}1.o", <<'END');
+capture_ok( "z88dk-z80nm -a ${test}.o ${test}1.o", <<'END' );
 Object  file test_t_modlink_sections_t.o at $0000: Z80RMF18
   Name: test_t_modlink_sections_t
   CPU:  z80 
@@ -164,7 +151,7 @@ Object  file test_t_modlink_sections_t1.o at $0000: Z80RMF18
     S   7 = "test_t_modlink_sections_t1"
 END
 
-check_text_file("${test}.map", <<END);
+check_text_file( "${test}.map", <<END );
 __code_head                     = \$1234 ; const, public, def, , ,
 __code_size                     = \$0025 ; const, public, def, , ,
 __code_tail                     = \$1259 ; const, public, def, , ,
@@ -189,7 +176,7 @@ END
 
 unlink_testfiles;
 
-spew("${test}.asm", <<'END');
+spew( "${test}.asm", <<'END' );
 		section code
 		section data
 		section bss
@@ -198,7 +185,7 @@ spew("${test}.asm", <<'END');
 		defb 3
 END
 
-spew("${test}1.asm", <<'END');
+spew( "${test}1.asm", <<'END' );
 		section code
 		section data
 		section bss
@@ -207,7 +194,7 @@ spew("${test}1.asm", <<'END');
 		defb 2
 END
 
-spew("${test}2.asm", <<'END');
+spew( "${test}2.asm", <<'END' );
 		section code
 		section data
 		section bss
@@ -216,19 +203,19 @@ spew("${test}2.asm", <<'END');
 		defb 1
 END
 
-$bin = bytes(1, 2, 3);
+$bin = bytes( 1, 2, 3 );
 
 # assemble and link
 unlink("${test}.bin");
-capture_ok("z88dk-z80asm -b -l -m ${test}.asm ${test}1.asm ${test}2.asm", "");
-check_bin_file("${test}.bin", $bin);
+capture_ok( "z88dk-z80asm -b -l -m ${test}.asm ${test}1.asm ${test}2.asm", "" );
+check_bin_file( "${test}.bin", $bin );
 
 # link only
 unlink("${test}.bin");
-capture_ok("z88dk-z80asm -b -l -m ${test}.o ${test}1.o ${test}2.o", "");
-check_bin_file("${test}.bin", $bin);
+capture_ok( "z88dk-z80asm -b -l -m ${test}.o ${test}1.o ${test}2.o", "" );
+check_bin_file( "${test}.bin", $bin );
 
-capture_ok("z88dk-z80nm -a ${test}.o ${test}1.o ${test}2.o", <<'END');
+capture_ok( "z88dk-z80nm -a ${test}.o ${test}1.o ${test}2.o", <<'END' );
 Object  file test_t_modlink_sections_t.o at $0000: Z80RMF18
   Name: test_t_modlink_sections_t
   CPU:  z80 
@@ -269,7 +256,6 @@ Object  file test_t_modlink_sections_t2.o at $0000: Z80RMF18
     S   3 = "data"
     S   4 = "bss"
 END
-
 
 unlink_testfiles;
 done_testing;

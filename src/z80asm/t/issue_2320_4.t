@@ -12,12 +12,12 @@ use Modern::Perl;
 #------------------------------------------------------------------------------
 
 unlink_testfiles;
-spew("$test.a.asm", <<'END');
+spew( "$test.a.asm", <<'END' );
 SECTION code2
 a:	ld      hl,16384
 END
 
-spew("$test.b.asm", <<'END');
+spew( "$test.b.asm", <<'END' );
 MODULE b
 SECTION code
 b:	ld      hl,32768
@@ -27,9 +27,10 @@ END
 # building library for diferent compatible cpus - give .o
 #------------------------------------------------------------------------------
 
-capture_ok("z88dk-z80asm -mz80 $test.a.asm", "");
-capture_ok("z88dk-z80asm -mz80_strict $test.b.asm", "");
-capture_ok("z88dk-z80asm -v -x$test.lib -mz80 ".quote_os("$test.*.o"), <<END);
+capture_ok( "z88dk-z80asm -mz80 $test.a.asm",        "" );
+capture_ok( "z88dk-z80asm -mz80_strict $test.b.asm", "" );
+capture_ok( "z88dk-z80asm -v -x$test.lib -mz80 " . quote_os("$test.*.o"),
+    <<END );
 % z88dk-z80asm -v -xtest_t_issue_2320_4_t.lib -mz80 ${\os_quoted("test_t_issue_2320_4_t.*.o")}
 Predefined constant: __CPU_Z80__ = 1
 Predefined constant: __CPU_ZILOG__ = 1
@@ -42,7 +43,7 @@ Adding test_t_issue_2320_4_t.a.o to library
 Adding test_t_issue_2320_4_t.b.o to library
 END
 
-capture_ok("z88dk-z80nm -a $test.lib", <<'END');
+capture_ok( "z88dk-z80nm -a $test.lib", <<'END' );
 Library file test_t_issue_2320_4_t.lib at $0000: Z80LMF18
 Object  file test_t_issue_2320_4_t.lib at $0014: Z80RMF18
   Name: test_t_issue_2320_4_t.a

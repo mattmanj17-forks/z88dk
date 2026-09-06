@@ -7,7 +7,7 @@ use Modern::Perl;
 # Test https://github.com/z88dk/z88dk/issues/2463
 # z80asm: run m4 on file.asm.m4
 
-spew("$test.asm.m4", <<'END');
+spew( "$test.asm.m4", <<'END' );
 define(`one', defb 1
 )
 define(`two', defb 2
@@ -19,7 +19,7 @@ define(`input', defb INPUT
 one two three input
 END
 
-capture_ok("z88dk-z80asm -v -b -m4=-DINPUT=4 $test.asm.m4", <<'END');
+capture_ok( "z88dk-z80asm -v -b -m4=-DINPUT=4 $test.asm.m4", <<'END' );
 % z88dk-z80asm -v -b -m4=-DINPUT=4 test_t_issue_2463_t.asm.m4
 % m4 -DINPUT=4  "test_t_issue_2463_t.asm.m4" > "test_t_issue_2463_t.asm"
 Predefined constant: __CPU_Z80__ = 1
@@ -33,7 +33,7 @@ Code size: 4 bytes ($0000 to $0003)
 Creating binary 'test_t_issue_2463_t.bin'
 END
 
-check_bin_file("$test.bin", bytes(1,2,3,4));
+check_bin_file( "$test.bin", bytes( 1, 2, 3, 4 ) );
 
 unlink_testfiles;
 done_testing;

@@ -15,14 +15,14 @@ use Modern::Perl;
 my $ticks = Ticks->new;
 
 for my $reg (qw( bc de hl )) {
-	for my $base (0, 255, 65534) {
-		for my $add (1, 2) {
-			note "reg:$reg base:$base add:$add";
-			my $sum = $base + $add;
-			my $carry = $sum > 65535 ? 1 : 0;
-			my $set_carry = $carry ? "scf" : "and a";
-			
-			$ticks->add(<<END, F_C=>$carry, HL=>$sum);
+    for my $base ( 0, 255, 65534 ) {
+        for my $add ( 1, 2 ) {
+            note "reg:$reg base:$base add:$add";
+            my $sum       = $base + $add;
+            my $carry     = $sum > 65535 ? 1     : 0;
+            my $set_carry = $carry       ? "scf" : "and a";
+
+            $ticks->add( <<END, F_C => $carry, HL => $sum );
 					ld		$reg, $base
 					add 	$reg, $add
 					
@@ -34,8 +34,8 @@ for my $reg (qw( bc de hl )) {
 					$set_carry
 					ENDIF
 END
-		}
-	}
+        }
+    }
 }
 
 $ticks->run;

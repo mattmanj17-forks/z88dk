@@ -9,8 +9,8 @@ use Modern::Perl;
 
 delete $ENV{ZCCCFG};
 
-spew("$test.asm", "nop");
-capture_nok("z88dk-z80asm -b -l$test $test.asm", <<END);
+spew( "$test.asm", "nop" );
+capture_nok( "z88dk-z80asm -b -l$test $test.asm", <<END );
 error: file not found: $test.lib
 END
 

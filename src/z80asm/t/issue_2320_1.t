@@ -12,8 +12,8 @@ use Modern::Perl;
 #------------------------------------------------------------------------------
 
 unlink_testfiles;
-spew("$test.asm", "nop");
-capture_nok("z88dk-z80asm -d -m* -x$test.lib $test", <<'END');
+spew( "$test.asm", "nop" );
+capture_nok( "z88dk-z80asm -d -m* -x$test.lib $test", <<'END' );
 error: cannot build libraries with -m* and -d
 END
 

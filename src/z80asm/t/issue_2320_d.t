@@ -12,12 +12,12 @@ use Modern::Perl;
 #------------------------------------------------------------------------------
 
 unlink_testfiles;
-spew("$test.a.as", <<'END');
+spew( "$test.a.as", <<'END' );
 SECTION code2
 a:	ld      hl,16384
 END
 
-spew("$test.b.as", <<'END');
+spew( "$test.b.as", <<'END' );
 MODULE b
 SECTION code
 b:	ld      hl,32768
@@ -27,9 +27,9 @@ END
 # any extension - give .o
 #------------------------------------------------------------------------------
 
-capture_ok("z88dk-z80asm -mz80 $test.a.as", "");
-capture_ok("z88dk-z80asm -mr3k $test.b.as", "");
-capture_nok("z88dk-z80asm -x$test.lib -mz80 $test.*.o", <<'END');
+capture_ok( "z88dk-z80asm -mz80 $test.a.as", "" );
+capture_ok( "z88dk-z80asm -mr3k $test.b.as", "" );
+capture_nok( "z88dk-z80asm -x$test.lib -mz80 $test.*.o", <<'END' );
 error: CPU incompatible: file test_t_issue_2320_d_t.b.o compiled for r3k, incompatible with z80
 END
 

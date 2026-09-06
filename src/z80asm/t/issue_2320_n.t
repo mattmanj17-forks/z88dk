@@ -12,24 +12,24 @@ use Modern::Perl;
 #------------------------------------------------------------------------------
 
 unlink_testfiles;
-spew("$test.1.asm", <<'END');
+spew( "$test.1.asm", <<'END' );
 			public the_answer
 	the_answer = 42
 END
 
-unlink("$test.1.o", "$test.1.lib");
-capture_ok("z88dk-z80asm -x$test.1.lib $test.1.asm", "");
-unlink("$test.1.o", "$test.1.asm");
+unlink( "$test.1.o", "$test.1.lib" );
+capture_ok( "z88dk-z80asm -x$test.1.lib $test.1.asm", "" );
+unlink( "$test.1.o", "$test.1.asm" );
 
-spew("$test.asm", <<'END');
+spew( "$test.asm", <<'END' );
 	extern the_answer
 	defb the_answer
 END
 
-unlink("$test.o", "$test.bin");
-capture_ok("z88dk-z80asm -b -m -l$test.1.lib $test.asm", "");
-check_bin_file("$test.bin", bytes(42));
-check_text_file("$test.map", <<'END');
+unlink( "$test.o", "$test.bin" );
+capture_ok( "z88dk-z80asm -b -m -l$test.1.lib $test.asm", "" );
+check_bin_file( "$test.bin", bytes(42) );
+check_text_file( "$test.map", <<'END' );
 __head                          = $0000 ; const, public, def, , ,
 __size                          = $0001 ; const, public, def, , ,
 __tail                          = $0001 ; const, public, def, , ,

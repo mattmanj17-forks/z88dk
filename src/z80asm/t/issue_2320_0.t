@@ -12,11 +12,11 @@ use Modern::Perl;
 #------------------------------------------------------------------------------
 
 unlink_testfiles;
-spew("$test.asm", "nop");
+spew( "$test.asm", "nop" );
 sleep(1);
-spew("$test.o", objfile(CPU=>-1));
+spew( "$test.o", objfile( CPU => -1 ) );
 
-capture_ok("z88dk-z80nm -a $test.o", <<'END');
+capture_ok( "z88dk-z80nm -a $test.o", <<'END' );
 Object  file test_t_issue_2320_0_t.o at $0000: Z80RMF18
   Name: test
   CPU:  (invalid -1) 
@@ -24,19 +24,19 @@ Object  file test_t_issue_2320_0_t.o at $0000: Z80RMF18
     S   1 = "test"
 END
 
-capture_nok("z88dk-z80asm -b $test.o", <<'END');
+capture_nok( "z88dk-z80asm -b $test.o", <<'END' );
 error: CPU invalid: file test_t_issue_2320_0_t.o, cpu_id = -1
 END
 
-capture_nok("z88dk-z80asm -d -b $test.o", <<'END');
+capture_nok( "z88dk-z80asm -d -b $test.o", <<'END' );
 error: CPU invalid: file test_t_issue_2320_0_t.o, cpu_id = -1
 END
 
 sleep(1);
-spew("$test.asm", "nop");
+spew( "$test.asm", "nop" );
 
-capture_ok("z88dk-z80asm -d -b $test.o", "");
-check_bin_file("$test.bin", bytes(0));
+capture_ok( "z88dk-z80asm -d -b $test.o", "" );
+check_bin_file( "$test.bin", bytes(0) );
 
 unlink_testfiles;
 done_testing;

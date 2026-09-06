@@ -15,20 +15,22 @@ use Modern::Perl;
 my $ticks = Ticks->new;
 
 for my $reg (qw( BC DE HL )) {
-	for my $carry (0, 1) {
-		for my $init (0, 0x1111, 0x2222, 0x8888) {
-			my $init_carry = $carry ? "scf" : "and a";
-			my $res = ($init >> 1)|(0x8000*$carry);
-			
-			$ticks->add(<<END, 
+    for my $carry ( 0, 1 ) {
+        for my $init ( 0, 0x1111, 0x2222, 0x8888 ) {
+            my $init_carry = $carry ? "scf" : "and a";
+            my $res        = ( $init >> 1 ) | ( 0x8000 * $carry );
+
+            $ticks->add(
+                <<END,
 					$init_carry 
 					ld		$reg, $init
 					rr      $reg
 END
-				F_C  => ($init & 1) ? 1 : 0,
-				$reg => $res);
-		}
-	}
+                F_C  => ( $init & 1 ) ? 1 : 0,
+                $reg => $res
+            );
+        }
+    }
 }
 
 $ticks->run;

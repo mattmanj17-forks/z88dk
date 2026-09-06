@@ -12,9 +12,9 @@ path("$test.dir")->remove_tree;
 unlink_testfiles;
 
 mkdir "$test.dir";
-spew("$test.asm", "public aa \n aa: nop");
+spew( "$test.asm", "public aa \n aa: nop" );
 
-capture_ok("z88dk-z80asm -v -o=$test.dir/$test.o $test.asm", <<'END');
+capture_ok( "z88dk-z80asm -v -o=$test.dir/$test.o $test.asm", <<'END' );
 % z88dk-z80asm -v -o=test_t_issue_2422_t.dir/test_t_issue_2422_t.o test_t_issue_2422_t.asm
 Predefined constant: __CPU_Z80__ = 1
 Predefined constant: __CPU_ZILOG__ = 1
@@ -25,10 +25,10 @@ Writing object file 'test_t_issue_2422_t.dir/test_t_issue_2422_t.o'
 
 END
 
-ok !-f "$test.o", "no object file in asm directory";
+ok !-f "$test.o",          "no object file in asm directory";
 ok -f "$test.dir/$test.o", "object file in target directory";
 
-capture_ok("z88dk-z80nm -a $test.dir/$test.o", <<'END');
+capture_ok( "z88dk-z80nm -a $test.dir/$test.o", <<'END' );
 Object  file test_t_issue_2422_t.dir/test_t_issue_2422_t.o at $0000: Z80RMF18
   Name: test_t_issue_2422_t
   CPU:  z80 
@@ -42,16 +42,16 @@ Object  file test_t_issue_2422_t.dir/test_t_issue_2422_t.o at $0000: Z80RMF18
     S   3 = "test_t_issue_2422_t"
 END
 
-
 # two object files
 path("$test.dir")->remove_tree;
 unlink_testfiles;
 
 mkdir "$test.dir";
-spew("$test.1.asm", "public aa \n aa: nop");
-spew("$test.2.asm", "public bb \n bb: nop");
+spew( "$test.1.asm", "public aa \n aa: nop" );
+spew( "$test.2.asm", "public bb \n bb: nop" );
 
-capture_ok("z88dk-z80asm -v -o=$test.dir/$test.o $test.1.asm $test.2.asm", <<'END');
+capture_ok( "z88dk-z80asm -v -o=$test.dir/$test.o $test.1.asm $test.2.asm",
+    <<'END' );
 % z88dk-z80asm -v -o=test_t_issue_2422_t.dir/test_t_issue_2422_t.o test_t_issue_2422_t.1.asm test_t_issue_2422_t.2.asm
 Predefined constant: __CPU_Z80__ = 1
 Predefined constant: __CPU_ZILOG__ = 1
@@ -66,11 +66,11 @@ Writing object file 'test_t_issue_2422_t.2.o'
 Writing object file 'test_t_issue_2422_t.dir/test_t_issue_2422_t.o'
 END
 
-ok -f "$test.1.o", "object file in asm directory";
-ok -f "$test.2.o", "object file in asm directory";
+ok -f "$test.1.o",         "object file in asm directory";
+ok -f "$test.2.o",         "object file in asm directory";
 ok -f "$test.dir/$test.o", "object file in target directory";
 
-capture_ok("z88dk-z80nm -a $test.dir/$test.o $test.1.o $test.2.o", <<'END');
+capture_ok( "z88dk-z80nm -a $test.dir/$test.o $test.1.o $test.2.o", <<'END' );
 Object  file test_t_issue_2422_t.dir/test_t_issue_2422_t.o at $0000: Z80RMF18
   Name: test_t_issue_2422_t
   CPU:  z80 

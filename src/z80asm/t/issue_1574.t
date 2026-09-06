@@ -7,7 +7,7 @@ use Modern::Perl;
 # https://github.com/z88dk/z88dk/issues/1574
 # z80asm -reloc-info fails to recognize subtraction
 
-spew("$test.asm", <<'END');
+spew( "$test.asm", <<'END' );
 	foo:
 		ld bc,bar - foo
 		nop
@@ -15,12 +15,11 @@ spew("$test.asm", <<'END');
 	bar:
 END
 
-capture_ok("z88dk-z80asm -b -m -reloc-info $test.asm", "");
+capture_ok( "z88dk-z80asm -b -m -reloc-info $test.asm", "" );
 
-check_bin_file("$test.bin",
-			bytes(0x01, 5, 0, 0, 0));
+check_bin_file( "$test.bin", bytes( 0x01, 5, 0, 0, 0 ) );
 
-check_text_file("$test.map", <<END);
+check_text_file( "$test.map", <<END );
 __head                          = \$0000 ; const, public, def, , ,
 __size                          = \$0005 ; const, public, def, , ,
 __tail                          = \$0005 ; const, public, def, , ,
@@ -28,7 +27,7 @@ bar                             = \$0005 ; addr, local, , $test, , $test.asm:5
 foo                             = \$0000 ; addr, local, , $test, , $test.asm:1
 END
 
-capture_ok("z88dk-z80nm -a $test.o", <<'END');
+capture_ok( "z88dk-z80nm -a $test.o", <<'END' );
 Object  file test_t_issue_1574_t.o at $0000: Z80RMF18
   Name: test_t_issue_1574_t
   CPU:  z80 
@@ -44,7 +43,7 @@ Object  file test_t_issue_1574_t.o at $0000: Z80RMF18
     S   4 = "test_t_issue_1574_t"
 END
 
-check_bin_file("$test.reloc", bytes());
+check_bin_file( "$test.reloc", bytes() );
 
 unlink_testfiles;
 done_testing;

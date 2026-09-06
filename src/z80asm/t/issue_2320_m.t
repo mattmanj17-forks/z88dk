@@ -11,23 +11,23 @@ use Modern::Perl;
 # allow multi-CPU object files during library creation
 #------------------------------------------------------------------------------
 
-for my $has_asm (0 .. 1) {
-	unlink_testfiles;
-	my @objs;
-	for my $cpu (@CPUS) {
-		for my $ixiy ("", "-IXIY") {
-			my $ixiy_text = $ixiy eq "" ? "" : "($ixiy)";
-			my $base = "$test.$cpu$ixiy";
-			spew("$base.asm", "nop");
-			unlink("$base.o");
-			capture_ok("z88dk-z80asm -m$cpu $ixiy $base.asm", "");
-			ok -f "$base.o", "$base.o created";
-			unlink("$base.asm") unless $has_asm;
-			push @objs, "$base.o";
-		}
-	}
+for my $has_asm ( 0 .. 1 ) {
+    unlink_testfiles;
+    my @objs;
+    for my $cpu (@CPUS) {
+        for my $ixiy ( "", "-IXIY" ) {
+            my $ixiy_text = $ixiy eq "" ? "" : "($ixiy)";
+            my $base      = "$test.$cpu$ixiy";
+            spew( "$base.asm", "nop" );
+            unlink("$base.o");
+            capture_ok( "z88dk-z80asm -m$cpu $ixiy $base.asm", "" );
+            ok -f "$base.o", "$base.o created";
+            unlink("$base.asm") unless $has_asm;
+            push @objs, "$base.o";
+        }
+    }
 
-	capture_ok("z88dk-z80asm -v -m* -x$test.1.lib @objs", <<'END');
+    capture_ok( "z88dk-z80asm -v -m* -x$test.1.lib @objs", <<'END' );
 % z88dk-z80asm -v -m* -xtest_t_issue_2320_m_t.1.lib test_t_issue_2320_m_t.z80.o test_t_issue_2320_m_t.z80-IXIY.o test_t_issue_2320_m_t.z80_strict.o test_t_issue_2320_m_t.z80_strict-IXIY.o test_t_issue_2320_m_t.z80n.o test_t_issue_2320_m_t.z80n-IXIY.o test_t_issue_2320_m_t.z80n_strict.o test_t_issue_2320_m_t.z80n_strict-IXIY.o test_t_issue_2320_m_t.z180.o test_t_issue_2320_m_t.z180-IXIY.o test_t_issue_2320_m_t.z180_strict.o test_t_issue_2320_m_t.z180_strict-IXIY.o test_t_issue_2320_m_t.ez80.o test_t_issue_2320_m_t.ez80-IXIY.o test_t_issue_2320_m_t.ez80_strict.o test_t_issue_2320_m_t.ez80_strict-IXIY.o test_t_issue_2320_m_t.ez80_z80.o test_t_issue_2320_m_t.ez80_z80-IXIY.o test_t_issue_2320_m_t.ez80_z80_strict.o test_t_issue_2320_m_t.ez80_z80_strict-IXIY.o test_t_issue_2320_m_t.r800.o test_t_issue_2320_m_t.r800-IXIY.o test_t_issue_2320_m_t.r800_strict.o test_t_issue_2320_m_t.r800_strict-IXIY.o test_t_issue_2320_m_t.r2ka.o test_t_issue_2320_m_t.r2ka-IXIY.o test_t_issue_2320_m_t.r2ka_strict.o test_t_issue_2320_m_t.r2ka_strict-IXIY.o test_t_issue_2320_m_t.r3k.o test_t_issue_2320_m_t.r3k-IXIY.o test_t_issue_2320_m_t.r3k_strict.o test_t_issue_2320_m_t.r3k_strict-IXIY.o test_t_issue_2320_m_t.r4k.o test_t_issue_2320_m_t.r4k-IXIY.o test_t_issue_2320_m_t.r4k_strict.o test_t_issue_2320_m_t.r4k_strict-IXIY.o test_t_issue_2320_m_t.r5k.o test_t_issue_2320_m_t.r5k-IXIY.o test_t_issue_2320_m_t.r5k_strict.o test_t_issue_2320_m_t.r5k_strict-IXIY.o test_t_issue_2320_m_t.r6k.o test_t_issue_2320_m_t.r6k-IXIY.o test_t_issue_2320_m_t.r6k_strict.o test_t_issue_2320_m_t.r6k_strict-IXIY.o test_t_issue_2320_m_t.8080.o test_t_issue_2320_m_t.8080-IXIY.o test_t_issue_2320_m_t.8080_strict.o test_t_issue_2320_m_t.8080_strict-IXIY.o test_t_issue_2320_m_t.8085.o test_t_issue_2320_m_t.8085-IXIY.o test_t_issue_2320_m_t.8085_strict.o test_t_issue_2320_m_t.8085_strict-IXIY.o test_t_issue_2320_m_t.gbz80.o test_t_issue_2320_m_t.gbz80-IXIY.o test_t_issue_2320_m_t.gbz80_strict.o test_t_issue_2320_m_t.gbz80_strict-IXIY.o test_t_issue_2320_m_t.kc160.o test_t_issue_2320_m_t.kc160-IXIY.o test_t_issue_2320_m_t.kc160_strict.o test_t_issue_2320_m_t.kc160_strict-IXIY.o test_t_issue_2320_m_t.kc160_z80.o test_t_issue_2320_m_t.kc160_z80-IXIY.o test_t_issue_2320_m_t.kc160_z80_strict.o test_t_issue_2320_m_t.kc160_z80_strict-IXIY.o test_t_issue_2320_m_t.vm1.o test_t_issue_2320_m_t.vm1-IXIY.o test_t_issue_2320_m_t.vm1_strict.o test_t_issue_2320_m_t.vm1_strict-IXIY.o test_t_issue_2320_m_t.ti83.o test_t_issue_2320_m_t.ti83-IXIY.o test_t_issue_2320_m_t.ti83_strict.o test_t_issue_2320_m_t.ti83_strict-IXIY.o test_t_issue_2320_m_t.ti83plus.o test_t_issue_2320_m_t.ti83plus-IXIY.o test_t_issue_2320_m_t.ti83plus_strict.o test_t_issue_2320_m_t.ti83plus_strict-IXIY.o
 Predefined constant: __CPU_Z80__ = 1
 Predefined constant: __CPU_ZILOG__ = 1
@@ -3019,7 +3019,7 @@ Predefined constant: __CPU_Z80__ = 1
 Predefined constant: __CPU_ZILOG__ = 1
 END
 
-	capture_ok("z88dk-z80nm -a $test.1.lib", <<'END');
+    capture_ok( "z88dk-z80nm -a $test.1.lib", <<'END' );
 Library file test_t_issue_2320_m_t.1.lib at $0000: Z80LMF18
 Object  file test_t_issue_2320_m_t.1.lib at $0014: Z80RMF18
   Name: test_t_issue_2320_m_t.z80n

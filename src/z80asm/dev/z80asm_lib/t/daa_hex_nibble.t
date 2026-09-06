@@ -15,9 +15,9 @@ use Modern::Perl;
 my $ticks = Ticks->new;
 
 # test l_hex_nibble from the z88dk library (uses DAA)
-for my $a (0..15) {
-	my $exp_out = ord(sprintf("%X", $a));
-	$ticks->add(<<END, A=>$exp_out);
+for my $a ( 0 .. 15 ) {
+    my $exp_out = ord( sprintf( "%X", $a ) );
+    $ticks->add( <<END, A => $exp_out );
 			ld a, $a
 			call l_hex_nibble
 			jr cont

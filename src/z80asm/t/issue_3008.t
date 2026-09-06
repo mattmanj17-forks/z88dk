@@ -22,7 +22,7 @@ my $dir = "${test}.dir";
 path($dir)->remove_tree if -d $dir;
 path($dir)->mkpath;
 
-spew("$dir/prog.c", <<'END');
+spew( "$dir/prog.c", <<'END' );
 unsigned char buf[8000];
 int main(void) { buf[0] = 1; return buf[0]; }
 END
@@ -30,14 +30,14 @@ END
 run_ok("zcc +cpm $dir/prog.c -o $dir/prog -create-app -m");
 
 # appmake uppercases the output basename and appends .COM
-my ($com) = grep { -f } ("$dir/PROG.COM", "$dir/prog.com");
+my ($com) = grep { -f } ( "$dir/PROG.COM", "$dir/prog.com" );
 ok defined($com), "found generated .COM";
 
 my $map = slurp("$dir/prog.map");
 my ($bss_head_hex) = $map =~ /^__BSS_head \s* = \s* \$ ([0-9A-Fa-f]+)/mx;
 ok defined($bss_head_hex), "found __BSS_head in map";
 
-my $code_data = hex($bss_head_hex) - 0x100;   # bytes from $0100 to __BSS_head
+my $code_data = hex($bss_head_hex) - 0x100;    # bytes from $0100 to __BSS_head
 my $com_size  = -s $com;
 
 # code+data end at __BSS_head; the trailing BSS is zeroed by the CRT and must
@@ -45,7 +45,7 @@ my $com_size  = -s $com;
 TODO: {
     local $TODO = "issue 3008: +cpm bundles uninitialised BSS into the .COM";
     ok $com_size <= $code_data,
-       ".COM excludes BSS (size $com_size <= code+data $code_data)";
+        ".COM excludes BSS (size $com_size <= code+data $code_data)";
 }
 
 unlink_testfiles();

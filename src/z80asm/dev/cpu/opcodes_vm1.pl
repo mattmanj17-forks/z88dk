@@ -29,13 +29,13 @@ for my $cpu1 ('vm1') {
 
         add_opcodes( $cpu, "ldax <r>/stax <r> [vm1]" );
         add_opcodes( $cpu, "ldax <rp>/stax <rp> [vm1]" ) if !$strict;
-        add_opcodes( $cpu, "ld a, (<rp>) [vm1]" ) if !$strict;
+        add_opcodes( $cpu, "ld a, (<rp>) [vm1]" )        if !$strict;
 
         add_opcodes( $cpu, "xchg [8080]" );
         add_opcodes( $cpu, "ex de, hl" ) if !$strict;
 
         add_opcodes( $cpu, "<alu> <r> [vm1]" );
-        add_opcodes( $cpu, "<alu> a, <r> [vm1]" ) if !$strict;
+        add_opcodes( $cpu, "<alu> a, <r> [vm1]" )       if !$strict;
         add_opcodes( $cpu, "<alu-extra> a, <r> [vm1]" ) if !$strict;
 
         add_opcodes( $cpu, "<alu> N [8080]" );
@@ -50,7 +50,7 @@ for my $cpu1 ('vm1') {
         add_opcodes( $cpu, "inc/dec <rp> [vm1]" ) if !$strict;
 
         add_opcodes( $cpu, "dad <r> [vm1]" );
-        add_opcodes( $cpu, "dad <rp> [vm1]" ) if !$strict;
+        add_opcodes( $cpu, "dad <rp> [vm1]" )     if !$strict;
         add_opcodes( $cpu, "add hl, <rp> [vm1]" ) if !$strict;
 
         add_opcodes( $cpu, "daa" );
@@ -79,8 +79,8 @@ for my $cpu1 ('vm1') {
 
         add_opcodes( $cpu, "call NN [vm1]" );
         add_opcodes( $cpu, "c<flag> NN [vm1]" );
-        add_opcodes( $cpu, "c_<f> NN [vm1]" ) if !$strict;
-        add_opcodes( $cpu, "cp NN [vm1]" ) if $strict;
+        add_opcodes( $cpu, "c_<f> NN [vm1]" )     if !$strict;
+        add_opcodes( $cpu, "cp NN [vm1]" )        if $strict;
         add_opcodes( $cpu, "call <f>, NN [vm1]" ) if !$strict;
 
         add_opcodes( $cpu, "rst NN [vm1]" );
@@ -114,48 +114,56 @@ for my $cpu1 ('vm1') {
         add_opcodes( $cpu, "sbc hl, <rp> [vm1]" );
         add_opcodes( $cpu, "dcmp [vm1]" );
         add_opcodes( $cpu, "cpc hl, <rp> [vm1]" );
-		
+
         add_opcodes( $cpu, "ld (hl), <alu> (hl) [vm1]" );
-		
+
         add_opcodes( $cpu, "shlx [vm1]" );
         add_opcodes( $cpu, "lhlx [vm1]" );
-		
+
         add_opcodes( $cpu, "jof [vm1]" );
-		add_opcodes( $cpu, "smf0/smf1 [vm1]");
+        add_opcodes( $cpu, "smf0/smf1 [vm1]" );
     }
 }
 
 sub add_opcode_vm1 {
-	my($cpu, $asm, $ops, $const) = @_;
-	
-	# add original opcode
-	if (!get_opcode($cpu, $asm)) {
-		add_opcode($cpu, $asm, $ops, $const);
-	}
-	
-	# check for hl', h', l', prefix RS (0x38)
-	my $has_38 = grep {$_ == 0x38} @$ops;
-	if (!$has_38) {
-		my $asm1 = $asm =~ s/\b(pchl|xthl|sphl|hl|h|l)\b(?!')/$1'/gr;
-		my $ops1 = [0x38, @$ops];
-		if (!get_opcode($cpu, $asm1)) {
-			add_opcode_vm1($cpu, $asm1, $ops1, $const);
-		}
-	}
-	
-	# check for memory access, prefix MB (0x28)
-	my $has_28 = grep {$_ == 0x28} @$ops;
-	if (!$has_28 &&								# already has the prefix
-		($asm =~ /\(/ && $asm !~ /^j/ ||		# has parens and is not jump
-		 $asm =~ /(?<!%)\bm\b/ && $asm !~ /^j/ || # has m, not %m and is not jump
-		 $asm =~ /^(?:lda|sta|lhld|shld|ldax|stax|shlx|shlde|lhlx|lhlde)\b/	|| # Intel memory access
-		 $asm =~ /^(?:push|pop|call|rst|ret|c(?:z|nz|c|nc|po|pe|m)|c_(?:z|nz|c|nc|po|pe|p|m)|r(?:z|nz|c|nc|po|pe|p|m)|r_(?:z|nz|c|nc|po|pe|p|m))\b/)) {	# stack
-		my $asm1 = "mb $asm";
-		my $ops1 = [0x28, @$ops];
-		if (!get_opcode($cpu, $asm1)) {
-			add_opcode_vm1($cpu, $asm1, $ops1, $const);
-		}
-	}
+    my ( $cpu, $asm, $ops, $const ) = @_;
+
+    # add original opcode
+    if ( !get_opcode( $cpu, $asm ) ) {
+        add_opcode( $cpu, $asm, $ops, $const );
+    }
+
+    # check for hl', h', l', prefix RS (0x38)
+    my $has_38 = grep { $_ == 0x38 } @$ops;
+    if ( !$has_38 ) {
+        my $asm1 = $asm =~ s/\b(pchl|xthl|sphl|hl|h|l)\b(?!')/$1'/gr;
+        my $ops1 = [ 0x38, @$ops ];
+        if ( !get_opcode( $cpu, $asm1 ) ) {
+            add_opcode_vm1( $cpu, $asm1, $ops1, $const );
+        }
+    }
+
+    # check for memory access, prefix MB (0x28)
+    my $has_28 = grep { $_ == 0x28 } @$ops;
+    if (
+        !$has_28 &&    # already has the prefix
+        (
+            $asm =~ /\(/ && $asm !~ /^j/ ||    # has parens and is not jump
+            $asm =~ /(?<!%)\bm\b/ && $asm !~ /^j/
+            ||                                 # has m, not %m and is not jump
+            $asm =~ /^(?:lda|sta|lhld|shld|ldax|stax|shlx|shlde|lhlx|lhlde)\b/
+            ||                                 # Intel memory access
+            $asm =~
+/^(?:push|pop|call|rst|ret|c(?:z|nz|c|nc|po|pe|m)|c_(?:z|nz|c|nc|po|pe|p|m)|r(?:z|nz|c|nc|po|pe|p|m)|r_(?:z|nz|c|nc|po|pe|p|m))\b/
+        )
+        )
+    {    # stack
+        my $asm1 = "mb $asm";
+        my $ops1 = [ 0x28, @$ops ];
+        if ( !get_opcode( $cpu, $asm1 ) ) {
+            add_opcode_vm1( $cpu, $asm1, $ops1, $const );
+        }
+    }
 }
-		
+
 1;

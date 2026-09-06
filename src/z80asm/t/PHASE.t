@@ -4,21 +4,21 @@ BEGIN { use lib 't'; require 'testlib.pl'; }
 
 use Modern::Perl;
 
-z80asm_nok("", "", <<END_ASM, <<END_ERR);
+z80asm_nok( "", "", <<END_ASM, <<END_ERR );
 		phase -1
 END_ASM
 $test.asm:1: error: integer range: -1
   ^---- phase -1
 END_ERR
 
-z80asm_nok("", "", <<END_ASM, <<END_ERR);
+z80asm_nok( "", "", <<END_ASM, <<END_ERR );
 		phase 65536
 END_ASM
 $test.asm:1: error: integer range: \$10000
   ^---- phase 65536
 END_ERR
 
-z80asm_nok("", "", <<END_ASM, <<END_ERR);
+z80asm_nok( "", "", <<END_ASM, <<END_ERR );
 		phase x
 END_ASM
 $test.asm:1: error: undefined symbol: x
@@ -27,7 +27,7 @@ $test.asm:1: error: constant expression expected
   ^---- phase x
 END_ERR
 
-z80asm_nok("", "", <<END_ASM, <<END_ERR);
+z80asm_nok( "", "", <<END_ASM, <<END_ERR );
 		extern x
 		phase x
 END_ASM
@@ -35,7 +35,8 @@ $test.asm:2: error: constant expression expected
   ^---- phase x
 END_ERR
 
-z80asm_ok("-b -m -l", "", "", <<END,
+z80asm_ok(
+    "-b -m -l", "", "", <<END,
 	section PART_1
 	part1:
 		ld hl, start
@@ -62,22 +63,15 @@ z80asm_ok("-b -m -l", "", "", <<END,
 	end:
 		defw asmpc
 END
-	bytes(0x21, 18, 0,
-		  0x11, 0, 0x80,
-		  0x01, 8, 0,
-		  0xED, 0xB0,
-		  0x18, 0,
-		  0xC3, 0, 0x80,
-		  0x10, 0,
-		  0xCD, 3, 0x80,
-		  0x18, 0,
-		  0xC9,
-		  0x06, 0x80,
-		  0x1A, 0,
-		  1, 2, 3, 4,
-));
+    bytes(
+        0x21, 18,   0,    0x11, 0,    0x80, 0x01, 8,
+        0,    0xED, 0xB0, 0x18, 0,    0xC3, 0,    0x80,
+        0x10, 0,    0xCD, 3,    0x80, 0x18, 0,    0xC9,
+        0x06, 0x80, 0x1A, 0,    1,    2,    3,    4,
+    )
+);
 
-check_text_file("$test.lis", <<'END');
+check_text_file( "$test.lis", <<'END' );
 test_t_PHASE_t.asm:
      1                          	section PART_1
      2                          	part1:
@@ -108,7 +102,7 @@ test_t_PHASE_t.asm:
     27                          
 END
 
-check_text_file("$test.map", <<END);
+check_text_file( "$test.map", <<END );
 __PART_1_head                   = \$0000 ; const, public, def, , ,
 __PART_1_size                   = \$001C ; const, public, def, , ,
 __PART_1_tail                   = \$001C ; const, public, def, , ,

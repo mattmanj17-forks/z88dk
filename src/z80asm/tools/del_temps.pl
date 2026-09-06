@@ -9,23 +9,15 @@ use warnings;
 use File::Find;
 
 my @patterns = (
-    qr/\.core$/,
-    qr/\.o$/,
-    qr/\.d$/,
-    qr/\.out$/,
-    qr/\.orig$/,
-    qr/\.exe$/,
-    qr/\.tmp$/,
-    qr/\.bak$/,
-    qr/\.log$/,
-    qr/~$/,
+    qr/\.core$/, qr/\.o$/,   qr/\.d$/,   qr/\.out$/, qr/\.orig$/, qr/\.exe$/,
+    qr/\.tmp$/,  qr/\.bak$/, qr/\.log$/, qr/~$/,
 );
 
 find(
     sub {
-        return unless -f $_;   # only files
+        return unless -f $_;    # only files
         for my $re (@patterns) {
-            if ($_ =~ $re) {
+            if ( $_ =~ $re ) {
                 unlink $_ or warn "Could not remove $_: $!";
                 last;
             }

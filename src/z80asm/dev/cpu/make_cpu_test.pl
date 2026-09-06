@@ -40,16 +40,19 @@ for my $ixiy ( "", "_ixiy" ) {
             if ( $opcodes->exists( $cpu, $asm_ixiy ) ) {
                 my $opcode = $opcodes->opcodes->{$asm_ixiy}{$cpu};
 
-                add( $cpu, $opcode->clone( sub { s/\Q$asm_ixiy/$asm/ }, sub { } ) )
+                add( $cpu,
+                    $opcode->clone( sub { s/\Q$asm_ixiy/$asm/ }, sub { } ) )
                     ;    # make a deep copy
             }
             elsif ( $opcodes->exists( $cpu, $asm ) ) {
                 my $opcode = $opcodes->opcodes->{$asm}{$cpu};
-                add( $cpu, $opcode->clone( sub { }, sub { } ) );    # make a deep copy
+                add( $cpu, $opcode->clone( sub { }, sub { } ) )
+                    ;    # make a deep copy
             }
         }
 
-        open( my $fh, ">", "${output_basename}_${cpu}${ixiy}_ok.asm" ) or die $!;
+        open( my $fh, ">", "${output_basename}_${cpu}${ixiy}_ok.asm" )
+            or die $!;
         say $fh join( "\n", compute_labels( $cpu, sort @test ) );
     }
 }
@@ -70,8 +73,8 @@ for my $cpu ( Opcode->cpus ) {
         {
             my $skip = 0;
 
-            # special case: 'djnz ASMPC' is translated to 'djnz NN' 
-			# in 8080/8085/vm1
+            # special case: 'djnz ASMPC' is translated to 'djnz NN'
+            # in 8080/8085/vm1
             if ( $asm =~ /^(jr|djnz)/ ) {
                 if ( $cpu =~ /^80|^vm1/ ) {
                     $skip = 1 if $asm =~ /ASMPC/;    # DIS
@@ -116,7 +119,8 @@ sub add {
         $opcode1->{done_ldh} = 1;
         add( $cpu, $opcode1 );
 
-        $opcode1 = $opcode->clone( sub { s/ldh /ld /; s/\(c\)/(0xff00+c)/ }, sub { } );
+        $opcode1 =
+            $opcode->clone( sub { s/ldh /ld /; s/\(c\)/(0xff00+c)/ }, sub { } );
         $opcode1->{done_ldh} = 1;
         add( $cpu, $opcode1 );
     }
@@ -156,9 +160,9 @@ sub add {
             )
         );
 
-        # must be 1-byte opcode so that call to __z80asm__add_sp_d with defb %d after
-        # is diassembled correctly during z80asm tests in cpu.t
-        # 7F is a prefix in r4k and r5k, is not single-opcode; use 7E instead
+   # must be 1-byte opcode so that call to __z80asm__add_sp_d with defb %d after
+   # is diassembled correctly during z80asm tests in cpu.t
+   # 7F is a prefix in r4k and r5k, is not single-opcode; use 7E instead
         $state = 0;
         add(
             $cpu,
@@ -341,7 +345,12 @@ sub add {
     }
     elsif ( $asm =~ /%j/ ) {
         my $dist = -scalar( $opcode->bytes );
-        add( $cpu, $opcode->clone( sub { s/%j/ASMPC/ }, sub { s/%j/ $dist & 0xFF /e } ) );
+        add(
+            $cpu,
+            $opcode->clone(
+                sub { s/%j/ASMPC/ }, sub { s/%j/ $dist & 0xFF /e }
+            )
+        );
     }
     elsif ( $asm =~ /%J/ ) {
         my $dist  = -scalar( $opcode->bytes );
@@ -352,8 +361,14 @@ sub add {
                 sub { s/%J/ASMPC/ },
                 sub {
                     if (/%J/) {
-                        if    ( $state == 0 ) { s/%J/ $dist & 0xFF /e;        $state = 1; }
-                        elsif ( $state == 1 ) { s/%J/ ($dist >> 8) & 0xFF /e; $state = 2; }
+                        if ( $state == 0 ) {
+                            s/%J/ $dist & 0xFF /e;
+                            $state = 1;
+                        }
+                        elsif ( $state == 1 ) {
+                            s/%J/ ($dist >> 8) & 0xFF /e;
+                            $state = 2;
+                        }
                     }
                 }
             )
@@ -415,7 +430,8 @@ sub compute_labels {
                 @before,
                 sprintf( "%02X", ($target) & 0xFF ),
                 sprintf( "%02X", ( $target >> 8 ) & 0xFF ),
-                sprintf( "%02X", ( $target >> 16 ) & 0xFF ), @after
+                sprintf( "%02X", ( $target >> 16 ) & 0xFF ),
+                @after
             );
             $bytes = join ' ', @bytes;
         }
@@ -439,7 +455,10 @@ sub compute_labels {
             my @before = split ' ', $before;
             my $after  = $';
             my @after  = split ' ', $after;
-            my $target = $asmpc + $num_bytes - ( $1 || 0 ) - ( $asmpc + scalar(@before) + 1 );
+            my $target =
+                $asmpc + $num_bytes -
+                ( $1 || 0 ) -
+                ( $asmpc + scalar(@before) + 1 );
             @bytes = ( @before, sprintf( "%02X", ($target) & 0xFF ), @after );
             $bytes = join ' ', @bytes;
         }

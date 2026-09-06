@@ -46,9 +46,11 @@ for my $asm ( sort keys %{ $opcodes->opcodes } ) {
     }
 }
 
-open( my $rules, ">", $output_file )            or die "$output_file: $!";
-open( my $aux_h, ">", $output_aux_file_header ) or die "$output_aux_file_header: $!";
-open( my $aux_c, ">", $output_aux_file_source ) or die "$output_aux_file_source: $!";
+open( my $rules, ">", $output_file ) or die "$output_file: $!";
+open( my $aux_h, ">", $output_aux_file_header )
+    or die "$output_aux_file_header: $!";
+open( my $aux_c, ">", $output_aux_file_source )
+    or die "$output_aux_file_source: $!";
 
 say $aux_h <<END;
 #pragma once
@@ -186,11 +188,13 @@ for my $tokens ( sort keys %parser ) {
     #say $tokens;
 
     say $rules $tokens, ' @{ ',
-        "if (!${aux_func_name}${action_nr}(ctx, name, stmt_label)) return false; }";
+"if (!${aux_func_name}${action_nr}(ctx, name, stmt_label)) return false; }";
 
-    say $aux_h "bool ${aux_func_name}${action_nr}", "(ParseCtx *ctx, Str *name, Str *stmt_label);";
+    say $aux_h "bool ${aux_func_name}${action_nr}",
+        "(ParseCtx *ctx, Str *name, Str *stmt_label);";
 
-    say $aux_c "bool ${aux_func_name}${action_nr}", "(ParseCtx *ctx, Str *name, Str *stmt_label) {";
+    say $aux_c "bool ${aux_func_name}${action_nr}",
+        "(ParseCtx *ctx, Str *name, Str *stmt_label) {";
     say $aux_c merge_cpu( $parser{$tokens} );
     say $aux_c "return true;";
     say $aux_c "}\n";
@@ -200,19 +204,21 @@ exit 0;
 
 sub parser_tokens {
     local ($_) = @_;
-    my $instr_flag = qr/\b(?:call|call3|jp|jmp|jr|jre|jp3|lljp|ret|ret3|rst|flag)\b/i;
-    my $am         = qr/\b(?:l|il|is|lil|lis|sil|sis)\b/i;
+    my $instr_flag =
+        qr/\b(?:call|call3|jp|jmp|jr|jre|jp3|lljp|ret|ret3|rst|flag)\b/i;
+    my $am = qr/\b(?:l|il|is|lil|lis|sil|sis)\b/i;
     my $flag =
-        qr/\b(?:nz|z|nc|c|po|pe|p|m|lz|lo|nv|v|x5|nx5|k|nk|ne|eq|ltu|leu|gtu|geu|lt|le|gt|ge|of)\b/i;
-    my $instr_x  = qr/\b(cpd|cpdr|cpi|cpir|ind|indr|ini|inir|otdr|otir|outd|outi)\s+(x)\b/i;
+qr/\b(?:nz|z|nc|c|po|pe|p|m|lz|lo|nv|v|x5|nx5|k|nk|ne|eq|ltu|leu|gtu|geu|lt|le|gt|ge|of)\b/i;
+    my $instr_x =
+qr/\b(cpd|cpdr|cpi|cpir|ind|indr|ini|inir|otdr|otir|outd|outi)\s+(x)\b/i;
     my $instr_xy = qr/\b(ldd|lddr|ldi|ldir)\s+(xy)\b/i;
 
     my @tokens = ();
 
     while ( !/\G \z 				/gcx ) {
-        if    (/\G \s+ 			/gcx)    { }
-        elsif (/\G \( (\w+)	'	/gcx) { push @tokens, "_TK_IND_" . uc($1)."1"; }
-        elsif (/\G \( (\w+)		/gcx) { push @tokens, "_TK_IND_" . uc($1); }
+        if    (/\G \s+ 			/gcx)     { }
+        elsif (/\G \( (\w+)	'	/gcx) { push @tokens, "_TK_IND_" . uc($1) . "1"; }
+        elsif (/\G \( (\w+)		/gcx)  { push @tokens, "_TK_IND_" . uc($1); }
         elsif (
             /\G ($instr_flag) \s+ ($flag) \b
 								/gcx
@@ -227,8 +233,12 @@ sub parser_tokens {
         {
             push @tokens, "_TK_" . uc($1) . "_" . uc($2) . "_" . uc($3);
         }
-        elsif (/\G $instr_x		/gcx)    { push @tokens, "_TK_" . uc($1) . "_" . uc($2); }
-        elsif (/\G $instr_xy	/gcx)    { push @tokens, "_TK_" . uc($1) . "_" . uc($2); }
+        elsif (/\G $instr_x		/gcx) {
+            push @tokens, "_TK_" . uc($1) . "_" . uc($2);
+        }
+        elsif (/\G $instr_xy	/gcx) {
+            push @tokens, "_TK_" . uc($1) . "_" . uc($2);
+        }
         elsif (/\G , 			/gcx)         { push @tokens, "_TK_COMMA"; }
         elsif (/\G \) 			/gcx)        { push @tokens, "_TK_RPAREN"; }
         elsif (/\G \( %[nmh] \)	/gcx) { push @tokens, "expr"; }
@@ -241,7 +251,7 @@ sub parser_tokens {
         elsif (/\G \-   		/gcx)       { push @tokens, "_TK_MINUS"; }
         elsif (/\G \.   		/gcx)       { push @tokens, "_TK_DOT"; }
         elsif (/\G \:   		/gcx)       { push @tokens, "_TK_COLON"; }
-        else                          { die "$_ ; ", substr( $_, pos($_) || 0 ) }
+        else  { die "$_ ; ", substr( $_, pos($_) || 0 ) }
     }
     return join( ' ', ( '| label?', @tokens, "_TK_NEWLINE" ) );
 }
@@ -277,7 +287,8 @@ sub parse_code {
 
     # handle special case of jump to %t
     if ( $bytes =~ /%t/ ) {
-        push @code, "{", "DO_STMT_LABEL();", "const char *end_label = autolabel();";
+        push @code, "{", "DO_STMT_LABEL();",
+            "const char *end_label = autolabel();";
         for my $op (@ops) {
             my $count_t = scalar( grep { /%t/ } @$op );
             if ($count_t) {
@@ -297,15 +308,21 @@ sub parse_code {
 
                 if ( $count_t == 1 ) {
                     push @code,
-                        "add_opcode_jr_end(0x" . fmthex($bin) . ", end_label, $target_offset);";
+                          "add_opcode_jr_end(0x"
+                        . fmthex($bin)
+                        . ", end_label, $target_offset);";
                 }
                 elsif ( $count_t == 2 ) {
                     push @code,
-                        "add_opcode_jp_nn_end(0x" . fmthex($bin) . ", end_label, $target_offset);";
+                          "add_opcode_jp_nn_end(0x"
+                        . fmthex($bin)
+                        . ", end_label, $target_offset);";
                 }
                 elsif ( $count_t == 3 ) {
                     push @code,
-                        "add_opcode_jp_nnn_end(0x" . fmthex($bin) . ", end_label, $target_offset);";
+                          "add_opcode_jp_nnn_end(0x"
+                        . fmthex($bin)
+                        . ", end_label, $target_offset);";
                 }
                 else {
                     die $count_t;
@@ -340,7 +357,9 @@ sub parse_code {
 
                 if ( $count_m == 2 ) {
                     push @code,
-                        "add_opcode_nn(0x" . fmthex($bin) . ", Expr1_clone(expr), $target_offset);";
+                          "add_opcode_nn(0x"
+                        . fmthex($bin)
+                        . ", Expr1_clone(expr), $target_offset);";
                 }
                 elsif ( $count_m == 3 ) {
                     push @code,
@@ -349,7 +368,10 @@ sub parse_code {
                         . ", Expr1_clone(expr), $target_offset);";
                 }
                 elsif ( $count_m == 4 ) {
-                    push @code, "add_opcode_nnnn(0x" . fmthex($bin) . ", Expr1_clone(expr));";
+                    push @code,
+                          "add_opcode_nnnn(0x"
+                        . fmthex($bin)
+                        . ", Expr1_clone(expr));";
                 }
                 else {
                     die $count_m;
@@ -375,7 +397,10 @@ sub parse_code {
                 }
 
                 if ( $count_j == 1 ) {
-                    push @code, "add_opcode_jr(0x" . fmthex($bin) . ", Expr1_clone(expr));";
+                    push @code,
+                          "add_opcode_jr(0x"
+                        . fmthex($bin)
+                        . ", Expr1_clone(expr));";
                 }
                 else {
                     die $count_j;
@@ -391,12 +416,15 @@ sub parse_code {
     # handle ld dd,(ix+d) -> ld ddl,(ix+d) : ld ddh, (ix+d+1)
     elsif ( $bytes =~ /%d1/ ) {
         for my $i ( 0 .. $#ops ) {
-            if ( ( $ops[$i][2] // '' ) eq '%d' && ( $ops[ $i + 1 ][2] // '' ) eq '%d1' ) {
+            if (   ( $ops[$i][2] // '' ) eq '%d'
+                && ( $ops[ $i + 1 ][2] // '' ) eq '%d1' )
+            {
                 my $opcode0 = ( $ops[ $i + 0 ][0] << 8 ) + $ops[ $i + 0 ][1];
                 my $opcode1 = ( $ops[ $i + 1 ][0] << 8 ) + $ops[ $i + 1 ][1];
                 push @code,
-                    "DO_stmt_idx_idx1("
-                    . sprintf( "0x%04XLL, 0x%04XLL", $opcode0, $opcode1 ) . ");";
+                      "DO_stmt_idx_idx1("
+                    . sprintf( "0x%04XLL, 0x%04XLL", $opcode0, $opcode1 )
+                    . ");";
             }
             elsif ( $ops[$i][2] // '' eq '%d1' ) {
 
@@ -434,13 +462,13 @@ sub parse_code_opcode {
     }
     elsif ( $asm =~ /^mmu %c, %n/ ) {
         push @code,
-            "if (ctx->expr_error) { error(ErrConstExprExpected, NULL); } else {",
+"if (ctx->expr_error) { error(ErrConstExprExpected, NULL); } else {",
 "if (ctx->expr_value < 0 || ctx->expr_value > 7) error_hex2(ErrIntRange, ctx->expr_value);",
             "DO_stmt_n(0xED9150LL + ctx->expr_value);}";
     }
     elsif ( $asm =~ /^mmu %c, a/ ) {
         push @code,
-            "if (ctx->expr_error) { error(ErrConstExprExpected, NULL); } else {",
+"if (ctx->expr_error) { error(ErrConstExprExpected, NULL); } else {",
 "if (ctx->expr_value < 0 || ctx->expr_value > 7) error_hex2(ErrIntRange, ctx->expr_value);",
             "DO_stmt(0xED9250LL + ctx->expr_value);}";
     }
@@ -498,7 +526,7 @@ sub parse_code_opcode {
     elsif ( $asm =~ /%c/ ) {
         $bytes =~ s/%c/ctx->expr_value/g;
         push @code,
-            "if (ctx->expr_error) { error(ErrConstExprExpected, NULL); } else {",
+"if (ctx->expr_error) { error(ErrConstExprExpected, NULL); } else {",
             "switch (ctx->expr_value) {",
             join( " ", map { "case $_:" } @const ) . " break;",
             "default: error_hex2(ErrIntRange, ctx->expr_value);",

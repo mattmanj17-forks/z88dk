@@ -7,7 +7,7 @@ use Modern::Perl;
 # Test https://github.com/z88dk/z88dk/issues/54
 # z80asm: overflow errors in calculated constants at linking stage
 
-z80asm_ok("-b -s -g -m -Ddummy", "", "", <<'END', bytes(0xC9));
+z80asm_ok( "-b -s -g -m -Ddummy", "", "", <<'END', bytes(0xC9) );
 org 65000
 
 PUBLIC program
@@ -32,7 +32,7 @@ there:
 ret
 END
 
-check_text_file("${test}.sym", <<END);
+check_text_file( "${test}.sym", <<END );
 asm_BIFROST2_showNext2Tiles     = \$C9C2 ; const, public, , , , ${test}.asm:11
 asm_BIFROST2_start              = \$C9A9 ; const, public, , , , ${test}.asm:9
 asm_BIFROST2_stop               = \$0000 ; comput, public, , , , ${test}.asm:10
@@ -41,7 +41,7 @@ program                         = \$0000 ; addr, public, , , , ${test}.asm:19
 there                           = \$0000 ; addr, local, , , , ${test}.asm:21
 END
 
-check_text_file("${test}.map", <<END);
+check_text_file( "${test}.map", <<END );
 __head                          = \$FDE8 ; const, public, def, , ,
 __size                          = \$0001 ; const, public, def, , ,
 __tail                          = \$FDE9 ; const, public, def, , ,
@@ -53,14 +53,14 @@ program                         = \$FDE8 ; addr, public, , ${test}, , ${test}.as
 there                           = \$FDE8 ; addr, local, , ${test}, , ${test}.asm:21
 END
 
-check_text_file("${test}.def", <<END);
+check_text_file( "${test}.def", <<END );
 DEFC asm_BIFROST2_showNext2Tiles     = \$C9C2
 DEFC asm_BIFROST2_start              = \$C9A9
 DEFC asm_BIFROST2_stop               = \$C9B2
 DEFC program                         = \$FDE8
 END
 
-capture_ok("z88dk-z80nm -a ${test}.o", <<'END');
+capture_ok( "z88dk-z80nm -a ${test}.o", <<'END' );
 Object  file test_t_issue_0054_t.o at $0000: Z80RMF18
   Name: test_t_issue_0054_t
   CPU:  z80 

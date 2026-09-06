@@ -8,13 +8,13 @@ use Modern::Perl;
 # z80asm: Produce a debugger-friendly filename/bank/memory address file
 
 unlink_testfiles;
-spew("${test}1.asm", <<END);
+spew( "${test}1.asm", <<END );
 	public func
 func:
 	ret
 END
 
-spew("${test}.c", <<END);
+spew( "${test}.c", <<END );
 int add(int a, int b) 
 {
 	return a+b;
@@ -29,14 +29,16 @@ int main()
 }
 END
 
-run_ok("zcc +z80 -m -clib=new -Cc-gcline -Ca-debug ${test}.c ${test}1.asm -o${test}.bin");
+run_ok(
+"zcc +z80 -m -clib=new -Cc-gcline -Ca-debug ${test}.c ${test}1.asm -o${test}.bin"
+);
 
-(my $test_expanded = $test) =~ s/([^a-z0-9])/ sprintf("_%02x", ord($1)) /ige;
-my @map = grep {!/zcc|crt|asm_dzx7/ && /$test_expanded|_main|_add|func/} 
-		  path("${test}.map")->lines;
-spew("${test}1.map", @map);
+( my $test_expanded = $test ) =~ s/([^a-z0-9])/ sprintf("_%02x", ord($1)) /ige;
+my @map = grep { !/zcc|crt|asm_dzx7/ && /$test_expanded|_main|_add|func/ }
+    path("${test}.map")->lines;
+spew( "${test}1.map", @map );
 
-check_text_file("${test}1.map", <<END);
+check_text_file( "${test}1.map", <<END );
 __ASM_LINE_2_${test_expanded}1_2easm = \$0000 ; addr, local, , ${test}1_asm, , ${test}1.asm:2
 __C_LINE_0_${test_expanded}_2ec = \$0000 ; addr, local, , ${test}_c, , ${test}.c:0
 __C_LINE_10_${test_expanded}_2ec_3a_3amain_3a_3a1_3a_3a3 = \$0194 ; addr, local, , ${test}_c, code_compiler, ${test}.c::main::1::3:10
@@ -52,8 +54,6 @@ _add                            = \$0180 ; addr, public, , ${test}_c, code_compi
 _main                           = \$018C ; addr, public, , ${test}_c, code_compiler, ${test}.c::main::0::2:7
 func                            = \$0000 ; addr, public, , ${test}1_asm, , ${test}1.asm:2
 END
-
-
 
 unlink_testfiles;
 done_testing;

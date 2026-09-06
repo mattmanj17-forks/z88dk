@@ -11,12 +11,12 @@ use Modern::Perl;
 # make sources
 #------------------------------------------------------------------------------
 unlink_testfiles;
-spew("$test.a.asm", <<'END');
+spew( "$test.a.asm", <<'END' );
 SECTION code2
 a:	ld      hl,16384
 END
 
-spew("$test.b.asm", <<'END');
+spew( "$test.b.asm", <<'END' );
 MODULE b
 SECTION code
 b:	ld      hl,32768
@@ -26,10 +26,10 @@ END
 # invalid object file - give .o
 #------------------------------------------------------------------------------
 
-capture_ok("z88dk-z80asm -mz80 $test.a.asm", "");
-capture_ok("z88dk-z80asm -mr3k $test.b.asm", "");
-spew("$test.b.o", "invalid");
-capture_nok("z88dk-z80asm -x$test.lib -mz80 $test.*.o", <<'END');
+capture_ok( "z88dk-z80asm -mz80 $test.a.asm", "" );
+capture_ok( "z88dk-z80asm -mr3k $test.b.asm", "" );
+spew( "$test.b.o", "invalid" );
+capture_nok( "z88dk-z80asm -x$test.lib -mz80 $test.*.o", <<'END' );
 error: not an object file: test_t_issue_2320_g_t.b.o
 END
 

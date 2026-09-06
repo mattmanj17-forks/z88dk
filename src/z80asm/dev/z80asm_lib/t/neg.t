@@ -11,15 +11,15 @@ BEGIN { use lib '../../t'; require 'testlib.pl'; }
 use Modern::Perl;
 
 for my $cpu (@CPUS) {
-	SKIP: {
-		skip "$cpu not supported by ticks" if $cpu =~ /^ez80$/;
-		skip "strict $cpu" if $cpu =~ /_strict/;
+SKIP: {
+        skip "$cpu not supported by ticks" if $cpu =~ /^ez80$/;
+        skip "strict $cpu"                 if $cpu =~ /_strict/;
 
-		for my $value (-1, 0, 1) {
-			for my $dd (qw( B  C  D  E  H  L  BC  DE  HL  IX IY )) {
-				next if $dd =~ /ix|iy/i && $cpu =~ /^80|gbz80|^vm1/;
-				
-				my $r = ticks(<<END, "-m$cpu");
+        for my $value ( -1, 0, 1 ) {
+            for my $dd (qw( B  C  D  E  H  L  BC  DE  HL  IX IY )) {
+                next if $dd =~ /ix|iy/i && $cpu =~ /^80|gbz80|^vm1/;
+
+                my $r = ticks( <<END, "-m$cpu" );
 					IF __CPU_R4K__ || __CPU_R5K__ || __CPU_R6K__
 						;; Enable R4K instruction mode on the R4K
 						ld      a,0xC0
@@ -29,14 +29,14 @@ for my $cpu (@CPUS) {
 						neg $dd
 						jp 0
 END
-					$dd =~ /[A-Z]+/;
-					my $mask = length($&)==1 ? 0xff : 0xffff;
-					is $r->{$dd}, (-$value) & $mask, "$dd result";
-					
-					(Test::More->builder->is_passing) or die;
-			}
-		}
-	}
+                $dd =~ /[A-Z]+/;
+                my $mask = length($&) == 1 ? 0xff : 0xffff;
+                is $r->{$dd}, ( -$value ) & $mask, "$dd result";
+
+                ( Test::More->builder->is_passing ) or die;
+            }
+        }
+    }
 }
 
 unlink_testfiles();

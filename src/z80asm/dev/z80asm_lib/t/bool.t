@@ -13,18 +13,24 @@ use Modern::Perl;
 my $ticks = Ticks->new;
 
 for my $dd (qw( HL IX IY )) {
-	for my $v (0, 1, -1) {
-		my $cond = ($dd =~ /IX|IY/i) ? "!__CPU_INTEL__ && !__CPU_GBZ80__" : "1";
-		$ticks->add(<<END, 
+    for my $v ( 0, 1, -1 ) {
+        my $cond =
+            ( $dd =~ /IX|IY/i ) ? "!__CPU_INTEL__ && !__CPU_GBZ80__" : "1";
+        $ticks->add(
+            <<END,
 			IF $cond
 				ld $dd, $v
 				bool $dd
 			ENDIF
 END
-			$dd => sub { my($t) = @_;
-						 return 0 if ($dd =~ /IX|IY/i && $t->{cpu} =~ /^80|^gbz80|^vm1/);
-						 return $v==0 ? 0 : 1; });
-	}
+            $dd => sub {
+                my ($t) = @_;
+                return 0
+                    if ( $dd =~ /IX|IY/i && $t->{cpu} =~ /^80|^gbz80|^vm1/ );
+                return $v == 0 ? 0 : 1;
+            }
+        );
+    }
 }
 
 $ticks->run;

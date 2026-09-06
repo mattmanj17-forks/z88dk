@@ -7,7 +7,7 @@ use Modern::Perl;
 # Test https://github.com/z88dk/z88dk/issues/16
 # z80asm: cannot specify name of generated object file
 
-spew("$test.asm", <<END);
+spew( "$test.asm", <<END );
 		public test_function
 test_function:  ret
 local_function: ret
@@ -18,7 +18,7 @@ unlink "$test.o";
 run_ok("z88dk-z80asm $test.asm");
 ok -f "$test.o", "$test.o exists";
 
-capture_ok("z88dk-z80nm -a $test.o", <<'END');
+capture_ok( "z88dk-z80nm -a $test.o", <<'END' );
 Object  file test_t_issue_0016_t.o at $0000: Z80RMF18
   Name: test_t_issue_0016_t
   CPU:  z80 
@@ -38,10 +38,10 @@ END
 unlink "$test.o";
 path("$test.dir")->mkpath;
 run_ok("z88dk-z80asm -O$test.dir -ozcc0000.o $test.asm");
-ok ! -f "$test.o", "no $test.o";
+ok !-f "$test.o",            "no $test.o";
 ok -f "$test.dir/zcc0000.o", "$test.dir/zcc0000.o exists";
 
-capture_ok("z88dk-z80nm -a $test.dir/zcc0000.o", <<'END');
+capture_ok( "z88dk-z80nm -a $test.dir/zcc0000.o", <<'END' );
 Object  file test_t_issue_0016_t.dir/zcc0000.o at $0000: Z80RMF18
   Name: test_t_issue_0016_t
   CPU:  z80 

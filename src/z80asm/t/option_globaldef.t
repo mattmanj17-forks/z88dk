@@ -31,22 +31,22 @@ my $asm1 = <<END;
 func: ret
 END
 
-my $bin = bytes(0x06, 0x0A, 0x10, 0xFE, 0x00, 0x00, 0xC9);
+my $bin = bytes( 0x06, 0x0A, 0x10, 0xFE, 0x00, 0x00, 0xC9 );
 
 # no -g
 unlink_testfiles;
-spew("${test}.asm", $asm);
-spew("${test}1.asm", $asm1);
+spew( "${test}.asm",  $asm );
+spew( "${test}1.asm", $asm1 );
 run_ok("z88dk-z80asm -b ${test}.asm ${test}1.asm");
 ok !-f "${test}.def", "no definitions file";
 
 # -g
 unlink_testfiles;
-spew("${test}.asm", $asm);
-spew("${test}1.asm", $asm1);
+spew( "${test}.asm",  $asm );
+spew( "${test}1.asm", $asm1 );
 run_ok("z88dk-z80asm -b -g ${test}.asm ${test}1.asm");
 ok -f "${test}.def", "no definitions file";
-check_text_file("${test}.def", <<END);
+check_text_file( "${test}.def", <<END );
 DEFC alias_last                      = \$0004
 DEFC alias_main                      = \$0000
 DEFC func                            = \$0006

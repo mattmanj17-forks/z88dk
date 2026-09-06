@@ -7,7 +7,7 @@ use Modern::Perl;
 # Test https://github.com/z88dk/z88dk/issues/655
 # z80asm: object file incorrect with correct lis input
 
-spew("${test}.asm", <<'END');
+spew( "${test}.asm", <<'END' );
 	SECTION rodata_driver
 
 	TESTING1:  	DEFB    $55
@@ -35,9 +35,9 @@ spew("${test}.asm", <<'END');
 	SECTION bss_user
 END
 
-capture_ok("z88dk-z80asm -l ${test}.asm", "");
+capture_ok( "z88dk-z80asm -l ${test}.asm", "" );
 
-capture_ok("z88dk-z80nm -a ${test}.o", <<'END');
+capture_ok( "z88dk-z80nm -a ${test}.o", <<'END' );
 Object  file test_t_issue_0655_t.o at $0000: Z80RMF18
   Name: test_t_issue_0655_t
   CPU:  z80 
